@@ -2270,7 +2270,7 @@ ScriptedImporter:
     layerType: 0
     blendMode: 0
     cells:
-    - name: Frame_0
+    - name: Effects_Frame_0
       frameIndex: 0
       additiveSortOrder: 0
       cellRect:
@@ -2279,7 +2279,7 @@ ScriptedImporter:
         width: 19
         height: 13
       spriteId: 44bea36ba81f51642b88edfdb5160e3c
-    - name: Frame_1
+    - name: Effects_Frame_1
       frameIndex: 1
       additiveSortOrder: 0
       cellRect:
@@ -2288,7 +2288,7 @@ ScriptedImporter:
         width: 23
         height: 16
       spriteId: 34d0c58c4516d414c8952999dfc1f553
-    - name: Frame_2
+    - name: Effects_Frame_2
       frameIndex: 2
       additiveSortOrder: 0
       cellRect:
@@ -2297,7 +2297,7 @@ ScriptedImporter:
         width: 35
         height: 19
       spriteId: d5112949040430f42b79338576720740
-    - name: Frame_3
+    - name: Effects_Frame_3
       frameIndex: 3
       additiveSortOrder: 0
       cellRect:
@@ -2306,7 +2306,7 @@ ScriptedImporter:
         width: 8
         height: 15
       spriteId: 6bea6573fc45909429f64a782d9b240a
-    - name: Frame_4
+    - name: Effects_Frame_4
       frameIndex: 4
       additiveSortOrder: 0
       cellRect:
@@ -2315,7 +2315,7 @@ ScriptedImporter:
         width: 6
         height: 10
       spriteId: 24cc57e12638cef4ab538b40e0431aa0
-    - name: Frame_5
+    - name: Effects_Frame_5
       frameIndex: 5
       additiveSortOrder: 0
       cellRect:
@@ -2324,7 +2324,7 @@ ScriptedImporter:
         width: 6
         height: 12
       spriteId: 09b27d6d335afa44fb1b56f0ae75e531
-    - name: Frame_6
+    - name: Effects_Frame_6
       frameIndex: 6
       additiveSortOrder: 0
       cellRect:
@@ -2333,7 +2333,7 @@ ScriptedImporter:
         width: 2
         height: 7
       spriteId: 962d86df71ab3c94487e6907aa7d447b
-    - name: Frame_7
+    - name: Effects_Frame_7
       frameIndex: 7
       additiveSortOrder: 0
       cellRect:
@@ -2342,7 +2342,7 @@ ScriptedImporter:
         width: 2
         height: 4
       spriteId: c5250862e549f9546952cb7414e145c9
-    - name: Frame_8
+    - name: Effects_Frame_8
       frameIndex: 8
       additiveSortOrder: 0
       cellRect:
@@ -2351,7 +2351,7 @@ ScriptedImporter:
         width: 1
         height: 1
       spriteId: 35c7fa5b4bd2c6346bb0529cd981b76d
-    - name: Frame_9
+    - name: Effects_Frame_9
       frameIndex: 9
       additiveSortOrder: 0
       cellRect:
@@ -2360,7 +2360,7 @@ ScriptedImporter:
         width: 14
         height: 19
       spriteId: d4586136a52001644a09b006cb9eeea7
-    - name: Frame_10
+    - name: Effects_Frame_10
       frameIndex: 10
       additiveSortOrder: 0
       cellRect:
@@ -2369,7 +2369,7 @@ ScriptedImporter:
         width: 16
         height: 23
       spriteId: 9f9279893b2bc7f4d893eb057c3f2361
-    - name: Frame_11
+    - name: Effects_Frame_11
       frameIndex: 11
       additiveSortOrder: 0
       cellRect:
@@ -2378,7 +2378,7 @@ ScriptedImporter:
         width: 17
         height: 25
       spriteId: f6e79c52bb282fc4aa5afc6c31b199f8
-    - name: Frame_12
+    - name: Effects_Frame_12
       frameIndex: 12
       additiveSortOrder: 0
       cellRect:
@@ -2387,7 +2387,7 @@ ScriptedImporter:
         width: 18
         height: 23
       spriteId: 3175218adb3fa1d4cae2e9a148b72664
-    - name: Frame_13
+    - name: Effects_Frame_13
       frameIndex: 13
       additiveSortOrder: 0
       cellRect:
@@ -2396,7 +2396,7 @@ ScriptedImporter:
         width: 13
         height: 9
       spriteId: a97fa10911c62cd4ba222d25e27c5a30
-    - name: Frame_14
+    - name: Effects_Frame_14
       frameIndex: 14
       additiveSortOrder: 0
       cellRect:
@@ -2405,7 +2405,7 @@ ScriptedImporter:
         width: 13
         height: 12
       spriteId: d5dd246c117aac34295d43260762fbd1
-    - name: Frame_15
+    - name: Effects_Frame_15
       frameIndex: 15
       additiveSortOrder: 0
       cellRect:
@@ -2414,7 +2414,7 @@ ScriptedImporter:
         width: 11
         height: 15
       spriteId: 1fe3163297deb964892d01a04abfd162
-    - name: Frame_16
+    - name: Effects_Frame_16
       frameIndex: 16
       additiveSortOrder: 0
       cellRect:
@@ -2423,7 +2423,7 @@ ScriptedImporter:
         width: 2
         height: 3
       spriteId: d5dbac35181f0294b944c81a64aa35cb
-    - name: Frame_17
+    - name: Effects_Frame_17
       frameIndex: 17
       additiveSortOrder: 0
       cellRect:
@@ -2432,7 +2432,7 @@ ScriptedImporter:
         width: 2
         height: 2
       spriteId: 030d7c24a3e776d46bf604df19492f6e
-    - name: Frame_18
+    - name: Effects_Frame_18
       frameIndex: 18
       additiveSortOrder: 0
       cellRect:
@@ -2441,7 +2441,7 @@ ScriptedImporter:
         width: 39
         height: 16
       spriteId: b1dd4b353ed0a244cb8ef3e29a3389ff
-    - name: Frame_19
+    - name: Effects_Frame_19
       frameIndex: 19
       additiveSortOrder: 0
       cellRect:
@@ -2450,7 +2450,7 @@ ScriptedImporter:
         width: 39
         height: 17
       spriteId: 6440f362a03023c46ac17d4ffaf4893c
-    - name: Frame_20
+    - name: Effects_Frame_20
       frameIndex: 20
       additiveSortOrder: 0
       cellRect:
@@ -2459,7 +2459,7 @@ ScriptedImporter:
         width: 39
         height: 8
       spriteId: cd116c068d0dac64db0c0897d263eca5
-    - name: Frame_21
+    - name: Effects_Frame_21
       frameIndex: 21
       additiveSortOrder: 0
       cellRect:
@@ -2468,7 +2468,7 @@ ScriptedImporter:
         width: 14
         height: 6
       spriteId: f1a56cd3bcdbc6d499ff65d9f4ec708b
-    - name: Frame_22
+    - name: Effects_Frame_22
       frameIndex: 22
       additiveSortOrder: 0
       cellRect:
@@ -2477,7 +2477,7 @@ ScriptedImporter:
         width: 14
         height: 3
       spriteId: 4819846010a618d40b91e179ed90acba
-    - name: Frame_23
+    - name: Effects_Frame_23
       frameIndex: 23
       additiveSortOrder: 0
       cellRect:
@@ -2486,7 +2486,7 @@ ScriptedImporter:
         width: 14
         height: 3
       spriteId: dd6c10c4eeaa6d749bef1b43c4403add
-    - name: Frame_24
+    - name: Effects_Frame_24
       frameIndex: 24
       additiveSortOrder: 0
       cellRect:
@@ -2495,7 +2495,7 @@ ScriptedImporter:
         width: 14
         height: 3
       spriteId: f429f1ef01d2a3c4a9551c73d12609ee
-    - name: Frame_25
+    - name: Effects_Frame_25
       frameIndex: 25
       additiveSortOrder: 0
       cellRect:
@@ -2504,7 +2504,7 @@ ScriptedImporter:
         width: 10
         height: 6
       spriteId: 5aa4dbd5c8a605a4fa85ff5c2ce73d6a
-    - name: Frame_26
+    - name: Effects_Frame_26
       frameIndex: 26
       additiveSortOrder: 0
       cellRect:
@@ -2513,7 +2513,7 @@ ScriptedImporter:
         width: 8
         height: 6
       spriteId: 1684dc27582915646a9337f0e25d5b4d
-    - name: Frame_27
+    - name: Effects_Frame_27
       frameIndex: 27
       additiveSortOrder: 0
       cellRect:
@@ -2522,7 +2522,7 @@ ScriptedImporter:
         width: 7
         height: 5
       spriteId: 1ed13d5539b9be34587ee633a1e6482e
-    - name: Frame_28
+    - name: Effects_Frame_28
       frameIndex: 28
       additiveSortOrder: 0
       cellRect:
@@ -2531,7 +2531,7 @@ ScriptedImporter:
         width: 1
         height: 1
       spriteId: f86e7db375e0d0d4aaaa05e6234983b7
-    - name: Frame_29
+    - name: Effects_Frame_29
       frameIndex: 29
       additiveSortOrder: 0
       cellRect:
@@ -2540,7 +2540,7 @@ ScriptedImporter:
         width: 8
         height: 2
       spriteId: fd6238d94d571924abc168c9159862bf
-    - name: Frame_30
+    - name: Effects_Frame_30
       frameIndex: 30
       additiveSortOrder: 0
       cellRect:
@@ -2549,7 +2549,7 @@ ScriptedImporter:
         width: 8
         height: 3
       spriteId: 397f2ba391fa4b1428463d7122e14cf6
-    - name: Frame_31
+    - name: Effects_Frame_31
       frameIndex: 31
       additiveSortOrder: 0
       cellRect:
@@ -2558,7 +2558,7 @@ ScriptedImporter:
         width: 7
         height: 2
       spriteId: 17a1b4ea4b0f55a4a98e486f0f7b8a61
-    - name: Frame_32
+    - name: Effects_Frame_32
       frameIndex: 32
       additiveSortOrder: 0
       cellRect:
@@ -2567,7 +2567,7 @@ ScriptedImporter:
         width: 11
         height: 6
       spriteId: 9409f30f20422924ab41f88320398183
-    - name: Frame_33
+    - name: Effects_Frame_33
       frameIndex: 33
       additiveSortOrder: 0
       cellRect:
@@ -2576,7 +2576,7 @@ ScriptedImporter:
         width: 7
         height: 2
       spriteId: c93ca8798bb38054c86a013bdf4186d6
-    - name: Frame_34
+    - name: Effects_Frame_34
       frameIndex: 34
       additiveSortOrder: 0
       cellRect:
@@ -2585,7 +2585,7 @@ ScriptedImporter:
         width: 6
         height: 2
       spriteId: 9310854fcac289f43acc22f626114b9c
-    - name: Frame_35
+    - name: Effects_Frame_35
       frameIndex: 35
       additiveSortOrder: 0
       cellRect:
@@ -2594,7 +2594,7 @@ ScriptedImporter:
         width: 5
         height: 1
       spriteId: a407f4e88023d674a897f232b8b16aa3
-    - name: Frame_36
+    - name: Effects_Frame_36
       frameIndex: 36
       additiveSortOrder: 0
       cellRect:
@@ -2603,7 +2603,7 @@ ScriptedImporter:
         width: 8
         height: 5
       spriteId: 33ff0f4cfb6c75744a4caa074f228c23
-    - name: Frame_37
+    - name: Effects_Frame_37
       frameIndex: 37
       additiveSortOrder: 0
       cellRect:
@@ -2612,7 +2612,7 @@ ScriptedImporter:
         width: 8
         height: 5
       spriteId: e372dc6848886b04f852b42d4c4525da
-    - name: Frame_38
+    - name: Effects_Frame_38
       frameIndex: 38
       additiveSortOrder: 0
       cellRect:
@@ -2621,7 +2621,7 @@ ScriptedImporter:
         width: 8
         height: 5
       spriteId: 5d40cc9bbf49908468c6ac0aa12eecce
-    - name: Frame_39
+    - name: Effects_Frame_39
       frameIndex: 39
       additiveSortOrder: 0
       cellRect:
@@ -2630,7 +2630,7 @@ ScriptedImporter:
         width: 8
         height: 4
       spriteId: 6c2a9cc76cc3bc342b013f84afa7c3d8
-    - name: Frame_40
+    - name: Effects_Frame_40
       frameIndex: 40
       additiveSortOrder: 0
       cellRect:
@@ -2639,7 +2639,7 @@ ScriptedImporter:
         width: 1
         height: 1
       spriteId: 2511c5dd5abedfd45b4549990646c25e
-    - name: Frame_41
+    - name: Effects_Frame_41
       frameIndex: 41
       additiveSortOrder: 0
       cellRect:
@@ -2648,7 +2648,7 @@ ScriptedImporter:
         width: 2
         height: 1
       spriteId: 5bf5552be5c29c048a27653f97791c3b
-    - name: Frame_42
+    - name: Effects_Frame_42
       frameIndex: 42
       additiveSortOrder: 0
       cellRect:
@@ -2657,7 +2657,7 @@ ScriptedImporter:
         width: 1
         height: 1
       spriteId: 18780814ca0512045b8067ecaa3852fa
-    - name: Frame_45
+    - name: Effects_Frame_45
       frameIndex: 45
       additiveSortOrder: 0
       cellRect:
@@ -2666,7 +2666,7 @@ ScriptedImporter:
         width: 2
         height: 1
       spriteId: 675e91474e00878419ef7b7b3ebcc9a7
-    - name: Frame_46
+    - name: Effects_Frame_46
       frameIndex: 46
       additiveSortOrder: 0
       cellRect:
@@ -2675,7 +2675,7 @@ ScriptedImporter:
         width: 4
         height: 2
       spriteId: 7fc91806089af9f42a4c23d779033838
-    - name: Frame_47
+    - name: Effects_Frame_47
       frameIndex: 47
       additiveSortOrder: 0
       cellRect:
@@ -2684,7 +2684,7 @@ ScriptedImporter:
         width: 4
         height: 3
       spriteId: f8101ffc10a538748b84a1ee61b76ef1
-    - name: Frame_48
+    - name: Effects_Frame_48
       frameIndex: 48
       additiveSortOrder: 0
       cellRect:
@@ -2693,7 +2693,7 @@ ScriptedImporter:
         width: 4
         height: 1
       spriteId: 95373e3d24cd34a4d8ed80cf5fddf569
-    - name: Frame_49
+    - name: Effects_Frame_49
       frameIndex: 49
       additiveSortOrder: 0
       cellRect:
@@ -2702,7 +2702,7 @@ ScriptedImporter:
         width: 2
         height: 1
       spriteId: 3c6253397ab4ce94f8d40565b34787df
-    - name: Frame_50
+    - name: Effects_Frame_50
       frameIndex: 50
       additiveSortOrder: 0
       cellRect:
@@ -2711,7 +2711,7 @@ ScriptedImporter:
         width: 5
         height: 2
       spriteId: de3332e22b0293c4bbb9e29da734dccc
-    - name: Frame_51
+    - name: Effects_Frame_51
       frameIndex: 51
       additiveSortOrder: 0
       cellRect:
@@ -2720,7 +2720,7 @@ ScriptedImporter:
         width: 4
         height: 3
       spriteId: 867eafe41286c0c41a9f71dcfc508461
-    - name: Frame_52
+    - name: Effects_Frame_52
       frameIndex: 52
       additiveSortOrder: 0
       cellRect:
@@ -2729,7 +2729,7 @@ ScriptedImporter:
         width: 3
         height: 2
       spriteId: 48263959e3be5634389bbae0ee2c6592
-    - name: Frame_53
+    - name: Effects_Frame_53
       frameIndex: 53
       additiveSortOrder: 0
       cellRect:
@@ -2738,7 +2738,7 @@ ScriptedImporter:
         width: 2
         height: 2
       spriteId: 71eceb0c03fa4b543869a6a16e606ce2
-    - name: Frame_57
+    - name: Effects_Frame_57
       frameIndex: 57
       additiveSortOrder: 0
       cellRect:
@@ -2747,7 +2747,7 @@ ScriptedImporter:
         width: 96
         height: 84
       spriteId: a63c99829cb91824baf1a4414b3f27bd
-    - name: Frame_58
+    - name: Effects_Frame_58
       frameIndex: 58
       additiveSortOrder: 0
       cellRect:
@@ -2756,7 +2756,7 @@ ScriptedImporter:
         width: 96
         height: 84
       spriteId: beff4d8595841554caa82bf2e50d7cbe
-    - name: Frame_59
+    - name: Effects_Frame_59
       frameIndex: 59
       additiveSortOrder: 0
       cellRect:
@@ -2765,7 +2765,7 @@ ScriptedImporter:
         width: 96
         height: 84
       spriteId: ed37091903f20e9459623e2d1bf6d6f8
-    - name: Frame_60
+    - name: Effects_Frame_60
       frameIndex: 60
       additiveSortOrder: 0
       cellRect:
@@ -2774,7 +2774,7 @@ ScriptedImporter:
         width: 96
         height: 84
       spriteId: 48e6d95dba66d8946ae29050b8b4cd2f
-    - name: Frame_61
+    - name: Effects_Frame_61
       frameIndex: 61
       additiveSortOrder: 0
       cellRect:
@@ -2783,7 +2783,7 @@ ScriptedImporter:
         width: 96
         height: 84
       spriteId: e56eff26df9618447b622a70b62edb92
-    - name: Frame_62
+    - name: Effects_Frame_62
       frameIndex: 62
       additiveSortOrder: 0
       cellRect:
@@ -2792,7 +2792,7 @@ ScriptedImporter:
         width: 96
         height: 84
       spriteId: 079585a7bf1f18d4cbdec86f6373a520
-    - name: Frame_63
+    - name: Effects_Frame_63
       frameIndex: 63
       additiveSortOrder: 0
       cellRect:
@@ -2801,7 +2801,7 @@ ScriptedImporter:
         width: 96
         height: 84
       spriteId: 32f26c3192971d3489331986de9df42f
-    - name: Frame_64
+    - name: Effects_Frame_64
       frameIndex: 64
       additiveSortOrder: 0
       cellRect:
@@ -2810,7 +2810,7 @@ ScriptedImporter:
         width: 96
         height: 84
       spriteId: b02f7f96204db2a408071ef776d9871a
-    - name: Frame_65
+    - name: Effects_Frame_65
       frameIndex: 65
       additiveSortOrder: 0
       cellRect:
@@ -2819,7 +2819,7 @@ ScriptedImporter:
         width: 96
         height: 84
       spriteId: 81a01bda0d56e6a49b966d66d0e81fd3
-    - name: Frame_66
+    - name: Effects_Frame_66
       frameIndex: 66
       additiveSortOrder: 0
       cellRect:
@@ -2828,7 +2828,7 @@ ScriptedImporter:
         width: 96
         height: 84
       spriteId: 0b6159ea8ee223045abb2f6706b78c15
-    - name: Frame_67
+    - name: Effects_Frame_67
       frameIndex: 67
       additiveSortOrder: 0
       cellRect:
@@ -2837,7 +2837,7 @@ ScriptedImporter:
         width: 96
         height: 84
       spriteId: 06647154248878048a6028632b176514
-    - name: Frame_68
+    - name: Effects_Frame_68
       frameIndex: 68
       additiveSortOrder: 0
       cellRect:
@@ -2846,7 +2846,7 @@ ScriptedImporter:
         width: 96
         height: 84
       spriteId: 21ebfebb804675347831e56d4b42fb6a
-    - name: Frame_69
+    - name: Effects_Frame_69
       frameIndex: 69
       additiveSortOrder: 0
       cellRect:
@@ -2855,7 +2855,7 @@ ScriptedImporter:
         width: 96
         height: 84
       spriteId: 07031f249f899ea458e5787f5f065ac7
-    - name: Frame_70
+    - name: Effects_Frame_70
       frameIndex: 70
       additiveSortOrder: 0
       cellRect:
@@ -2864,7 +2864,7 @@ ScriptedImporter:
         width: 96
         height: 84
       spriteId: cbe07beda93c6044ea22fa08743ee372
-    - name: Frame_71
+    - name: Effects_Frame_71
       frameIndex: 71
       additiveSortOrder: 0
       cellRect:
@@ -2873,7 +2873,7 @@ ScriptedImporter:
         width: 96
         height: 84
       spriteId: 167bb664a0185294d897beca9d088a20
-    - name: Frame_72
+    - name: Effects_Frame_72
       frameIndex: 72
       additiveSortOrder: 0
       cellRect:
@@ -2882,7 +2882,7 @@ ScriptedImporter:
         width: 96
         height: 84
       spriteId: 1584c7b0ef1a2364da1fa38323ab1c99
-    - name: Frame_73
+    - name: Effects_Frame_73
       frameIndex: 73
       additiveSortOrder: 0
       cellRect:
@@ -2891,7 +2891,7 @@ ScriptedImporter:
         width: 96
         height: 84
       spriteId: 8bc9a32b62569004282ff1b3700ba911
-    - name: Frame_74
+    - name: Effects_Frame_74
       frameIndex: 74
       additiveSortOrder: 0
       cellRect:
@@ -2900,7 +2900,7 @@ ScriptedImporter:
         width: 96
         height: 84
       spriteId: f6cc8192d91c02a41984fb36ea257907
-    - name: Frame_75
+    - name: Effects_Frame_75
       frameIndex: 75
       additiveSortOrder: 0
       cellRect:
@@ -2909,7 +2909,7 @@ ScriptedImporter:
         width: 96
         height: 84
       spriteId: 433e96293ce13d543bade5b424d8294b
-    - name: Frame_76
+    - name: Effects_Frame_76
       frameIndex: 76
       additiveSortOrder: 0
       cellRect:
@@ -2918,7 +2918,7 @@ ScriptedImporter:
         width: 96
         height: 84
       spriteId: 9ce3c84ce706f234686360c3feed900c
-    - name: Frame_77
+    - name: Effects_Frame_77
       frameIndex: 77
       additiveSortOrder: 0
       cellRect:
@@ -2927,7 +2927,7 @@ ScriptedImporter:
         width: 64
         height: 20
       spriteId: decf4109ba715144bbc124899ca69151
-    - name: Frame_78
+    - name: Effects_Frame_78
       frameIndex: 78
       additiveSortOrder: 0
       cellRect:
@@ -2936,7 +2936,7 @@ ScriptedImporter:
         width: 64
         height: 20
       spriteId: e0d1854a2db89db40ad39517772a0884
-    - name: Frame_79
+    - name: Effects_Frame_79
       frameIndex: 79
       additiveSortOrder: 0
       cellRect:
@@ -2945,7 +2945,7 @@ ScriptedImporter:
         width: 64
         height: 20
       spriteId: 9950ee9a30a63c443b47e5e3af24f2ff
-    - name: Frame_80
+    - name: Effects_Frame_80
       frameIndex: 80
       additiveSortOrder: 0
       cellRect:
@@ -2954,7 +2954,7 @@ ScriptedImporter:
         width: 64
         height: 20
       spriteId: 999aebcd7f967804a92940146ab3d5f9
-    - name: Frame_81
+    - name: Effects_Frame_81
       frameIndex: 81
       additiveSortOrder: 0
       cellRect:
@@ -2963,7 +2963,7 @@ ScriptedImporter:
         width: 64
         height: 20
       spriteId: d67e6400a80c7804583314df1fcac921
-    - name: Frame_82
+    - name: Effects_Frame_82
       frameIndex: 82
       additiveSortOrder: 0
       cellRect:
@@ -2972,7 +2972,7 @@ ScriptedImporter:
         width: 96
         height: 84
       spriteId: 7d9cf06b8b25e7446980cdbc3bf5a057
-    - name: Frame_83
+    - name: Effects_Frame_83
       frameIndex: 83
       additiveSortOrder: 0
       cellRect:
@@ -2981,7 +2981,7 @@ ScriptedImporter:
         width: 96
         height: 84
       spriteId: 893451629ace5c5439d203b6b9e9702a
-    - name: Frame_84
+    - name: Effects_Frame_84
       frameIndex: 84
       additiveSortOrder: 0
       cellRect:
@@ -2990,7 +2990,7 @@ ScriptedImporter:
         width: 96
         height: 84
       spriteId: 2d9a046f52d798d48869c0bc5c65aa88
-    - name: Frame_85
+    - name: Effects_Frame_85
       frameIndex: 85
       additiveSortOrder: 0
       cellRect:
@@ -2999,7 +2999,7 @@ ScriptedImporter:
         width: 96
         height: 84
       spriteId: 3e7ded450c58e2648ae94b746101c56d
-    - name: Frame_86
+    - name: Effects_Frame_86
       frameIndex: 86
       additiveSortOrder: 0
       cellRect:
@@ -3008,7 +3008,7 @@ ScriptedImporter:
         width: 96
         height: 84
       spriteId: 8a1458deca4d37b49adb06e8575d645b
-    - name: Frame_87
+    - name: Effects_Frame_87
       frameIndex: 87
       additiveSortOrder: 0
       cellRect:
@@ -3017,7 +3017,7 @@ ScriptedImporter:
         width: 96
         height: 84
       spriteId: 330216af1a0717645894284c98476820
-    - name: Frame_88
+    - name: Effects_Frame_88
       frameIndex: 88
       additiveSortOrder: 0
       cellRect:
@@ -3026,7 +3026,7 @@ ScriptedImporter:
         width: 96
         height: 84
       spriteId: 4ad9a4d2837a2264dba7d2eefee241ff
-    - name: Frame_89
+    - name: Effects_Frame_89
       frameIndex: 89
       additiveSortOrder: 0
       cellRect:
@@ -3035,7 +3035,7 @@ ScriptedImporter:
         width: 96
         height: 84
       spriteId: 3e4899486fb80c04098e086c7e7664e6
-    - name: Frame_90
+    - name: Effects_Frame_90
       frameIndex: 90
       additiveSortOrder: 0
       cellRect:
@@ -3044,7 +3044,7 @@ ScriptedImporter:
         width: 96
         height: 84
       spriteId: 1c35cc14bac1c80488a0c3521b9932f6
-    - name: Frame_91
+    - name: Effects_Frame_91
       frameIndex: 91
       additiveSortOrder: 0
       cellRect:
@@ -3053,7 +3053,7 @@ ScriptedImporter:
         width: 96
         height: 84
       spriteId: 5460f439af1b3254198cc548f99529ba
-    - name: Frame_92
+    - name: Effects_Frame_92
       frameIndex: 92
       additiveSortOrder: 0
       cellRect:
@@ -3062,7 +3062,7 @@ ScriptedImporter:
         width: 96
         height: 84
       spriteId: ef209ee75ff354149b4167dc22652ef9
-    - name: Frame_93
+    - name: Effects_Frame_93
       frameIndex: 93
       additiveSortOrder: 0
       cellRect:
@@ -3071,7 +3071,7 @@ ScriptedImporter:
         width: 96
         height: 84
       spriteId: 6576b4b54f4b94347915d165b26ec749
-    - name: Frame_95
+    - name: Effects_Frame_95
       frameIndex: 95
       additiveSortOrder: 0
       cellRect:
@@ -3080,7 +3080,7 @@ ScriptedImporter:
         width: 96
         height: 84
       spriteId: 2e9f126df4f72d841b98905c7ec65e57
-    - name: Frame_96
+    - name: Effects_Frame_96
       frameIndex: 96
       additiveSortOrder: 0
       cellRect:
@@ -3089,7 +3089,7 @@ ScriptedImporter:
         width: 96
         height: 84
       spriteId: dc0263b30cb9d1a4babdbdff79949a33
-    - name: Frame_97
+    - name: Effects_Frame_97
       frameIndex: 97
       additiveSortOrder: 0
       cellRect:
@@ -3098,7 +3098,7 @@ ScriptedImporter:
         width: 96
         height: 84
       spriteId: 0720c9a22958dc04a86cf7fa45802e89
-    - name: Frame_98
+    - name: Effects_Frame_98
       frameIndex: 98
       additiveSortOrder: 0
       cellRect:
@@ -3107,7 +3107,7 @@ ScriptedImporter:
         width: 96
         height: 84
       spriteId: 950e88154b1951e49a55a75e2592d79e
-    - name: Frame_99
+    - name: Effects_Frame_99
       frameIndex: 99
       additiveSortOrder: 0
       cellRect:
@@ -3116,7 +3116,7 @@ ScriptedImporter:
         width: 96
         height: 84
       spriteId: fce4e9c6014f8664fa303fe453eb439b
-    - name: Frame_100
+    - name: Effects_Frame_100
       frameIndex: 100
       additiveSortOrder: 0
       cellRect:
@@ -3125,7 +3125,7 @@ ScriptedImporter:
         width: 96
         height: 84
       spriteId: 3b45a573f9ffbd14998b4637d870cbf4
-    - name: Frame_101
+    - name: Effects_Frame_101
       frameIndex: 101
       additiveSortOrder: 0
       cellRect:
@@ -3134,7 +3134,7 @@ ScriptedImporter:
         width: 96
         height: 84
       spriteId: d0bd12c6cbf845140bbd45d7e7181c13
-    - name: Frame_102
+    - name: Effects_Frame_102
       frameIndex: 102
       additiveSortOrder: 0
       cellRect:
@@ -3143,7 +3143,7 @@ ScriptedImporter:
         width: 96
         height: 84
       spriteId: e44c7d01d0dec1e4fa94a0b7c088e0a9
-    - name: Frame_103
+    - name: Effects_Frame_103
       frameIndex: 103
       additiveSortOrder: 0
       cellRect:
@@ -3152,7 +3152,7 @@ ScriptedImporter:
         width: 96
         height: 84
       spriteId: 4f69699a2ca869b49941e4a4940dcb4d
-    - name: Frame_104
+    - name: Effects_Frame_104
       frameIndex: 104
       additiveSortOrder: 0
       cellRect:
@@ -3161,7 +3161,7 @@ ScriptedImporter:
         width: 96
         height: 84
       spriteId: b9e1ebc0ff23fe440b44825c496444c9
-    - name: Frame_105
+    - name: Effects_Frame_105
       frameIndex: 105
       additiveSortOrder: 0
       cellRect:
@@ -3170,7 +3170,7 @@ ScriptedImporter:
         width: 96
         height: 84
       spriteId: ca8611de57e34ef4581c571664108844
-    - name: Frame_106
+    - name: Effects_Frame_106
       frameIndex: 106
       additiveSortOrder: 0
       cellRect:
@@ -3179,7 +3179,7 @@ ScriptedImporter:
         width: 96
         height: 84
       spriteId: 4990e53f04b7b38488c0fb7437c64d45
-    - name: Frame_107
+    - name: Effects_Frame_107
       frameIndex: 107
       additiveSortOrder: 0
       cellRect:
@@ -3188,7 +3188,7 @@ ScriptedImporter:
         width: 96
         height: 84
       spriteId: 20ad0f9753de4684680f2325e7058c2b
-    - name: Frame_108
+    - name: Effects_Frame_108
       frameIndex: 108
       additiveSortOrder: 0
       cellRect:
@@ -3197,7 +3197,7 @@ ScriptedImporter:
         width: 96
         height: 84
       spriteId: ea1bd7af5982f9f4e9bbcb14378576d1
-    - name: Frame_109
+    - name: Effects_Frame_109
       frameIndex: 109
       additiveSortOrder: 0
       cellRect:
@@ -3206,7 +3206,7 @@ ScriptedImporter:
         width: 96
         height: 84
       spriteId: b20c24b8b56caf64295ae13dc02c9aec
-    - name: Frame_110
+    - name: Effects_Frame_110
       frameIndex: 110
       additiveSortOrder: 0
       cellRect:
@@ -3215,7 +3215,7 @@ ScriptedImporter:
         width: 96
         height: 84
       spriteId: 05ba0543f94909a4eb1b3b5cbba896ae
-    - name: Frame_111
+    - name: Effects_Frame_111
       frameIndex: 111
       additiveSortOrder: 0
       cellRect:
@@ -3224,7 +3224,7 @@ ScriptedImporter:
         width: 96
         height: 84
       spriteId: 2e47b5e82f4171f4fb87530601330691
-    - name: Frame_94
+    - name: Effects_Frame_94
       frameIndex: 94
       additiveSortOrder: 0
       cellRect:
