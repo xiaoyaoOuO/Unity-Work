@@ -22,19 +22,24 @@ public class PlayerIdleState : IState {
         if(player.canDash) {
             return State.Dash;
         }
+        if(player.canRoll) {
+            return State.Roll; 
+        }
         if(player.canAttack) {
-            return State.Attack; 
+            return State.StandingAttack; 
         }
         if(player.IsGrounded() == false) {
            return State.Air; 
         }
-        if(GameInput.IsJumpPressed()) {
+        if(GameInput.IsJumpPressed() && player.jumpCheck.AllowJUmp()) {
             return State.Jump;
         }
         if(Input.GetAxisRaw("Horizontal") != 0) {
             return State.Run;
         }
-        player.ZeroVelocity();
+        if(player.rb.velocity != Vector2.zero) {
+            player.rb.velocity = new Vector2(Mathf.Lerp(player.rb.velocity.x, 0, player.acceleration * Time.deltaTime), player.rb.velocity.y);
+        }
         return state;
     }
 }

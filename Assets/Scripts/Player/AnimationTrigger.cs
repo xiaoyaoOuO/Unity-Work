@@ -7,4 +7,14 @@ public class AnimationTrigger :MonoBehaviour {
         player.AnimationTrigger();
     }
 
+    public void OnAttackHit() { // 攻击命中时调用的函数
+        player.AnimationAttackTrigger();
+    }
+
+    public void OnAnimationEnd() { // 动画结束时调用的函数
+        player.AnimationTrigger();
+    }
+
+    
+
 }

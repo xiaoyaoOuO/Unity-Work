@@ -1,4 +1,5 @@
 using System;
+using UnityEngine;
 
 public enum State {
      Idle, 
@@ -8,7 +9,11 @@ public enum State {
      Hit, 
      Die,
      Dash,
-     Jump
+     Jump,
+     RunAttack,
+     StandingAttack,
+     DashAttack,
+     Roll,
 }
 public abstract class IState
 {
@@ -29,4 +34,8 @@ public abstract class IState
     public abstract State OnUpdate();
 
     public virtual void AnimationEndTrigger() { triggerCalled = true; }
+    public virtual void AnimationAttackTrigger()
+    {
+    }
+
 }
