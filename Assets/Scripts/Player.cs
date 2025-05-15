@@ -114,7 +114,7 @@ public class Player : MonoBehaviour
 
     public bool IsGrounded()
     {
-        RaycastHit2D hit = Physics2D.BoxCast(boxCollider.bounds.center, boxCollider.bounds.size, 0f, Vector2.down, 1f, LayerMask.GetMask("Ground")); 
+        RaycastHit2D hit = Physics2D.BoxCast(boxCollider.bounds.center, boxCollider.bounds.size, 0f, Vector2.down, 0.1f, LayerMask.GetMask("Ground")); 
         if(hit.collider == null) { // If the player is not grounded, return false
             return false;
         }

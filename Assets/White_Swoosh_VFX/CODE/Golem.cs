@@ -2,40 +2,29 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Mushroom : Enemy
+public class Golem : Enemy
 {
     private Rigidbody2D rb;
     private Animator Ani;
-    [SerializeField] private int count=0;
+    private bool isDashing = false;
+    [SerializeField] private int count = 0;
+    public float chaseRange = 7; // ×·»÷·¶Î§
+    public float attackRange = 2f; // ¹¥»÷·¶Î§
+    public Transform player; // Íæ¼ÒTransform
+    private float lastAttackTime = 0f;
+    public float attackCooldown = 1f;
 
-    [Header("ç‰¹æ•ˆPrefab")]
-    public GameObject hitVFX;      // å—å‡»ç‰¹æ•ˆ
-    public GameObject deathVFX;    // æ­»äº¡ç‰¹æ•ˆ
-    public GameObject attackVFX;   // æ”»å‡»ç‰¹æ•ˆ
-
-    [Header("å±æ€§")]
+    [Header("ÊôĞÔ")]
     public int maxHP = 30;
     public int currentHP;
 
-    [Header("å·¡é€»å‚æ•°")]
+    [Header("Ñ²Âß²ÎÊı")]
     public Transform leftPoint;
     public Transform rightPoint;
     public float patrolSpeed = 2f;
     [SerializeField] public bool movingRight = false;
+    
     private bool isDead = false;
-
-    public Transform player; // ç©å®¶Transform
-    public float chaseRange = 7; // è¿½å‡»èŒƒå›´
-    public float attackRange = 4f; // æ”»å‡»èŒƒå›´
-    private bool isChasing = false;
-
-    private float lastAttackTime = 0f;
-    public float attackCooldown = 1f;
-
-    private bool isDashing = false;
-
-    private int stoping = 1000; 
-
     // Start is called before the first frame update
     void Start()
     {
@@ -47,10 +36,10 @@ public class Mushroom : Enemy
     // Update is called once per frame
     void Update()
     {
-        if (isDashing) return; // å†²åˆºæ—¶ä¸åšå…¶ä»–ç§»åŠ¨æ§åˆ¶
+        if (isDashing) return; // ³å´ÌÊ±²»×öÆäËûÒÆ¶¯¿ØÖÆ
         Ani.SetBool("Hit", false);
         Ani.SetBool("Attack", false);
-        // æ­»äº¡æ—¶ä¸å·¡é€»
+        // ËÀÍöÊ±²»Ñ²Âß
         if (!isDead && count == 0)
         {
             float distanceToPlayer = Vector2.Distance(transform.position, player.position);
@@ -70,19 +59,12 @@ public class Mushroom : Enemy
             }
             else
             {
-                stoping--;
-                if (stoping != 0) { Patrol(); }
-                else { 
-                    rb.velocity = new Vector2(0, rb.velocity.y);
-                    stoping = 1000;
-                    count = 1000;
-                }
-
+                Patrol();
             }
 
         }
         else { count--; }
-        // ç§»åŠ¨åŠ¨ç”»æ§åˆ¶
+        // ÒÆ¶¯¶¯»­¿ØÖÆ
         if (Ani != null)
         {
             Ani.SetFloat("Speed", Mathf.Abs(rb.velocity.x));
@@ -102,6 +84,13 @@ public class Mushroom : Enemy
             }
         }
     }
+    void Flip()
+    {
+        Vector3 scale = transform.localScale;
+        scale.x *= -1;
+        transform.localScale = scale;
+    }
+
     void Patrol()
     {
         if (movingRight)
@@ -124,67 +113,34 @@ public class Mushroom : Enemy
         }
     }
 
-    void Flip()
+    public new void Attack()
     {
-        Vector3 scale = transform.localScale;
-        scale.x *= -1;
-        transform.localScale = scale;
+        if (Ani != null)
+            Ani.SetTrigger("Attack");
     }
 
-    // å—å‡»å‡½æ•°
+    public new void Die()
+    {
+        if (Ani != null)
+            Ani.SetTrigger("Die");
+        isDead = true;
+        rb.velocity = Vector2.zero;
+        // ËÀÍö¶¯»­²¥·ÅºóÏú»Ù¶ÔÏó£¬¿ÉÓÃĞ­³ÌÑÓ³Ù
+        Destroy(gameObject, 1.5f);
+    }
+
     public new void OnHit(int damage = 1)
     {
         currentHP -= damage;
-        if (hitVFX != null)
-            Instantiate(hitVFX, transform.position, Quaternion.identity);
         if (Ani != null)
         {
             Ani.SetTrigger("Hit");
             rb.velocity = new Vector2(0, rb.velocity.y);
-            count = 100; 
+            count = 100;
         }
         if (currentHP <= 0)
         {
             Die();
         }
-    }
-
-    // æ”»å‡»å‡½æ•°ï¼ˆå¯åœ¨åŠ¨ç”»äº‹ä»¶ä¸­è°ƒç”¨ï¼‰
-    public new void Attack()
-    {
-        if (attackVFX != null)
-            Instantiate(attackVFX, transform.position, Quaternion.identity);
-        if (Ani != null)
-            Ani.SetTrigger("Attack");
-    }
-
-    public new void AttackMove()
-    {
-        isDashing = true;
-        float dashDistance = 2.0f; // å†²åˆºè·ç¦»ï¼Œå¯è°ƒæ•´
-        float dashTime = 0.2f;     // å†²åˆºæ—¶é—´ï¼Œå¯è°ƒæ•´
-        Vector2 dashDir = movingRight ? Vector2.right : Vector2.left;
-        rb.velocity = dashDir * (dashDistance / dashTime);
-        StartCoroutine(ResetVelocityAfterDash(dashTime));
-    }
-
-    private IEnumerator ResetVelocityAfterDash(float delay)
-    {
-        yield return new WaitForSeconds(delay);
-        rb.velocity = Vector2.zero;
-        isDashing = false;
-    }
-
-    // æ­»äº¡å‡½æ•°
-    public new void Die()
-    {
-        if (deathVFX != null)
-            Instantiate(deathVFX, transform.position, Quaternion.identity);
-        if (Ani != null)
-            Ani.SetTrigger("Die");
-        isDead = true;
-        rb.velocity = Vector2.zero;
-        // æ­»äº¡åŠ¨ç”»æ’­æ”¾åé”€æ¯å¯¹è±¡ï¼Œå¯ç”¨åç¨‹å»¶è¿Ÿ
-        Destroy(gameObject, 1.5f);
     }
 }

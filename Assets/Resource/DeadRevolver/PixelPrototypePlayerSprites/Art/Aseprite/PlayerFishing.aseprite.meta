@@ -730,7 +730,7 @@ ScriptedImporter:
     layerType: 0
     blendMode: 0
     cells:
-    - name: PlayerFishing_Frame_0
+    - name: Frame_0
       frameIndex: 0
       additiveSortOrder: 0
       cellRect:
@@ -739,7 +739,7 @@ ScriptedImporter:
         width: 51
         height: 60
       spriteId: c24d788315ed52549aee9122ab5fbead
-    - name: PlayerFishing_Frame_1
+    - name: Frame_1
       frameIndex: 1
       additiveSortOrder: 0
       cellRect:
@@ -748,7 +748,7 @@ ScriptedImporter:
         width: 104
         height: 60
       spriteId: cb6b89e50c917bd408bdf13fedb4567c
-    - name: PlayerFishing_Frame_2
+    - name: Frame_2
       frameIndex: 2
       additiveSortOrder: 0
       cellRect:
@@ -757,7 +757,7 @@ ScriptedImporter:
         width: 64
         height: 66
       spriteId: b52b6c65ed1f6164985e5e096ba39db9
-    - name: PlayerFishing_Frame_3
+    - name: Frame_3
       frameIndex: 3
       additiveSortOrder: 0
       cellRect:
@@ -766,7 +766,7 @@ ScriptedImporter:
         width: 52
         height: 76
       spriteId: 21a55572bf974f94eb5d6c986a01048c
-    - name: PlayerFishing_Frame_4
+    - name: Frame_4
       frameIndex: 4
       additiveSortOrder: 0
       cellRect:
@@ -775,7 +775,7 @@ ScriptedImporter:
         width: 52
         height: 76
       spriteId: 5ba360f57b85bfd44acc3da0a856b520
-    - name: PlayerFishing_Frame_5
+    - name: Frame_5
       frameIndex: 5
       additiveSortOrder: 0
       cellRect:
@@ -784,7 +784,7 @@ ScriptedImporter:
         width: 75
         height: 71
       spriteId: fe8025d4c36c2a449ad4452e7472ca1c
-    - name: PlayerFishing_Frame_6
+    - name: Frame_6
       frameIndex: 6
       additiveSortOrder: 0
       cellRect:
@@ -793,7 +793,7 @@ ScriptedImporter:
         width: 93
         height: 34
       spriteId: 548c56be7ed938646a82c703c354e011
-    - name: PlayerFishing_Frame_7
+    - name: Frame_7
       frameIndex: 7
       additiveSortOrder: 0
       cellRect:
@@ -802,7 +802,7 @@ ScriptedImporter:
         width: 73
         height: 44
       spriteId: 5abd8572bcc644a4b9bd9da99e38b7ab
-    - name: PlayerFishing_Frame_8
+    - name: Frame_8
       frameIndex: 8
       additiveSortOrder: 0
       cellRect:
@@ -811,7 +811,7 @@ ScriptedImporter:
         width: 59
         height: 57
       spriteId: c19c605b14f7f134bb75083d8ad2858d
-    - name: PlayerFishing_Frame_9
+    - name: Frame_9
       frameIndex: 9
       additiveSortOrder: 0
       cellRect:
@@ -820,7 +820,7 @@ ScriptedImporter:
         width: 51
         height: 60
       spriteId: 27b88c61e42b7c74ba840d1d57dac1ad
-    - name: PlayerFishing_Frame_10
+    - name: Frame_10
       frameIndex: 10
       additiveSortOrder: 0
       cellRect:
@@ -829,7 +829,7 @@ ScriptedImporter:
         width: 51
         height: 60
       spriteId: 403236616d8ca934c84077ea704e5cf6
-    - name: PlayerFishing_Frame_11
+    - name: Frame_11
       frameIndex: 11
       additiveSortOrder: 0
       cellRect:
@@ -838,7 +838,7 @@ ScriptedImporter:
         width: 51
         height: 59
       spriteId: 80fb15c5113f76c47983f5cb477d846e
-    - name: PlayerFishing_Frame_12
+    - name: Frame_12
       frameIndex: 12
       additiveSortOrder: 0
       cellRect:
@@ -847,7 +847,7 @@ ScriptedImporter:
         width: 51
         height: 59
       spriteId: 75a20e0929a5be54b9365adf544f8130
-    - name: PlayerFishing_Frame_13
+    - name: Frame_13
       frameIndex: 13
       additiveSortOrder: 0
       cellRect:
@@ -856,7 +856,7 @@ ScriptedImporter:
         width: 51
         height: 60
       spriteId: 005602bbebe189d4783cb5c9e08740aa
-    - name: PlayerFishing_Frame_14
+    - name: Frame_14
       frameIndex: 14
       additiveSortOrder: 0
       cellRect:
@@ -865,7 +865,7 @@ ScriptedImporter:
         width: 51
         height: 61
       spriteId: 0a73ac29d29079b4e90e50760650ec51
-    - name: PlayerFishing_Frame_15
+    - name: Frame_15
       frameIndex: 15
       additiveSortOrder: 0
       cellRect:
@@ -874,7 +874,7 @@ ScriptedImporter:
         width: 51
         height: 61
       spriteId: 01613349a94d52e408cf9b4d072758f5
-    - name: PlayerFishing_Frame_16
+    - name: Frame_16
       frameIndex: 16
       additiveSortOrder: 0
       cellRect:
@@ -883,7 +883,7 @@ ScriptedImporter:
         width: 51
         height: 60
       spriteId: adfd27d71c2c07544a7efe10ae4c25b4
-    - name: PlayerFishing_Frame_17
+    - name: Frame_17
       frameIndex: 17
       additiveSortOrder: 0
       cellRect:
@@ -892,7 +892,7 @@ ScriptedImporter:
         width: 51
         height: 60
       spriteId: 8b810ca873899ba48aa80bbdf0e76377
-    - name: PlayerFishing_Frame_18
+    - name: Frame_18
       frameIndex: 18
       additiveSortOrder: 0
       cellRect:
@@ -901,7 +901,7 @@ ScriptedImporter:
         width: 50
         height: 59
       spriteId: 63be78549748fce40ade5b0ef64242b0
-    - name: PlayerFishing_Frame_19
+    - name: Frame_19
       frameIndex: 19
       additiveSortOrder: 0
       cellRect:
@@ -910,7 +910,7 @@ ScriptedImporter:
         width: 51
         height: 59
       spriteId: a8e1415d1c334d147b8c500454c94ea0
-    - name: PlayerFishing_Frame_20
+    - name: Frame_20
       frameIndex: 20
       additiveSortOrder: 0
       cellRect:
@@ -919,7 +919,7 @@ ScriptedImporter:
         width: 56
         height: 61
       spriteId: e4d53223121527844822eede05d0b717
-    - name: PlayerFishing_Frame_21
+    - name: Frame_21
       frameIndex: 21
       additiveSortOrder: 0
       cellRect:
@@ -928,7 +928,7 @@ ScriptedImporter:
         width: 55
         height: 61
       spriteId: ae30afb97fb71e841b3597b741bbdd9c
-    - name: PlayerFishing_Frame_22
+    - name: Frame_22
       frameIndex: 22
       additiveSortOrder: 0
       cellRect:
@@ -937,7 +937,7 @@ ScriptedImporter:
         width: 55
         height: 60
       spriteId: cb4bf86980789614894727e3798608cb
-    - name: PlayerFishing_Frame_23
+    - name: Frame_23
       frameIndex: 23
       additiveSortOrder: 0
       cellRect:
@@ -946,7 +946,7 @@ ScriptedImporter:
         width: 49
         height: 61
       spriteId: 10a6445534f66db4eb18f2f5a168a6c3
-    - name: PlayerFishing_Frame_24
+    - name: Frame_24
       frameIndex: 24
       additiveSortOrder: 0
       cellRect:
@@ -955,7 +955,7 @@ ScriptedImporter:
         width: 64
         height: 96
       spriteId: 4e3235e2448db2c4a99bd13429e89a12
-    - name: PlayerFishing_Frame_25
+    - name: Frame_25
       frameIndex: 25
       additiveSortOrder: 0
       cellRect:
@@ -964,7 +964,7 @@ ScriptedImporter:
         width: 30
         height: 96
       spriteId: b77cb326c9a88ea4e9b6c0075ae04bac
-    - name: PlayerFishing_Frame_26
+    - name: Frame_26
       frameIndex: 26
       additiveSortOrder: 0
       cellRect:
@@ -973,7 +973,7 @@ ScriptedImporter:
         width: 15
         height: 103
       spriteId: 1712f83abf7a134459ab8b6551b64e3c
-    - name: PlayerFishing_Frame_27
+    - name: Frame_27
       frameIndex: 27
       additiveSortOrder: 0
       cellRect:
@@ -982,7 +982,7 @@ ScriptedImporter:
         width: 21
         height: 94
       spriteId: fad7b3cc8ca9ee44c87f3fb82ff2aea0
-    - name: PlayerFishing_Frame_28
+    - name: Frame_28
       frameIndex: 28
       additiveSortOrder: 0
       cellRect:
@@ -991,7 +991,7 @@ ScriptedImporter:
         width: 63
         height: 45
       spriteId: 5bceb044b572e274c8cdd441b6533272
-    - name: PlayerFishing_Frame_29
+    - name: Frame_29
       frameIndex: 29
       additiveSortOrder: 0
       cellRect:
