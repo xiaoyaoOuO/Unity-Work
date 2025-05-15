@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Mushroom : MonoBehaviour
+public class Mushroom : Enemy
 {
     private Rigidbody2D rb;
     private Animator Ani;
@@ -33,6 +33,8 @@ public class Mushroom : MonoBehaviour
     public float attackCooldown = 1f;
 
     private bool isDashing = false;
+
+    private int stoping = 1000; 
 
     // Start is called before the first frame update
     void Start()
@@ -68,7 +70,14 @@ public class Mushroom : MonoBehaviour
             }
             else
             {
-                Patrol();
+                stoping--;
+                if (stoping != 0) { Patrol(); }
+                else { 
+                    rb.velocity = new Vector2(0, rb.velocity.y);
+                    stoping = 1000;
+                    count = 1000;
+                }
+
             }
 
         }
@@ -123,7 +132,7 @@ public class Mushroom : MonoBehaviour
     }
 
     // 受击函数
-    public void OnHit(int damage = 1)
+    public new void OnHit(int damage = 1)
     {
         currentHP -= damage;
         if (hitVFX != null)
@@ -142,7 +151,7 @@ public class Mushroom : MonoBehaviour
     }
 
     // 攻击函数（可在动画事件中调用）
-    public void Attack()
+    public new void Attack()
     {
         if (attackVFX != null)
             Instantiate(attackVFX, transform.position, Quaternion.identity);
@@ -150,7 +159,7 @@ public class Mushroom : MonoBehaviour
             Ani.SetTrigger("Attack");
     }
 
-    public void AttackMove()
+    public new void AttackMove()
     {
         isDashing = true;
         float dashDistance = 2.0f; // 冲刺距离，可调整
@@ -168,7 +177,7 @@ public class Mushroom : MonoBehaviour
     }
 
     // 死亡函数
-    public void Die()
+    public new void Die()
     {
         if (deathVFX != null)
             Instantiate(deathVFX, transform.position, Quaternion.identity);
