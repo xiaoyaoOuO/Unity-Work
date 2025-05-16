@@ -32,17 +32,19 @@ public class Player : MonoBehaviour
     public float rollSpeed = 15f; // 翻滚速度
     public float rollCooldown = 1f; // 翻滚冷却时间
 
-    public bool canAttack{get{return attackTimer <= 0 && GameInput.IsAttackPressed();}}
+    public bool canAttack { get { return attackTimer <= 0 && GameInput.IsAttackPressed(); } }
 
-    public bool canDash{get{return dashCount > 0 && GameInput.IsDashPressed();}}
+    public bool canDash { get { return dashCount > 0 && GameInput.IsDashPressed(); } }
 
-    public bool canJump{get{return GameInput.IsJumpPressed() && IsGrounded();}}
-    public bool canIntoBulletTime{get{return GameInput.IsBulletTimePressed() && BulletTimeCooldownTimer >= BulletTimeDuration;}}
-    public bool canRoll{get{return GameInput.IsRollPressed() && IsGrounded();}}
+    public bool canJump { get { return GameInput.IsJumpPressed() && IsGrounded(); } }
+    public bool canIntoBulletTime { get { return GameInput.IsBulletTimePressed() && BulletTimeCooldownTimer >= BulletTimeDuration; } }
+    public bool canRoll { get { return GameInput.IsRollPressed() && IsGrounded(); } }
     public Collider2D UpAttackCollider; // Reference to the UpAttack collider
     public Collider2D DownAttackCollider; // Reference to the DownAttack collider
     public Collider2D RightAttackCollider; // Reference to the RightAttack collider
     public LayerMask enemyLayer; // Layer mask for enemies
+
+    private PlayerState playerState;
     #endregion
 
     // Create a finite state machine for the player
@@ -53,7 +55,7 @@ public class Player : MonoBehaviour
     public Rigidbody2D rb; // Reference to the Rigidbody2D component
     private BoxCollider2D boxCollider;
 
-    public IEffectController effectController; 
+    public IEffectController effectController;
     public ICamera cameraManager; // Reference to the camera manager
 
     public JumpCheck jumpCheck;
@@ -72,18 +74,25 @@ public class Player : MonoBehaviour
         fsm.AddState(new PlayerStandingAttackState(this));
         fsm.AddState(new PlayerDashAttackState(this));
         fsm.AddState(new PlayerRollState(this));
-        animator = GetComponentInChildren<Animator>(); // Get the Animator component attached to the player
-        rb = GetComponentInChildren<Rigidbody2D>(); // Get the Rigidbody2D component attached to the player
+
+        //玩家状态
+        playerState = new PlayerState(this);
+
+        //获取组件
+        animator = GetComponentInChildren<Animator>();
+        rb = GetComponentInChildren<Rigidbody2D>();
         boxCollider = GetComponentInChildren<BoxCollider2D>();
 
-        rb.gravityScale = gravity; // Set the gravity scale of the Rigidbody2D component
+        rb.gravityScale = gravity;
 
+        //特效组
         effectController = Game.instance.sceneManager;
         cameraManager = Game.instance.cameraManager;
 
+        //跳跃检查器
         jumpCheck = new JumpCheck(this);
-    
-        fsm.Initialize();        
+
+        fsm.Initialize();
     }
 
     // Update is called once per frame
@@ -91,6 +100,8 @@ public class Player : MonoBehaviour
     {
         // Update the state machine
         fsm.Update();
+
+        //输入缓冲检测
         GameInput.Jump.Update();
         GameInput.Dash.Update();
         GameInput.Roll.Update();
@@ -98,16 +109,16 @@ public class Player : MonoBehaviour
         UpdatePlayerController();
         CheckForBulletTime(); // Check if the player can enter bullet time
 
-        cameraManager.UpdateCameraPosition(this.transform.position); 
+        cameraManager.UpdateCameraPosition(this.transform.position);
 
-        jumpCheck.Update(); 
+        jumpCheck.Update();
     }
 
     private void UpdatePlayerController()
     {
         if (IsGrounded() && rb.velocity.y <= 0)
         {
-            RefillDash(); // Refill the dash count if the player is grounded{    
+            RefillDash();
         }
 
         if (attackTimer > 0)
@@ -133,7 +144,7 @@ public class Player : MonoBehaviour
 
     public void SetVelocity(Vector2 velocity)
     {
-        if(facing == Facing.Left && velocity.x > 0 || facing == Facing.Right && velocity.x < 0) // Check if the player is moving in the opposite direction{
+        if (facing == Facing.Left && velocity.x > 0 || facing == Facing.Right && velocity.x < 0) // Check if the player is moving in the opposite direction{
         {
             OnFlip();
         }
@@ -153,8 +164,9 @@ public class Player : MonoBehaviour
 
     public bool IsGrounded()
     {
-        RaycastHit2D hit = Physics2D.BoxCast(boxCollider.bounds.center, boxCollider.bounds.size, 0f, Vector2.down, 0.1f, LayerMask.GetMask("Ground")); 
-        if(hit.collider == null) { // If the player is not grounded, return false
+        RaycastHit2D hit = Physics2D.BoxCast(boxCollider.bounds.center, boxCollider.bounds.size, 0f, Vector2.down, 0.1f, LayerMask.GetMask("Ground"));
+        if (hit.collider == null)
+        { // If the player is not grounded, return false
             return false;
         }
         return true;
@@ -167,43 +179,56 @@ public class Player : MonoBehaviour
 
     public void SuperJump()
     {
-        SetVelocity(new Vector2(rb.velocity.x, jumpForce)*1.5f);
+        SetVelocity(new Vector2(rb.velocity.x, jumpForce) * 1.5f);
     }
 
     public Vector2 getVelocity() => rb.velocity;
     public void AnimationTrigger() => fsm.CurrentState.AnimationEndTrigger();
     public void AnimationAttackTrigger() => fsm.CurrentState.AnimationAttackTrigger(); // Trigger the attack animation
 
-    public void RefillDash() { // Refill the dash count if the player is grounded{
-        if(dashCount <= 0 ) { // Check if the player has any dash count left{
+    public void RefillDash()
+    { // Refill the dash count if the player is grounded{
+        if (dashCount <= 0)
+        { // Check if the player has any dash count left{
             dashCount = maxDashCount; // Refill the dash count;   
         }
     }
 
-    public void CheckForBulletTime() { // Check if the player can enter bullet time{
-        if (canIntoBulletTime) { // If the player can enter bullet time{
+    public void CheckForBulletTime()
+    { // Check if the player can enter bullet time{
+        if (canIntoBulletTime)
+        { // If the player can enter bullet time{
             BulletTimeManager.instance.Enter(); // Enter bullet time
             BulletTimer = BulletTimeDuration;
             BulletTimeCooldownTimer = 0;
         }
-        if (BulletTimeManager.instance.isBulletTime) { // If the game is in bullet time{
+        if (BulletTimeManager.instance.isBulletTime)
+        { // If the game is in bullet time{
             BulletTimer -= Time.deltaTime; // Decrement the bullet time cooldown
-            if(InputToExitBulletTime() || BulletTimer <= 0) { // If the player is not pressing the bullet time button or the bullet time cooldown is less than or equal to 0{
+            if (InputToExitBulletTime() || BulletTimer <= 0)
+            { // If the player is not pressing the bullet time button or the bullet time cooldown is less than or equal to 0{
                 BulletTimeManager.instance.Exit(); // Exit bullet time
             }
         }
-        else{
+        else
+        {
             BulletTimeCooldownTimer = Mathf.MoveTowards(BulletTimeCooldownTimer, BulletTimeDuration, BulletTimeRefillSpeed * Time.deltaTime);
         }
     }
 
-    public bool InputToExitBulletTime() { // Check if the player can exit bullet time{
-        if(!GameInput.IsBulletTimePressed()) 
+    public bool InputToExitBulletTime()
+    { // Check if the player can exit bullet time{
+        if (!GameInput.IsBulletTimePressed())
             return true;
-        if(GameInput.IsAttackPressed())
+        if (GameInput.IsAttackPressed())
             return true;
-        if(GameInput.IsDashPressed())
+        if (GameInput.IsDashPressed())
             return true;
-        return false; 
+        return false;
+    }
+
+    public void OnHit()
+    {
+        playerState.OnHit();
     }
 }
