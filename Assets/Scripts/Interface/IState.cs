@@ -1,19 +1,21 @@
 using System;
 using UnityEngine;
 
-public enum State {
-     Idle, 
-     Run, 
-     Air,
-     Attack, 
-     Hit, 
-     Die,
-     Dash,
-     Jump,
-     RunAttack,
-     StandingAttack,
-     DashAttack,
-     Roll,
+public enum State
+{
+    Idle,
+    Run,
+    Air,
+    Attack,
+    Hit,
+    Die,
+    Dash,
+    Jump,
+    RunAttack,
+    StandingAttack,
+    DashAttack,
+    Roll,
+     RollAttack,
 }
 public abstract class IState
 {

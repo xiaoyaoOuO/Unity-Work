@@ -17,4 +17,7 @@ public class AnimationTrigger :MonoBehaviour {
 
     
 
+    public void Attackhit() {
+        mushroom1.OnHit(1);
+    }
 }

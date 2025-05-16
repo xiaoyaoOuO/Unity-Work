@@ -74,6 +74,7 @@ public class Player : MonoBehaviour
         fsm.AddState(new PlayerStandingAttackState(this));
         fsm.AddState(new PlayerDashAttackState(this));
         fsm.AddState(new PlayerRollState(this));
+        fsm.AddState(new PlayerRollAttackState(this));
 
         //玩家状态
         playerState = new PlayerState(this);
