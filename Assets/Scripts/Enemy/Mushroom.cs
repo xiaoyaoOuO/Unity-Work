@@ -143,6 +143,7 @@ public class Mushroom : Enemy
             rb.velocity = new Vector2(0, rb.velocity.y);
             count = 100; 
         }
+        OnhitFX(); // 调用受击特效函数
         if (currentHP <= 0)
         {
             Die();
@@ -186,5 +187,21 @@ public class Mushroom : Enemy
         rb.velocity = Vector2.zero;
         // 死亡动画播放后销毁对象，可用协程延迟
         Destroy(gameObject, 1.5f);
+    }
+
+    public void OnhitFX()
+    {
+        SpriteRenderer spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+        if (spriteRenderer != null)
+        {
+            spriteRenderer.color = Color.red; // 设置颜色为红色
+            StartCoroutine(ResetColor(spriteRenderer)); // 启动协程重置颜色
+        }
+    }
+
+    private IEnumerator ResetColor(SpriteRenderer spriteRenderer)
+    {
+        yield return new WaitForSeconds(0.2f); // 等待0.1秒
+        spriteRenderer.color = Color.white; // 重置颜色为白色
     }
 }
