@@ -11,7 +11,12 @@ public class PlayerAirState : IState {
         if(player.canDash){
             return State.Dash;
         }
-        if(GameInput.IsJumpPressed() && player.jumpCheck.AllowJUmp()) {
+        if (player.canGrab)
+        {
+            return State.Wall;
+        }
+        if (GameInput.IsJumpPressed() && player.jumpCheck.AllowJump())
+        {
             return State.Jump;
         }
         if(player.canAttack) {

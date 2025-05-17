@@ -19,6 +19,7 @@ public class Player : MonoBehaviour
     public float attackTimer;
     [Header("冲刺")]
     public float dashSpeed = 15f; // 冲刺速度
+    public float upDashSpeed = 10f; // 向上冲刺速度
     public float dashDuration = 0.3f; // 冲刺持续时间 
     public Vector2 dashDirection; // 冲刺方向
     public int dashCount = 1; // 当前冲刺次数
@@ -31,11 +32,11 @@ public class Player : MonoBehaviour
     [Header("翻滚")]
     public float rollSpeed = 15f; // 翻滚速度
     public float rollCooldown = 1f; // 翻滚冷却时间
-
+    [Header("爬墙")]
+    public float wallSlideSpeed = 2f; // 爬墙速度
+    public bool canGrab { get { return GameInput.IsGrabPressed() && WallCheck(); } } // 是否可以抓墙
     public bool canAttack { get { return attackTimer <= 0 && GameInput.IsAttackPressed(); } }
-
     public bool canDash { get { return dashCount > 0 && GameInput.IsDashPressed(); } }
-
     public bool canJump { get { return GameInput.IsJumpPressed() && IsGrounded(); } }
     public bool canIntoBulletTime { get { return GameInput.IsBulletTimePressed() && BulletTimeCooldownTimer >= BulletTimeDuration; } }
     public bool canRoll { get { return GameInput.IsRollPressed() && IsGrounded(); } }
@@ -75,6 +76,7 @@ public class Player : MonoBehaviour
         fsm.AddState(new PlayerDashAttackState(this));
         fsm.AddState(new PlayerRollState(this));
         fsm.AddState(new PlayerRollAttackState(this));
+        fsm.AddState(new PlayerWallState(this));
 
         //玩家状态
         playerState = new PlayerState(this);
@@ -231,5 +233,15 @@ public class Player : MonoBehaviour
     public void OnHit()
     {
         playerState.OnHit();
+    }
+
+    public bool WallCheck()
+    { // Check if the player is touching a wall{
+        RaycastHit2D hit = Physics2D.BoxCast(boxCollider.bounds.center, boxCollider.bounds.size, 0f, Vector2.right * (facing == Facing.Right ? 1 : -1), 0.3f, LayerMask.GetMask("Ground"));
+        if (hit.collider == null)
+        { // If the player is not touching a wall, return false{
+            return false;
+        }
+        return true;
     }
 }

@@ -6,7 +6,7 @@ public class WallBoost
 {
     public float timer;
 
-    public void Update()
+    public void Update()        //TODO： 检测墙跳
     {
         if (timer > 0)
         {

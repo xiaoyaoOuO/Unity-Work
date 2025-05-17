@@ -15,7 +15,11 @@ public enum State
     StandingAttack,
     DashAttack,
     Roll,
-     RollAttack,
+    RollAttack,
+    WallClimb,
+    WallJump,
+    WallIdle,
+    Wall
 }
 public abstract class IState
 {

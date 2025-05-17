@@ -19,7 +19,7 @@ public class JumpCheck
         }   
     }
 
-    public bool AllowJUmp(){
+    public bool AllowJump(){
         return timer > 0;
     }
 

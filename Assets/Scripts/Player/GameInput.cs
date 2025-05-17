@@ -34,16 +34,19 @@ public class Command{
 }
 
 
-public static class GameInput{
-    public static Command Jump = new Command(KeyCode.Space,0.4f);
+public static class GameInput
+{
+    public static Command Jump = new Command(KeyCode.Space, 0.4f);
     public static Command Attack = new Command(KeyCode.Mouse0);
-    public static Command Dash = new Command(KeyCode.LeftShift,0.1f);
+    public static Command Dash = new Command(KeyCode.LeftShift, 0.1f);
     public static Command BulletTime = new Command(KeyCode.Mouse1);
-    public static Command Roll = new Command(KeyCode.S,0.4f);
-    public static Vector2 LastDir {get => new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));}
-    public static bool IsJumpPressed(){ return Jump.IsPressed(); }
-    public static bool IsAttackPressed(){ return Attack.IsPressed(); }
-    public static bool IsDashPressed(){ return Dash.IsPressed(); }  
-    public static bool IsBulletTimePressed(){ return BulletTime.IsDown(); } 
-    public static bool IsRollPressed(){ return Roll.IsPressed(); }
+    public static Command Roll = new Command(KeyCode.S, 0.4f);
+    public static Command Grab = new Command(KeyCode.F);
+    public static Vector2 LastDir { get => new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")); }
+    public static bool IsJumpPressed() { return Jump.IsPressed(); }
+    public static bool IsAttackPressed() { return Attack.IsPressed(); }
+    public static bool IsDashPressed() { return Dash.IsPressed(); }
+    public static bool IsBulletTimePressed() { return BulletTime.IsDown(); }
+    public static bool IsRollPressed() { return Roll.IsPressed(); }
+    public static bool IsGrabPressed() { return Grab.IsDown(); }
 }
