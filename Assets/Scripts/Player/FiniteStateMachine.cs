@@ -8,8 +8,11 @@ class FiniteStateMachine<T> where T : IState {
     private Dictionary<State , T> states = new Dictionary<State,T>();
     public FiniteStateMachine() {
     }
-    public void Initialize() {
-        currentState = states[State.Idle];
+    public void Initialize(T initialState = null) {
+        if (initialState == null) {
+            initialState = states[State.Idle]; // Set to default state if not provided
+        }
+        currentState = initialState;
         currentState.OnEnter();
     }
 

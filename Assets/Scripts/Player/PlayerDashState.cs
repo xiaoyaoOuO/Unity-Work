@@ -30,10 +30,17 @@ public class PlayerDashState : IState
         player.SetAnimation("DashUp",dashUp);
 
         /// 获取鼠标位置或者键盘决定位置
-        
-        player.rb.gravityScale = 0;
 
-        player.SetVelocity(player.dashDirection * player.dashSpeed); // Set the player's velocity to the dash direction and speed
+        // player.SetVelocity(player.dashDirection * player.dashSpeed); // Set the player's velocity to the dash direction and speed
+
+        // if (dashUp)
+        // {
+        //     player.SetVelocity(player.dashDirection * player.upDashSpeed);
+        // }
+
+        float dashX = player.dashDirection.x * player.dashSpeed; // Calculate the x component of the dash velocity
+        float dashY = player.dashDirection.y * player.upDashSpeed;
+        player.SetVelocity(new Vector2(dashX, dashY)); // Set the player's velocity to the dash velocity
 
         dashTimer = player.dashDuration; // Reset the dash timer
 
@@ -58,6 +65,5 @@ public class PlayerDashState : IState
 
     public override void OnExit(){
         base.OnExit();
-        player.rb.gravityScale = player.gravity;
     }
 }

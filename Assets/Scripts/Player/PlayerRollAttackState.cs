@@ -27,7 +27,7 @@ public class PlayerRollAttackState : IState
         Vector2 velocity = player.rb.velocity;
         velocity.x = Mathf.MoveTowards(velocity.x, 0, acceleration * Time.deltaTime);
         player.rb.velocity = velocity;
-        Debug.Log(player.rb.velocity);
+        // Debug.Log(player.rb.velocity);
         return state;
     }
 
