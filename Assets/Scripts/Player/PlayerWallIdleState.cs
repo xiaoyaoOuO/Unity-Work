@@ -12,7 +12,11 @@ public class PlayerWallIdleState : IState
 
     public override State OnUpdate()
     {
-        if(Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S)) 
+        if (!player.HeadWallCheck())
+        {
+            return State.CrossWall;
+        }
+        if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S))
         {
             return State.WallClimb;
         }

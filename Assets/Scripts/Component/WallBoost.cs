@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WallBoost
+public class WallBoost  //好像暂时没用
 {
     public float timer;
 
@@ -11,10 +11,6 @@ public class WallBoost
         if (timer > 0)
         {
             timer -= Time.deltaTime;
-            if (timer <= 0)
-            {
-                timer = 0;
-            }
         }
     }
 }

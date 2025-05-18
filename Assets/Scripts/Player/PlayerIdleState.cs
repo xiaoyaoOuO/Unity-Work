@@ -35,15 +35,13 @@ public class PlayerIdleState : IState {
         if(player.IsGrounded() == false) {
            return State.Air; 
         }
-        if(GameInput.IsJumpPressed() && player.jumpCheck.AllowJump()) {
+        if(player.canJump && player.jumpCheck.AllowJump()) {
             return State.Jump;
         }
         if(Input.GetAxisRaw("Horizontal") != 0) {
             return State.Run;
         }
-        if(player.rb.velocity != Vector2.zero) {
-            player.rb.velocity = new Vector2(Mathf.Lerp(player.rb.velocity.x, 0, player.acceleration * Time.deltaTime), player.rb.velocity.y);
-        }
+        player.ZeroVelocity();
         return state;
     }
 }

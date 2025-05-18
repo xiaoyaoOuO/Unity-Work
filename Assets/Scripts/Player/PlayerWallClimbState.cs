@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class PlayerWallClimbState : IState
 {
-
     public PlayerWallClimbState(Player player) : base(player)
     {
         this.stateName = "WallClimb";
@@ -13,6 +12,11 @@ public class PlayerWallClimbState : IState
 
     public override State OnUpdate()
     {
+        if (!player.HeadWallCheck())
+        {
+            Debug.Log("CrossWall");
+            return State.CrossWall;
+        }
         int climbDirection = Input.GetKey(KeyCode.W) ? 1 : (Input.GetKey(KeyCode.S) ? -1 : 0);
         if (climbDirection != 0)
         {

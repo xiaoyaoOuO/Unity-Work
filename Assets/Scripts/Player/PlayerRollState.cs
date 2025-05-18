@@ -6,6 +6,7 @@ using UnityEngine;
 public class PlayerRollState : IState
 {
     private bool RollAttack;
+    private bool CanChangeToAttack;
     public PlayerRollState(Player player) : base(player)
     {
         state = State.Roll;
@@ -20,24 +21,32 @@ public class PlayerRollState : IState
         player.rb.velocity = newSpeed * direction;
         triggerCalled = false; // Reset the trigger called flag
         RollAttack = false;
+        CanChangeToAttack = false;
     }
 
     public override State OnUpdate()
     {
-        if(GameInput.IsAttackPressed())
+        if (GameInput.IsAttackPressed())
         {
             RollAttack = true;
         }
+        if(RollAttack) {
+            return State.RollAttack; 
+        }
         if (triggerCalled)
         {
-            if(RollAttack) return State.RollAttack;
             return State.Idle;
-        } 
+        }
         return State.Roll;
     }
 
     public override void AnimationEndTrigger()
     {
         triggerCalled = true;
+    }
+
+    public override void FirstAnimationTrigger()
+    {
+        CanChangeToAttack = true;
     }
 }

@@ -35,4 +35,9 @@ public class PlayerRollAttackState : IState
     {
         rollAttackEnd = true;
     }
+
+    public override void AnimationAttackTrigger(Collider2D collider = null)
+    {
+        base.AnimationAttackTrigger(player.RightAttackCollider);
+    }
 }

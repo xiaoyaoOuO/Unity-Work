@@ -15,7 +15,7 @@ public class PlayerAirState : IState {
         {
             return State.Wall;
         }
-        if (GameInput.IsJumpPressed() && player.jumpCheck.AllowJump())
+        if (player.canJump && player.jumpCheck.AllowJump())
         {
             return State.Jump;
         }

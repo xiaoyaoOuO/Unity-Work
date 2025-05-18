@@ -2,23 +2,40 @@ using UnityEngine;
 
 public class PlayerRunAttackState : IState {
     private bool attackEnd;
-    public PlayerRunAttackState(Player player) : base(player) {
+    private int slashAttackCount;
+    public PlayerRunAttackState(Player player) : base(player)
+    {
         stateName = "RunAttack";
         state = State.RunAttack;
+        slashAttackCount = 0;
     }
 
     public override State OnUpdate() {
-        if(attackEnd) { 
-            attackEnd = false;
-            return State.Run; // Return to idle state
+        if (player.canDash)
+        {
+            return State.DashAttack;
         }
+        if (player.canRoll)
+        {
+            return State.Roll;
+        }
+        if (attackEnd)
+            {
+                attackEnd = false;
+                return State.Run; // Return to idle state
+            }
+        float dir = Input.GetAxisRaw("Horizontal"); // Get the horizontal input direction
+        player.SetVelocity(new Vector2(dir * player.speed, player.rb.velocity.y)); 
         return state;
     }
 
-    public override void OnEnter() {
+    public override void OnEnter()
+    {
         base.OnEnter();
         player.attackTimer = player.attackCooldown; // Reset the attack timer
         attackEnd = false; // Reset the attack end flag
+        slashAttackCount = (slashAttackCount + 1) & 1;
+        player.SetAnimation("RunSlash", slashAttackCount);
     }
 
     public override void OnExit() {
@@ -29,17 +46,7 @@ public class PlayerRunAttackState : IState {
        attackEnd = true; // Set the attackEnd flag to true when the animation ends
     }
 
-    public override void AnimationAttackTrigger() {
-        Collider2D[] hitEnemies = new Collider2D[10]; // Array to store hit enemies
-        player.RightAttackCollider.OverlapCollider(new ContactFilter2D { layerMask = player.enemyLayer }, hitEnemies); // Check for enemies in the attack range
-        for (int i = 0; i < hitEnemies.Length; i++) {
-            if (hitEnemies[i] != null) {
-                Mushroom enemy = hitEnemies[i].GetComponent<Mushroom>(); // Get the Mushroom component from the hit enemy
-                if (enemy != null) {
-                    enemy.OnHit(); // Call the OnHit method on the enemy
-                    Debug.Log("Hit enemy: " + enemy.name); // Log the hit enemy
-                }
-            }
-        }
+    public override void AnimationAttackTrigger(Collider2D collider = null) {
+        base.AnimationAttackTrigger(player.RightAttackCollider);
     }
 }
