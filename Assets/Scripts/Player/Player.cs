@@ -38,6 +38,8 @@ public class Player : MonoBehaviour
     public float wallJumpForce = 10f; // 墙跳y轴力
     public float wallJumpDuration = 0.3f; // 墙跳持续时间
     public float wallJumpBoostSpeed = 10f; // 墙跳x轴力
+    [Header("人物状态")]
+    public int maxHealth;
     public bool canGrab { get { return GameInput.IsGrabPressed() && HeadWallCheck(); } } // 是否可以抓墙
     public bool canAttack { get { return attackTimer <= 0 && GameInput.IsAttackPressed(); } }
     public bool canDash { get { return dashCount > 0 && GameInput.IsDashPressed(); } }
@@ -87,7 +89,7 @@ public class Player : MonoBehaviour
         fsm.AddState(new PlayerWallJumpState(this));
 
         //玩家状态
-        playerState = new PlayerState(this);
+        playerState = new PlayerState(this,maxHealth);
 
         //获取组件
         animator = GetComponentInChildren<Animator>();
@@ -216,20 +218,24 @@ public class Player : MonoBehaviour
         }
         if (BulletTimeManager.instance.isBulletTime)
         { // If the game is in bullet time{
-            BulletTimer -= Time.deltaTime; // Decrement the bullet time cooldown
+            BulletTimer -= Time.deltaTime;
+            game_UI.ConsumeBulletTime(); //UI读条
+
             if (InputToExitBulletTime() || BulletTimer <= 0)
-            { // If the player is not pressing the bullet time button or the bullet time cooldown is less than or equal to 0{
-                BulletTimeManager.instance.Exit(); // Exit bullet time
+            {
+                BulletTimeCooldownTimer = BulletTimer >=0 ? BulletTimer : 0;
+                BulletTimeManager.instance.Exit();
             }
         }
         else
         {
             BulletTimeCooldownTimer = Mathf.MoveTowards(BulletTimeCooldownTimer, BulletTimeDuration, BulletTimeRefillSpeed * Time.deltaTime);
+            game_UI.ResetBulletTime();
         }
     }
 
     public bool InputToExitBulletTime()
-    { // Check if the player can exit bullet time{
+    {
         if (!GameInput.IsBulletTimePressed())
             return true;
         if (GameInput.IsAttackPressed())
@@ -260,8 +266,11 @@ public class Player : MonoBehaviour
     }
 
     public RaycastHit2D RightWallCheck()
-    {
-        return Physics2D.BoxCast(boxCollider.bounds.center, boxCollider.bounds.size, 0f, Vector2.right, 1f, LayerMask.GetMask("Ground"));
+    { 
+        int dir = facing == Facing.Right? 1 : -1;
+        Vector3 raycastPosition = boxCollider.bounds.center;
+        raycastPosition.x += boxCollider.bounds.size.x / 2f * dir;
+        return Physics2D.Raycast(raycastPosition, Vector2.right * dir, 0.5f, LayerMask.GetMask("Ground"));
     }
 
     public bool HaveWallAbove()

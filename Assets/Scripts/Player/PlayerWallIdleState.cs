@@ -12,7 +12,7 @@ public class PlayerWallIdleState : IState
 
     public override State OnUpdate()
     {
-        if (!player.HeadWallCheck())
+        if (!player.HeadWallCheck() && player.RightWallCheck())
         {
             return State.CrossWall;
         }

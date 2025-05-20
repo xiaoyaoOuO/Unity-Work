@@ -12,9 +12,9 @@ public class PlayerWallClimbState : IState
 
     public override State OnUpdate()
     {
-        if (!player.HeadWallCheck())
+        if (!player.HeadWallCheck() && player.RightWallCheck())
         {
-            Debug.Log("CrossWall");
+            // Debug.Log("CrossWall");
             return State.CrossWall;
         }
         int climbDirection = Input.GetKey(KeyCode.W) ? 1 : (Input.GetKey(KeyCode.S) ? -1 : 0);

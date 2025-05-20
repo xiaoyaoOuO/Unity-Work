@@ -1,13 +1,14 @@
-using System.Collections;
+
 using System.Collections.Generic;
-using Microsoft.Unity.VisualStudio.Editor;
+using UnityEngine.UI;
 using UnityEngine;
 
 public class Game_UI : MonoBehaviour
 {
     public Player player;
     public int currentHealth;
-    public List<SpriteRenderer> healthBars;
+    public List<Image> healthBars;
+    public Slider BulletTimeSlider;
 
     public void UpdateHealthBars()
     {
@@ -24,5 +25,15 @@ public class Game_UI : MonoBehaviour
                 healthBars[i].enabled = false;
             }
         }
+    }
+
+    public void ConsumeBulletTime()
+    {
+        BulletTimeSlider.value = player.BulletTimer / player.BulletTimeDuration;
+    }
+
+    public void ResetBulletTime()
+    {
+        BulletTimeSlider.value = player.BulletTimeCooldownTimer / player.BulletTimeDuration;
     }
 }

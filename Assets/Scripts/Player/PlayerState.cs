@@ -8,7 +8,11 @@ public class PlayerState
     public int currentHealth;
     Player player;
 
-    public PlayerState(Player player) { this.player = player; }
+    public PlayerState(Player player, int maxHealth)
+    {
+        this.player = player;
+        this.maxHealth = maxHealth;
+    }
     public void OnHit()
     {
         currentHealth--;

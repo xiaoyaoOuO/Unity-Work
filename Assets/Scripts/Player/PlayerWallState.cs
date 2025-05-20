@@ -30,6 +30,7 @@ public class PlayerWallState : IState
         RaycastHit2D hit = player.RightWallCheck();
         if (hit)
         {
+            Debug.Log(hit.distance);
             player.transform.position += hit.distance * Vector3.right * dir;
         }
         fsm.Initialize(playerWallIdleState);
