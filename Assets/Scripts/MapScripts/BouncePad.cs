@@ -13,7 +13,7 @@ public class BouncePad2D : MonoBehaviour
     public float resetSpeed = 2f;       // 复位速度
 
     private Vector2 originalPosition;   // 原始位置
-    private bool isActive = false;       // 是否正在运行协程
+    private bool isActive = false;      // 是否正在运行协程
 
     void Start()
     {
