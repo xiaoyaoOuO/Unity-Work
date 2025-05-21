@@ -62,7 +62,7 @@ public class Player : MonoBehaviour
     //Unity组件
     private Animator animator;
     public Rigidbody2D rb;
-    private BoxCollider2D boxCollider;  //人物的碰撞盒
+    public BoxCollider2D boxCollider;  //人物的碰撞盒
     public Game_UI game_UI;
 
     public IEffectController effectController;
