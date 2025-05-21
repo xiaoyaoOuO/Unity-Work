@@ -41,7 +41,9 @@ public class PlayerIdleState : IState {
         if(Input.GetAxisRaw("Horizontal") != 0) {
             return State.Run;
         }
-        player.ZeroVelocity();
+        if(player.rb.velocity != Vector2.zero) {
+            player.rb.velocity = new Vector2(Mathf.Lerp(player.rb.velocity.x, 0, player.acceleration * Time.deltaTime), player.rb.velocity.y);
+        }
         return state;
     }
 }
