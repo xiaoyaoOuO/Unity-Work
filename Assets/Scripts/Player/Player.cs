@@ -67,6 +67,7 @@ public class Player : MonoBehaviour
 
     public IEffectController effectController;
     public ICamera cameraManager;
+    public ISoundEffectController soundEffectController;
 
     public JumpCheck jumpCheck;
 
@@ -101,6 +102,8 @@ public class Player : MonoBehaviour
         //特效组
         effectController = Game.instance.sceneManager;
         cameraManager = Game.instance.cameraManager;
+        soundEffectController = Game.instance.sceneManager;
+
 
         //跳跃检查器
         jumpCheck = new JumpCheck(this);
