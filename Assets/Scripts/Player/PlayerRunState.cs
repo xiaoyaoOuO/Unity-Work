@@ -23,7 +23,7 @@ public class PlayerRunState : IState
         { // Check if the player is attacking{
             return State.RunAttack; // Return to attack state
         }
-        if(GameInput.IsJumpPressed() && player.canJump) {
+        if(GameInput.IsJumpPressed()) {
             return State.Jump; 
         }
         if(player.IsGrounded() == false) { // Check if the player is grounded{

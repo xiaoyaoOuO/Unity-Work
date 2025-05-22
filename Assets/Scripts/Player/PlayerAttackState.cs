@@ -102,23 +102,30 @@ public class PlayerAttackState : IState {
         attackEnd = true; // 攻击结束
     }
 
-    public override void AnimationAttackTrigger() { // 攻击时调用的函数
+    public override void AnimationAttackTrigger(Collider2D attackBox = null) { // 攻击时调用的函数
         Collider2D[] hitEnemies = new Collider2D[10]; // Array to store hit enemies
-        Collider2D collider = player.RightAttackCollider; // Get the attack collider
-        if(Dir == (int)AttackDirection.Right) { // Right direction
-            collider = player.RightAttackCollider; // Get the right attack collider
-        }else if(Dir == (int)AttackDirection.Up) { // Up direction
-            collider = player.UpAttackCollider; // Get the up attack collider
-        }else if(Dir == (int)AttackDirection.Down) { // Down direction
-            collider = player.DownAttackCollider; // Get the down attack collider
+        Collider2D collider = player.RightAttackCollider; 
+        
+        if (Dir == (int)AttackDirection.Right)
+        { 
+            collider = player.RightAttackCollider; 
         }
-        collider.OverlapCollider(new ContactFilter2D { layerMask = player.enemyLayer }, hitEnemies); // Check for enemies in the attack range 
+        else if (Dir == (int)AttackDirection.Up)
+        { 
+            collider = player.UpAttackCollider; 
+        }
+        else if (Dir == (int)AttackDirection.Down)
+        { 
+            collider = player.DownAttackCollider; 
+        }
+
+        collider.OverlapCollider(new ContactFilter2D { layerMask = player.enemyLayer }, hitEnemies); 
         for (int i = 0; i < hitEnemies.Length; i++) {
             if (hitEnemies[i]!= null) {
-                Mushroom enemy = hitEnemies[i].GetComponent<Mushroom>(); // Get the Mushroom component from the hit enemy
+                Enemy enemy = hitEnemies[i].GetComponent<Enemy>();
                 if (enemy!= null) {
-                    enemy.OnHit(); // Call the OnHit method on the enemy
-                    Debug.Log("Hit enemy: " + enemy.name); // Log the hit enemy  
+                    enemy.OnHit(); 
+                    Debug.Log("Hit enemy: " + enemy.name);  
                 }else{
                     break;
                 }

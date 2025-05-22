@@ -24,13 +24,13 @@ public class Enemy : MonoBehaviour
 
     }
 
-    // ÊÜ»÷º¯Êý
-    public void OnHit(int damage = 1)
+    // ï¿½Ü»ï¿½ï¿½ï¿½ï¿½ï¿½
+    public virtual void OnHit(int damage = 1)
     {
  
     }
 
-    // ¹¥»÷º¯Êý£¨¿ÉÔÚ¶¯»­ÊÂ¼þÖÐµ÷ÓÃ£©
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ú¶ï¿½ï¿½ï¿½ï¿½Â¼ï¿½ï¿½Ðµï¿½ï¿½Ã£ï¿½
     public void Attack()
     {
 
@@ -41,7 +41,7 @@ public class Enemy : MonoBehaviour
     }
 
 
-    // ËÀÍöº¯Êý
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     public void Die()
     {  
     }

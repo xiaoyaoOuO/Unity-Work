@@ -35,7 +35,7 @@ public class PlayerIdleState : IState {
         if(player.IsGrounded() == false) {
            return State.Air; 
         }
-        if(GameInput.IsJumpPressed() && player.jumpCheck.AllowJump()) {
+        if(player.canJump && player.jumpCheck.AllowJump()) {
             return State.Jump;
         }
         if(Input.GetAxisRaw("Horizontal") != 0) {

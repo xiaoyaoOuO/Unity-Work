@@ -34,30 +34,40 @@ public class Player : MonoBehaviour
     public float rollCooldown = 1f; // 翻滚冷却时间
     [Header("爬墙")]
     public float wallSlideSpeed = 2f; // 爬墙速度
-    public bool canGrab { get { return GameInput.IsGrabPressed() && WallCheck(); } } // 是否可以抓墙
+    [Header("墙跳")]
+    public float wallJumpForce = 10f; // 墙跳y轴力
+    public float wallJumpDuration = 0.3f; // 墙跳持续时间
+    public float wallJumpBoostSpeed = 10f; // 墙跳x轴力
+    [Header("人物状态")]
+    public int maxHealth;
+    public bool canGrab { get { return GameInput.IsGrabPressed() && HeadWallCheck(); } } // 是否可以抓墙
     public bool canAttack { get { return attackTimer <= 0 && GameInput.IsAttackPressed(); } }
     public bool canDash { get { return dashCount > 0 && GameInput.IsDashPressed(); } }
-    public bool canJump { get { return GameInput.IsJumpPressed() && IsGrounded(); } }
+    public bool canJump { get { return GameInput.IsJumpPressed() && IsGrounded() && !HaveWallAbove(); } }
     public bool canIntoBulletTime { get { return GameInput.IsBulletTimePressed() && BulletTimeCooldownTimer >= BulletTimeDuration; } }
     public bool canRoll { get { return GameInput.IsRollPressed() && IsGrounded(); } }
     public Collider2D UpAttackCollider; // Reference to the UpAttack collider
     public Collider2D DownAttackCollider; // Reference to the DownAttack collider
     public Collider2D RightAttackCollider; // Reference to the RightAttack collider
+    public Collider2D HeadWallCheckCollider;
+    public GameObject CorrectCrossWall;
     public LayerMask enemyLayer; // Layer mask for enemies
+    public LayerMask wallLayer; // Layer mask for walls
 
-    private PlayerState playerState;
     #endregion
 
-    // Create a finite state machine for the player
+    public PlayerState playerState;
     private FiniteStateMachine<IState> fsm;
 
-    private Animator animator; // Reference to the Animator component
-
-    public Rigidbody2D rb; // Reference to the Rigidbody2D component
-    private BoxCollider2D boxCollider;
+    //Unity组件
+    private Animator animator;
+    public Rigidbody2D rb;
+    private BoxCollider2D boxCollider;  //人物的碰撞盒
+    public Game_UI game_UI;
 
     public IEffectController effectController;
-    public ICamera cameraManager; // Reference to the camera manager
+    public ICamera cameraManager;
+    public ISoundEffectController soundEffectController;
 
     public JumpCheck jumpCheck;
 
@@ -77,9 +87,10 @@ public class Player : MonoBehaviour
         fsm.AddState(new PlayerRollState(this));
         fsm.AddState(new PlayerRollAttackState(this));
         fsm.AddState(new PlayerWallState(this));
+        fsm.AddState(new PlayerWallJumpState(this));
 
         //玩家状态
-        playerState = new PlayerState(this);
+        playerState = new PlayerState(this,maxHealth);
 
         //获取组件
         animator = GetComponentInChildren<Animator>();
@@ -91,6 +102,8 @@ public class Player : MonoBehaviour
         //特效组
         effectController = Game.instance.sceneManager;
         cameraManager = Game.instance.cameraManager;
+        soundEffectController = Game.instance.sceneManager;
+
 
         //跳跃检查器
         jumpCheck = new JumpCheck(this);
@@ -186,7 +199,8 @@ public class Player : MonoBehaviour
     }
 
     public Vector2 getVelocity() => rb.velocity;
-    public void AnimationTrigger() => fsm.CurrentState.AnimationEndTrigger();
+    public void FirstAnimationTrigger() => fsm.CurrentState.FirstAnimationTrigger();
+    public void AnimationEndTrigger() => fsm.CurrentState.AnimationEndTrigger();
     public void AnimationAttackTrigger() => fsm.CurrentState.AnimationAttackTrigger(); // Trigger the attack animation
 
     public void RefillDash()
@@ -207,25 +221,31 @@ public class Player : MonoBehaviour
         }
         if (BulletTimeManager.instance.isBulletTime)
         { // If the game is in bullet time{
-            BulletTimer -= Time.deltaTime; // Decrement the bullet time cooldown
+            BulletTimer -= Time.deltaTime;
+            game_UI.ConsumeBulletTime(); //UI读条
+
             if (InputToExitBulletTime() || BulletTimer <= 0)
-            { // If the player is not pressing the bullet time button or the bullet time cooldown is less than or equal to 0{
-                BulletTimeManager.instance.Exit(); // Exit bullet time
+            {
+                BulletTimeCooldownTimer = BulletTimer >=0 ? BulletTimer : 0;
+                BulletTimeManager.instance.Exit();
             }
         }
         else
         {
             BulletTimeCooldownTimer = Mathf.MoveTowards(BulletTimeCooldownTimer, BulletTimeDuration, BulletTimeRefillSpeed * Time.deltaTime);
+            game_UI.ResetBulletTime();
         }
     }
 
     public bool InputToExitBulletTime()
-    { // Check if the player can exit bullet time{
+    {
         if (!GameInput.IsBulletTimePressed())
             return true;
         if (GameInput.IsAttackPressed())
             return true;
         if (GameInput.IsDashPressed())
+            return true;
+        if (canRoll)
             return true;
         return false;
     }
@@ -233,13 +253,34 @@ public class Player : MonoBehaviour
     public void OnHit()
     {
         playerState.OnHit();
+        game_UI.UpdateHealthBars();
     }
 
-    public bool WallCheck()
+    public bool HeadWallCheck()
     { // Check if the player is touching a wall{
-        RaycastHit2D hit = Physics2D.BoxCast(boxCollider.bounds.center, boxCollider.bounds.size, 0f, Vector2.right * (facing == Facing.Right ? 1 : -1), 0.3f, LayerMask.GetMask("Ground"));
+        List<Collider2D> results = new List<Collider2D>();
+        int count = HeadWallCheckCollider.OverlapCollider(new ContactFilter2D { layerMask = wallLayer }, results);
+        for (int i = 0; i < results.Count; i++)
+        {
+            if (results[i].gameObject.layer == LayerMask.NameToLayer("Ground"))
+                return true;
+        }
+        return false;
+    }
+
+    public RaycastHit2D RightWallCheck()
+    { 
+        int dir = facing == Facing.Right? 1 : -1;
+        Vector3 raycastPosition = boxCollider.bounds.center;
+        raycastPosition.x += boxCollider.bounds.size.x / 2f * dir;
+        return Physics2D.Raycast(raycastPosition, Vector2.right * dir, 0.5f, LayerMask.GetMask("Ground"));
+    }
+
+    public bool HaveWallAbove()
+    {
+        RaycastHit2D hit = Physics2D.BoxCast(boxCollider.bounds.center, boxCollider.bounds.size, 0f, Vector2.up, 1f, LayerMask.GetMask("Ground"));
         if (hit.collider == null)
-        { // If the player is not touching a wall, return false{
+        {
             return false;
         }
         return true;
