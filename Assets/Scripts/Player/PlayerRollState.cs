@@ -7,6 +7,7 @@ public class PlayerRollState : IState
 {
     private bool RollAttack;
     private bool CanChangeToAttack;
+    private Vector2 colliderDefaultScale;
     public PlayerRollState(Player player) : base(player)
     {
         state = State.Roll;
@@ -22,6 +23,9 @@ public class PlayerRollState : IState
         triggerCalled = false; // Reset the trigger called flag
         RollAttack = false;
         CanChangeToAttack = false;
+
+        colliderDefaultScale = player.boxCollider.size; // Store the default scale of the collider
+        player.boxCollider.size = new Vector2(colliderDefaultScale.x * 0.8f, colliderDefaultScale.y * 0.5f); // Increase the size of the collider by 50%
     }
 
     public override State OnUpdate()
@@ -30,8 +34,9 @@ public class PlayerRollState : IState
         {
             RollAttack = true;
         }
-        if(RollAttack) {
-            return State.RollAttack; 
+        if (RollAttack)
+        {
+            return State.RollAttack;
         }
         if (triggerCalled)
         {
@@ -48,5 +53,11 @@ public class PlayerRollState : IState
     public override void FirstAnimationTrigger()
     {
         CanChangeToAttack = true;
+    }
+
+    public override void OnExit()
+    {
+        base.OnExit();
+        player.boxCollider.size = colliderDefaultScale; // Restore the default scale of the collider
     }
 }
