@@ -16,10 +16,14 @@ public class PlayerRunState : IState
         if(player.canRoll) {
             return State.Roll; 
         }
-        if(player.canAttack) { // Check if the player is attacking{
+        if (player.canGrab){
+            return State.Wall;
+        }
+        if (player.canAttack)
+        { // Check if the player is attacking{
             return State.RunAttack; // Return to attack state
         }
-        if(GameInput.IsJumpPressed() && player.canJump) {
+        if(GameInput.IsJumpPressed()) {
             return State.Jump; 
         }
         if(player.IsGrounded() == false) { // Check if the player is grounded{

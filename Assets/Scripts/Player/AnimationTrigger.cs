@@ -2,9 +2,8 @@ using UnityEngine;
 
 public class AnimationTrigger :MonoBehaviour {
     public Player player; // 引用到 Player 脚本的实例
-    public Enemy enemy;
     public void OnAttackEnd() { // 攻击结束时调用的函数
-        player.AnimationTrigger();
+        player.AnimationEndTrigger();
     }
 
     public void OnAttackHit() { // 攻击命中时调用的函数
@@ -12,12 +11,11 @@ public class AnimationTrigger :MonoBehaviour {
     }
 
     public void OnAnimationEnd() { // 动画结束时调用的函数
-        player.AnimationTrigger();
+        player.AnimationEndTrigger();
     }
 
-    
-
-    public void Attackhit() {
-        enemy.OnHit(1);
+    public void FirstOnAnimationTrigger()
+    {
+        player.FirstAnimationTrigger();
     }
 }

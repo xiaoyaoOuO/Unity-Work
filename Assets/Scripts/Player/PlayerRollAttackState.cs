@@ -27,12 +27,17 @@ public class PlayerRollAttackState : IState
         Vector2 velocity = player.rb.velocity;
         velocity.x = Mathf.MoveTowards(velocity.x, 0, acceleration * Time.deltaTime);
         player.rb.velocity = velocity;
-        Debug.Log(player.rb.velocity);
+        // Debug.Log(player.rb.velocity);
         return state;
     }
 
     public override void AnimationEndTrigger()
     {
         rollAttackEnd = true;
+    }
+
+    public override void AnimationAttackTrigger(Collider2D collider = null)
+    {
+        base.AnimationAttackTrigger(player.RightAttackCollider);
     }
 }

@@ -132,7 +132,7 @@ public class Mushroom : Enemy
     }
 
     // 受击函数
-    public new void OnHit(int damage = 1)
+    public override void OnHit(int damage = 1)
     {
         currentHP -= damage;
         if (hitVFX != null)

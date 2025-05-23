@@ -8,17 +8,17 @@ public class Golem : Enemy
     private Animator Ani;
     private bool isDashing = false;
     [SerializeField] private int count = 0;
-    public float chaseRange = 7; // ×·»÷·¶Î§
-    public float attackRange = 2f; // ¹¥»÷·¶Î§
-    public Transform player; // Íæ¼ÒTransform
+    public float chaseRange = 7; // ×·ï¿½ï¿½ï¿½ï¿½Î§
+    public float attackRange = 2f; // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î§
+    public Transform player; // ï¿½ï¿½ï¿½Transform
     private float lastAttackTime = 0f;
     public float attackCooldown = 1f;
 
-    [Header("ÊôÐÔ")]
+    [Header("ï¿½ï¿½ï¿½ï¿½")]
     public int maxHP = 30;
     public int currentHP;
 
-    [Header("Ñ²Âß²ÎÊý")]
+    [Header("Ñ²ï¿½ß²ï¿½ï¿½ï¿½")]
     public Transform leftPoint;
     public Transform rightPoint;
     public float patrolSpeed = 2f;
@@ -36,10 +36,10 @@ public class Golem : Enemy
     // Update is called once per frame
     void Update()
     {
-        if (isDashing) return; // ³å´ÌÊ±²»×öÆäËûÒÆ¶¯¿ØÖÆ
+        if (isDashing) return; // ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ¶ï¿½ï¿½ï¿½ï¿½ï¿½
         Ani.SetBool("Hit", false);
         Ani.SetBool("Attack", false);
-        // ËÀÍöÊ±²»Ñ²Âß
+        // ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½Ñ²ï¿½ï¿½
         if (!isDead && count == 0)
         {
             float distanceToPlayer = Vector2.Distance(transform.position, player.position);
@@ -64,7 +64,7 @@ public class Golem : Enemy
 
         }
         else { count--; }
-        // ÒÆ¶¯¶¯»­¿ØÖÆ
+        // ï¿½Æ¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         if (Ani != null)
         {
             Ani.SetFloat("Speed", Mathf.Abs(rb.velocity.x));
@@ -125,11 +125,11 @@ public class Golem : Enemy
             Ani.SetTrigger("Die");
         isDead = true;
         rb.velocity = Vector2.zero;
-        // ËÀÍö¶¯»­²¥·ÅºóÏú»Ù¶ÔÏó£¬¿ÉÓÃÐ­³ÌÑÓ³Ù
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Åºï¿½ï¿½ï¿½ï¿½Ù¶ï¿½ï¿½ó£¬¿ï¿½ï¿½ï¿½Ð­ï¿½ï¿½ï¿½Ó³ï¿½
         Destroy(gameObject, 1.5f);
     }
 
-    public new void OnHit(int damage = 1)
+    public override void OnHit(int damage = 1)
     {
         currentHP -= damage;
         if (Ani != null)

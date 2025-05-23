@@ -19,7 +19,12 @@ public class PlayerJumpState : IState
         if(player.canDash){ // If the player presses the dash button, change to the dash state
             return State.Dash;        
         }
-        if(player.canAttack){ // If the player presses the attack button, change to the attack state
+        if (player.canGrab) // If the player presses the grab button, change to the wall slide state
+        {
+            return State.Wall;
+        }
+        if (player.canAttack)
+        { // If the player presses the attack button, change to the attack state
             return State.Attack;
         }
         if(player.IsGrounded()) // If the player is grounded, change to the idle state

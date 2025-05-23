@@ -59,8 +59,8 @@ public class CameraManager : MonoBehaviour,ICamera
             var multiplier = 1f;
 
 
-            target.x = Mathf.Clamp(target.x, bounds.min.x + 3200 / 100 / 2f, bounds.max.x - 3200 / 100 / 2f);
-            target.y = Mathf.Clamp(target.y, bounds.min.y + 1800 / 100 / 2f, bounds.max.y - 1800 / 100 / 2f);
+            // target.x = Mathf.Clamp(target.x, bounds.min.x + 3200 / 100 / 2f, bounds.max.x - 3200 / 100 / 2f);
+            // target.y = Mathf.Clamp(target.y, bounds.min.y + 1800 / 100 / 2f, bounds.max.y - 1800 / 100 / 2f);
 
             Vector2 cameraPosition = from + (target - from) * (1f - (float)Mathf.Pow(0.01f / multiplier, Time.deltaTime));
             SetCameraPosition(cameraPosition);

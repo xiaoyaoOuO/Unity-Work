@@ -25,13 +25,17 @@ public class PlayerIdleState : IState {
         if(player.canRoll) {
             return State.Roll; 
         }
-        if(player.canAttack) {
-            return State.StandingAttack; 
+        if(player.canGrab) {
+            return State.Wall;
+        }
+        if (player.canAttack)
+        {
+            return State.StandingAttack;
         }
         if(player.IsGrounded() == false) {
            return State.Air; 
         }
-        if(GameInput.IsJumpPressed() && player.jumpCheck.AllowJUmp()) {
+        if(player.canJump && player.jumpCheck.AllowJump()) {
             return State.Jump;
         }
         if(Input.GetAxisRaw("Horizontal") != 0) {
