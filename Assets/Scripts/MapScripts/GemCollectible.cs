@@ -13,7 +13,7 @@ public class GemCollectible : MonoBehaviour
         {
             isCollected = true;
             animator.Play("GemCollectAnim");
-            Destroy(gameObject, 1.75f); // ¸ù¾Ý¶¯»­Ê±³¤µ÷Õû
+            Destroy(gameObject, 1.75f); // ï¿½ï¿½ï¿½Ý¶ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
             other.GetComponent<Player>().RefillDash();
         }
     }

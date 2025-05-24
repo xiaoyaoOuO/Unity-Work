@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Materials.meta
 guid: b656bd7e2ae6b4a41973fb706638ac1b
+========
+guid: 2f90dae05672d0540a07e27e78f1e759
+>>>>>>>> origin/YSJ:Assets/Map/Prefab.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}

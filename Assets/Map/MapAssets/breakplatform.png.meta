@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Map/MapAssets/breakplatform.png.meta
 guid: 1e3d97791f48a3549919b8fd26372770
+========
+guid: b3ad646307261ae4a9316b80005ee34c
+>>>>>>>> origin/YSJ:Assets/Resource/TrapAndBullet/Ball of ice.png.meta
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -48,7 +52,11 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
+<<<<<<<< HEAD:Assets/Map/MapAssets/breakplatform.png.meta
   spritePixelsToUnits: 500
+========
+  spritePixelsToUnits: 100
+>>>>>>>> origin/YSJ:Assets/Resource/TrapAndBullet/Ball of ice.png.meta
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -97,6 +105,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
+<<<<<<<< HEAD:Assets/Map/MapAssets/breakplatform.png.meta
       name: breakplatform_0
       rect:
         serializedVersion: 2
@@ -104,6 +113,15 @@ TextureImporter:
         y: 608
         width: 359
         height: 281
+========
+      name: Ball of ice_0
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 432
+        width: 30
+        height: 30
+>>>>>>>> origin/YSJ:Assets/Resource/TrapAndBullet/Ball of ice.png.meta
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -111,13 +129,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
+<<<<<<<< HEAD:Assets/Map/MapAssets/breakplatform.png.meta
       spriteID: c4dfca4b812699444a653169923246cb
       internalID: 737457721
+========
+      spriteID: 1b4af02848258994d90aa81d9ef8be10
+      internalID: -1341299535
+>>>>>>>> origin/YSJ:Assets/Resource/TrapAndBullet/Ball of ice.png.meta
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
+<<<<<<<< HEAD:Assets/Map/MapAssets/breakplatform.png.meta
       name: breakplatform_1
       rect:
         serializedVersion: 2
@@ -125,6 +149,15 @@ TextureImporter:
         y: 608
         width: 363
         height: 281
+========
+      name: Ball of ice_1
+      rect:
+        serializedVersion: 2
+        x: 46
+        y: 302
+        width: 34
+        height: 34
+>>>>>>>> origin/YSJ:Assets/Resource/TrapAndBullet/Ball of ice.png.meta
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -132,13 +165,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
+<<<<<<<< HEAD:Assets/Map/MapAssets/breakplatform.png.meta
       spriteID: e4ae009392877a148888b044fc70bfaa
       internalID: 1875831760
+========
+      spriteID: c9c880cb86507be4788aa2e9345286f9
+      internalID: -18997676
+>>>>>>>> origin/YSJ:Assets/Resource/TrapAndBullet/Ball of ice.png.meta
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
+<<<<<<<< HEAD:Assets/Map/MapAssets/breakplatform.png.meta
       name: breakplatform_2
       rect:
         serializedVersion: 2
@@ -146,6 +185,15 @@ TextureImporter:
         y: 249
         width: 360
         height: 244
+========
+      name: Ball of ice_2
+      rect:
+        serializedVersion: 2
+        x: 44
+        y: 172
+        width: 38
+        height: 38
+>>>>>>>> origin/YSJ:Assets/Resource/TrapAndBullet/Ball of ice.png.meta
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -153,13 +201,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
+<<<<<<<< HEAD:Assets/Map/MapAssets/breakplatform.png.meta
       spriteID: 6965a08d5bad8de41a1e79e8201e3ac2
       internalID: 1483864500
+========
+      spriteID: 0def8ec63be917b44b6d52e65ab49671
+      internalID: 13695346
+>>>>>>>> origin/YSJ:Assets/Resource/TrapAndBullet/Ball of ice.png.meta
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
+<<<<<<<< HEAD:Assets/Map/MapAssets/breakplatform.png.meta
       name: breakplatform_3
       rect:
         serializedVersion: 2
@@ -167,6 +221,15 @@ TextureImporter:
         y: 155
         width: 363
         height: 338
+========
+      name: Ball of ice_3
+      rect:
+        serializedVersion: 2
+        x: 46
+        y: 46
+        width: 34
+        height: 34
+>>>>>>>> origin/YSJ:Assets/Resource/TrapAndBullet/Ball of ice.png.meta
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -174,8 +237,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
+<<<<<<<< HEAD:Assets/Map/MapAssets/breakplatform.png.meta
       spriteID: 5bb2a32e001046147a11040c78bd5d08
       internalID: -453012331
+========
+      spriteID: 7527846d925a97344bb189b4e9bfa410
+      internalID: 2013266696
+>>>>>>>> origin/YSJ:Assets/Resource/TrapAndBullet/Ball of ice.png.meta
       vertices: []
       indices: 
       edges: []
@@ -183,7 +251,11 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
+<<<<<<<< HEAD:Assets/Map/MapAssets/breakplatform.png.meta
     spriteID: 14345c3f82fedd0498910cbc7ed6df44
+========
+    spriteID: 67fa39d85c012e546972c8147e87eca6
+>>>>>>>> origin/YSJ:Assets/Resource/TrapAndBullet/Ball of ice.png.meta
     internalID: 0
     vertices: []
     indices: 
@@ -191,6 +263,7 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
+<<<<<<<< HEAD:Assets/Map/MapAssets/breakplatform.png.meta
       breakplatform_0: 737457721
       breakplatform_1: 1875831760
       breakplatform_2: 1483864500
@@ -200,6 +273,12 @@ TextureImporter:
       breakplatform_6: -1095909994
       breakplatform_7: -2096009783
       breakplatform_8: -2144984767
+========
+      Ball of ice_0: -1341299535
+      Ball of ice_1: -18997676
+      Ball of ice_2: 13695346
+      Ball of ice_3: 2013266696
+>>>>>>>> origin/YSJ:Assets/Resource/TrapAndBullet/Ball of ice.png.meta
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -53,6 +53,7 @@ public class Player : MonoBehaviour
     public GameObject CorrectCrossWall;
     public LayerMask enemyLayer; // Layer mask for enemies
     public LayerMask wallLayer; // Layer mask for walls
+    public LayerMask bulletLayer; // Layer mask for bullets
 
     #endregion
 
@@ -273,7 +274,7 @@ public class Player : MonoBehaviour
         int dir = facing == Facing.Right ? 1 : -1;
         Vector3 raycastPosition = boxCollider.bounds.center;
         raycastPosition.x += boxCollider.bounds.size.x / 2f * dir;
-        return Physics2D.Raycast(raycastPosition, Vector2.right * dir, 0.5f, LayerMask.GetMask("Ground"));
+        return Physics2D.Raycast(raycastPosition, Vector2.right * dir, 0.3f, LayerMask.GetMask("Ground"));
     }
 
     public bool HaveWallAbove()
@@ -284,5 +285,15 @@ public class Player : MonoBehaviour
             return false;
         }
         return true;
+    }
+
+    public void CounterBullet(Collider2D collider)
+    {
+        Bullet bullet = null;
+        if ((bullet = collider.GetComponent<Bullet>()) != null && bullet.CompareTag("enemyAttack"))
+        {
+            bullet.Flip();
+            effectController.CameraShake(Vector2.right);
+        }
     }
 }

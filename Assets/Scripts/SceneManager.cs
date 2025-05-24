@@ -69,8 +69,8 @@ public class SceneManager : MonoBehaviour, IEffectController, ISoundEffectContro
         audioManager = new AudioManager();
         BGMAudioSource = new AudioSource();
         currentBGM = "";   //TODO: 播放BGM
-        BGMAudioSource.clip = audioManager.GetBGM(currentBGM);
-        BGMAudioSource.Play();
+        // BGMAudioSource.clip = audioManager.GetBGM(currentBGM);
+        // BGMAudioSource.Play();
     }
     private void Start()
     {

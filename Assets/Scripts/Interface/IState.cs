@@ -48,14 +48,21 @@ public abstract class IState
             Debug.Log("Attack box is null");
             return;
         }
-        Collider2D[] hitEnemies = new Collider2D[10]; // Array to store hit enemies
-        attackBox.OverlapCollider(new ContactFilter2D { layerMask = player.enemyLayer }, hitEnemies); // Check for enemies in the attack range
-        for (int i = 0; i < hitEnemies.Length; i++) {
-            if (hitEnemies[i] != null) {
+        Collider2D[] hitEnemies = new Collider2D[20]; // Array to store hit enemies
+        attackBox.OverlapCollider(new ContactFilter2D().NoFilter(), hitEnemies); // Check for enemies in the attack range
+        for (int i = 0; i < hitEnemies.Length; i++)
+        {
+            if (hitEnemies[i] != null)
+            {
                 Enemy enemy = hitEnemies[i].GetComponent<Enemy>();
-                if (enemy != null) {
-                    enemy.OnHit(); // Call the OnHit method on the enemy
-                    Debug.Log("Hit enemy: " + enemy.name); // Log the hit enemy
+                if (enemy != null)
+                {
+                    enemy.OnHit();
+                    Debug.Log("Hit enemy: " + enemy.name);
+                }
+                else
+                {
+                    player.CounterBullet(hitEnemies[i]);
                 }
             }
         }

@@ -12,6 +12,7 @@ public class PlayerState
     {
         this.player = player;
         this.maxHealth = maxHealth;
+        currentHealth = maxHealth;
     }
     public void OnHit()
     {
