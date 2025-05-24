@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class TrapAttack : MonoBehaviour
 {
+    private Animator Ani;
+
     public GameObject bulletPrefab; // 子弹预制体
     public Transform firePoint;     // 发射点
     public float attackRange = 10f; // 攻击距离
@@ -12,6 +14,7 @@ public class TrapAttack : MonoBehaviour
 
     void Start()
     {
+        Ani = GetComponentInChildren<Animator>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
@@ -33,11 +36,14 @@ public class TrapAttack : MonoBehaviour
 
     void Attack()
     {
+        Ani.SetTrigger("Attack");
         // 生成子弹
+
         GameObject bullet = Instantiate(bulletPrefab, firePoint.position, Quaternion.identity);
         //bullet.layer = LayerMask.NameToLayer("Default");
         // 让子弹朝Player方向移动
         Vector3 dir = (player.position - firePoint.position).normalized;
         bullet.GetComponent<Bullet>().SetDirection(dir);
+        
     }
 }

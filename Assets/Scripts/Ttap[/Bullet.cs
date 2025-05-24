@@ -8,7 +8,7 @@ public class Bullet : MonoBehaviour
     private Vector2 direction; // 子弹移动方向
     private float lifeTime = 2f; // 子弹生命周期（秒）
     private float timer = 0f;
-    bool flipped;
+    bool flipped=false;
     public void SetDirection(Vector2 dir)
     {
         direction = dir;
