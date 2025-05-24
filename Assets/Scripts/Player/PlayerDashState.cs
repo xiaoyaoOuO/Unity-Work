@@ -11,12 +11,22 @@ public class PlayerDashState : IState
     public override void OnEnter()
     {
         base.OnEnter();
-        player.dashCount--; 
+        player.dashCount--;
+
+        //在地面上播放冲刺特效
+        if (player.IsGrounded())
+        {
+            GameObject fx = player.effectController.PlayerDashFX(player.GetComponentInChildren<SpriteRenderer>().transform.position);
+            if (!(player.facing == Facing.Right))
+            {
+                fx.transform.Rotate(0, 180, 0);
+            }
+        }
 
         /// TODO:操作方式待定
         // Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition); // Get the mouse position in world space
         // player.dashDirection = (mousePosition - (Vector2)player.transform.position).normalized; // Calculate the direction from the player to the mouse position
-        
+
         player.dashDirection = GameInput.LastDir.normalized; // Get the last direction from the input manager
 
         if(player.dashDirection == Vector2.zero){ // If the direction is zero, set it to the player's facing direction{

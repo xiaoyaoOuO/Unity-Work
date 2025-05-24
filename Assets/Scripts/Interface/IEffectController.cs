@@ -8,5 +8,7 @@ public interface IEffectController
 
     public void Freeze(float duration);
 
+    public GameObject PlayerDashFX(Vector3 position);
+
     
 }

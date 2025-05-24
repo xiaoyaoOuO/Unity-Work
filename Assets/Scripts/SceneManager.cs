@@ -60,6 +60,7 @@ public class SceneManager : MonoBehaviour, IEffectController, ISoundEffectContro
 {
     private AudioManager audioManager;
     private AudioSource BGMAudioSource;
+    public GameObject playerDashDust;
     private string currentBGM;
     private float BGMVolume;
     private float SoundEffectVolume;
@@ -127,6 +128,12 @@ public class SceneManager : MonoBehaviour, IEffectController, ISoundEffectContro
     public void StopBgm()
     {
         BGMAudioSource.Stop();
+    }
+
+    public GameObject PlayerDashFX(Vector3 position)
+    {
+        GameObject fx = Instantiate(playerDashDust, position, Quaternion.identity);
+        return fx;
     }
 }
 
