@@ -14,6 +14,7 @@ public class GemCollectible : MonoBehaviour
             isCollected = true;
             animator.Play("GemCollectAnim");
             Destroy(gameObject, 1.75f); // 根据动画时长调整
+            other.GetComponent<Player>().RefillDash();
         }
     }
 }

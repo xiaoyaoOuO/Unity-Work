@@ -138,6 +138,7 @@ public class Golem : Enemy
             rb.velocity = new Vector2(0, rb.velocity.y);
             count = 100;
         }
+        OnhitFX(); // 调用受击特效函数
         if (currentHP <= 0)
         {
             Die();

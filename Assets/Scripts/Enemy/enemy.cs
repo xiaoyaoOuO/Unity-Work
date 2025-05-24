@@ -27,7 +27,7 @@ public class Enemy : MonoBehaviour
     // �ܻ�����
     public virtual void OnHit(int damage = 1)
     {
- 
+
     }
 
     // �������������ڶ����¼��е��ã�
@@ -43,6 +43,22 @@ public class Enemy : MonoBehaviour
 
     // ��������
     public void Die()
-    {  
+    {
+    }
+
+    public virtual void OnhitFX()
+    {
+        SpriteRenderer spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+        if (spriteRenderer != null)
+        {
+            spriteRenderer.color = Color.red; // 设置颜色为红色
+            StartCoroutine(ResetColor(spriteRenderer)); // 启动协程重置颜色
+        }
+    }
+    
+    private IEnumerator ResetColor(SpriteRenderer spriteRenderer)
+    {
+        yield return new WaitForSeconds(0.2f); // 等待0.1秒
+        spriteRenderer.color = Color.white; // 重置颜色为白色
     }
 }

@@ -90,7 +90,7 @@ public class Player : MonoBehaviour
         fsm.AddState(new PlayerWallJumpState(this));
 
         //玩家状态
-        playerState = new PlayerState(this,maxHealth);
+        playerState = new PlayerState(this, maxHealth);
 
         //获取组件
         animator = GetComponentInChildren<Animator>();
@@ -226,7 +226,7 @@ public class Player : MonoBehaviour
 
             if (InputToExitBulletTime() || BulletTimer <= 0)
             {
-                BulletTimeCooldownTimer = BulletTimer >=0 ? BulletTimer : 0;
+                BulletTimeCooldownTimer = BulletTimer >= 0 ? BulletTimer : 0;
                 BulletTimeManager.instance.Exit();
             }
         }
@@ -269,8 +269,8 @@ public class Player : MonoBehaviour
     }
 
     public RaycastHit2D RightWallCheck()
-    { 
-        int dir = facing == Facing.Right? 1 : -1;
+    {
+        int dir = facing == Facing.Right ? 1 : -1;
         Vector3 raycastPosition = boxCollider.bounds.center;
         raycastPosition.x += boxCollider.bounds.size.x / 2f * dir;
         return Physics2D.Raycast(raycastPosition, Vector2.right * dir, 0.5f, LayerMask.GetMask("Ground"));

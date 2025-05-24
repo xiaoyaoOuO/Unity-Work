@@ -8,6 +8,9 @@ public class PlayerRollState : IState
     private bool RollAttack;
     private bool CanChangeToAttack;
     private Vector2 colliderDefaultScale;
+    private Vector2 colliderDefaultOffset;
+    private float colliderYOffset = -0.4f;          //写死的数据
+    private float colliderYSize = 0.7f;
     public PlayerRollState(Player player) : base(player)
     {
         state = State.Roll;
@@ -24,8 +27,10 @@ public class PlayerRollState : IState
         RollAttack = false;
         CanChangeToAttack = false;
 
-        colliderDefaultScale = player.boxCollider.size; // Store the default scale of the collider
-        player.boxCollider.size = new Vector2(colliderDefaultScale.x * 0.8f, colliderDefaultScale.y * 0.5f); // Increase the size of the collider by 50%
+        colliderDefaultScale = player.boxCollider.size; 
+        colliderDefaultOffset = player.boxCollider.offset;
+        player.boxCollider.size = new Vector2(colliderDefaultScale.x, colliderYSize); 
+        player.boxCollider.offset = new Vector2(player.boxCollider.offset.x, colliderYOffset); 
     }
 
     public override State OnUpdate()
@@ -58,6 +63,7 @@ public class PlayerRollState : IState
     public override void OnExit()
     {
         base.OnExit();
-        player.boxCollider.size = colliderDefaultScale; // Restore the default scale of the collider
+        player.boxCollider.size = colliderDefaultScale;
+        player.boxCollider.offset = colliderDefaultOffset;
     }
 }
