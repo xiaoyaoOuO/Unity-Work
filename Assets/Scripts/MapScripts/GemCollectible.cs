@@ -11,9 +11,22 @@ public class GemCollectible : MonoBehaviour
     {
         if (other.CompareTag("Player") && !isCollected)
         {
+            // 1. UI更新
+            GemUIManager.Instance.AddGem(1);
+
+            // 2. 播放收集动画
             isCollected = true;
             animator.Play("GemCollectAnim");
-            Destroy(gameObject, 1.75f); // 根据动画时长调整
+
+            // 3. 销毁对象
+            Destroy(gameObject, 1.75f);
+
+            // 4. 重置玩家的冲刺次数
+            Player player = other.GetComponent<Player>();
+            if (player != null)
+            {
+                player.dashCount = player.maxDashCount;
+            }
         }
     }
 }

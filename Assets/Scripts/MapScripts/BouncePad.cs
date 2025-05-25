@@ -3,7 +3,7 @@ using System.Collections;
 
 public class BouncePad2D : MonoBehaviour
 {
-    [Header("弹跳参数")]
+    [Header("玩家弹跳参数")]
     public float bounceForce = 15f;          // 弹跳力大小
     public Vector2 bounceDirection = Vector2.up; // 弹跳方向
 

@@ -4,7 +4,7 @@ using System.Collections;
 [RequireComponent(typeof(Animator), typeof(Collider2D), typeof(SpriteRenderer))]
 public class BreakablePlatform : MonoBehaviour
 {
-    [Header("基本参数")]
+    [Header("平台重现时间")]
     public float respawnTime = 3f;     // 重生时间
 
     // 组件引用
@@ -55,7 +55,7 @@ public class BreakablePlatform : MonoBehaviour
         // 重置状态
         platformCollider.enabled = true;
         spriteRenderer.enabled = true;
-        anim.Play("Idle", 0, 0f); // 强制回到初始状态
+        anim.Play("Idle", 0, 0f); // 回到初始状态
         isActive = true;
     }
 }
