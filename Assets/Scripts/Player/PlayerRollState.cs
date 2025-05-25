@@ -20,6 +20,15 @@ public class PlayerRollState : IState
     public override void OnEnter()
     {
         base.OnEnter();
+        //翻滚尘土
+        GameObject dust = player.effectController.PlayerDashFX(player.animator.transform.position); //和dash共用一个特效
+        if (dust != null) {
+           if(player.facing == Facing.Left) {
+                dust.transform.Rotate(0, 180,0);
+           }
+        }
+
+
         int direction = player.facing == Facing.Right ? 1 : -1;
         Vector2 newSpeed = new Vector2(Math.Max(player.rb.velocity.x, player.rollSpeed), 0);
         player.rb.velocity = newSpeed * direction;

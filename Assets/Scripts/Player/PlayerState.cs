@@ -21,6 +21,7 @@ public class PlayerState
         if (currentHealth <= 0)
         {
             Debug.Log("Player is dead");        //TODO : 死亡界面
+            player.PlayerDie();
         }
         
     }

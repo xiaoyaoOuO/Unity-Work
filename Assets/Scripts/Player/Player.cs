@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public enum Facing{Left, Right}
 
@@ -24,6 +26,7 @@ public class Player : MonoBehaviour
     public Vector2 dashDirection; // 冲刺方向
     public int dashCount = 1; // 当前冲刺次数
     public int maxDashCount = 1; // 最大冲刺次数
+    public float trailFXInterval = 0.05f; // 冲刺特效间隔
     [Header("子弹时间")]
     public float BulletTimeDuration = 0.5f; // 子弹时间持续时间
     public float BulletTimeRefillSpeed = 0.5f; // 时间回复速度
@@ -61,10 +64,11 @@ public class Player : MonoBehaviour
     private FiniteStateMachine<IState> fsm;
 
     //Unity组件
-    private Animator animator;
+    public Animator animator;
     public Rigidbody2D rb;
     public BoxCollider2D boxCollider;  //人物的碰撞盒
     public Game_UI game_UI;
+    public Image DeadScreen;
 
     public IEffectController effectController;
     public ICamera cameraManager;
@@ -89,6 +93,7 @@ public class Player : MonoBehaviour
         fsm.AddState(new PlayerRollAttackState(this));
         fsm.AddState(new PlayerWallState(this));
         fsm.AddState(new PlayerWallJumpState(this));
+        fsm.AddState(new PlayerDeadState(this));
 
         //玩家状态
         playerState = new PlayerState(this, maxHealth);
@@ -295,5 +300,21 @@ public class Player : MonoBehaviour
             bullet.Flip();
             effectController.CameraShake(Vector2.right);
         }
+    }
+
+    public IEnumerator Die()
+    {
+        DeadScreen.gameObject.SetActive(true);
+        for (float t = 0; t < 1; t += Time.deltaTime)
+        {
+            DeadScreen.color = Color.Lerp(Color.clear, Color.black, t); // 逐渐显示黑色
+            yield return null;
+        }
+        UnityEngine.SceneManagement.SceneManager.LoadScene("Main Menu");
+    }
+
+    public void PlayerDie()
+    {
+        fsm.ChangeState(fsm.GetState(State.Die));
     }
 }

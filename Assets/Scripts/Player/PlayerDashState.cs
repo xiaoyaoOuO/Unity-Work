@@ -1,12 +1,15 @@
+using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerDashState : IState
 {
     private float dashTimer; // Timer for the dash duration
     private bool dashUp;
-    public PlayerDashState(Player player) : base(player) {
+    public PlayerDashState(Player player) : base(player)
+    {
         stateName = "Dash";
-        state = State.Dash; 
+        state = State.Dash;
     }
     public override void OnEnter()
     {
@@ -29,15 +32,20 @@ public class PlayerDashState : IState
 
         player.dashDirection = GameInput.LastDir.normalized; // Get the last direction from the input manager
 
-        if(player.dashDirection == Vector2.zero){ // If the direction is zero, set it to the player's facing direction{
+        if (player.dashDirection == Vector2.zero)
+        { // If the direction is zero, set it to the player's facing direction{
             player.dashDirection = player.facing == Facing.Right ? Vector2.right : Vector2.left; // Set the dash direction to the player's facing direction
         }
         dashUp = false;
-        if(player.dashDirection.y > 0 && player.dashDirection.x == 0){     
-            dashUp = true; 
+        if (player.dashDirection.y > 0 && player.dashDirection.x == 0)
+        {
+            dashUp = true;
         }
 
-        player.SetAnimation("DashUp",dashUp);
+        player.SetAnimation("DashUp", dashUp);
+
+        if(!dashUp)
+            player.StartCoroutine(PlayDashTrail()); 
 
         /// 获取鼠标位置或者键盘决定位置
 
@@ -61,8 +69,10 @@ public class PlayerDashState : IState
     public override State OnUpdate()
     {
         dashTimer -= Time.deltaTime; // Decrement the dash timer
-        if(dashTimer >= player.dashDuration * 0.2f){    //冲刺前半段保持，不能被打断
-            if(player.canAttack){
+        if (dashTimer >= player.dashDuration * 0.2f)
+        {    //冲刺前半段保持，不能被打断
+            if (player.canAttack)
+            {
                 return State.DashAttack; // Return to attack state
             }
         }
@@ -73,7 +83,21 @@ public class PlayerDashState : IState
         return state;
     }
 
-    public override void OnExit(){
+    public override void OnExit()
+    {
         base.OnExit();
+    }
+
+    public IEnumerator PlayDashTrail()
+    {
+        for (float i = 0; i < player.dashDuration; i += player.trailFXInterval)
+        {
+            GameObject fx = player.effectController.PlayerDashTrailFX(player.animator.transform.position);
+            if (!(player.facing == Facing.Right))
+            {
+                fx.transform.Rotate(0, 180, 0);
+            }
+            yield return new WaitForSeconds(player.trailFXInterval);
+        }
     }
 }

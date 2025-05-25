@@ -61,6 +61,11 @@ public class SceneManager : MonoBehaviour, IEffectController, ISoundEffectContro
     private AudioManager audioManager;
     private AudioSource BGMAudioSource;
     public GameObject playerDashDust;
+    public GameObject playerJumpFX;
+    public GameObject playerLandFX;
+    public GameObject playerWallSlideFX;
+    public GameObject playerWallJumpFX;
+    public GameObject playerDashTrailFX;
     private string currentBGM;
     private float BGMVolume;
     private float SoundEffectVolume;
@@ -133,6 +138,33 @@ public class SceneManager : MonoBehaviour, IEffectController, ISoundEffectContro
     public GameObject PlayerDashFX(Vector3 position)
     {
         GameObject fx = Instantiate(playerDashDust, position, Quaternion.identity);
+        return fx;
+    }
+
+    public void PlayerJumpFX(Vector3 position)
+    {
+        Instantiate(playerJumpFX, position, Quaternion.identity);
+    }
+
+    public void PlayerLandFX(Vector3 position)
+    {
+        Instantiate(playerLandFX, position, Quaternion.identity);
+    }
+
+    public GameObject PlayerWallSlideFX(Vector3 position)
+    {
+        GameObject fx = Instantiate(playerWallSlideFX, position, Quaternion.identity);
+        return fx;
+    }
+
+    public void PlayerWallJumpFX(Vector3 position)
+    {
+        Instantiate(playerWallJumpFX, position, Quaternion.identity);
+    }
+
+    public GameObject PlayerDashTrailFX(Vector3 position)
+    {
+        GameObject fx = Instantiate(playerDashTrailFX, position, Quaternion.identity);
         return fx;
     }
 }

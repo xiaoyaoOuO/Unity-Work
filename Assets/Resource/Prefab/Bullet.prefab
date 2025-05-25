@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1448864810587155393}
   - component: {fileID: 8484305337520896595}
   - component: {fileID: 9151480503269538117}
+  - component: {fileID: 8901687388813104779}
   m_Layer: 10
   m_Name: Bullet
   m_TagString: enemyAttack
@@ -80,7 +81,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.3, y: 0.32}
+  m_Size: {x: 0.36, y: 0.36}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -134,3 +135,24 @@ CircleCollider2D:
   m_Offset: {x: -0.0021533966, y: 0.0053195953}
   serializedVersion: 2
   m_Radius: 0.18084145
+--- !u!95 &8901687388813104779
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3402488623227643498}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: e3757237ea5f3ae499a8bb2a07244128, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

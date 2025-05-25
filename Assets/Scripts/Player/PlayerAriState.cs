@@ -23,6 +23,7 @@ public class PlayerAirState : IState {
             return State.Attack; 
         }
         if(player.IsGrounded()) {
+            player.effectController.PlayerLandFX(player.animator.transform.position);
             return State.Idle;
         }
         player.SetAnimation("yVelocity", player.getVelocity().y);

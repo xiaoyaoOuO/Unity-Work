@@ -2,40 +2,62 @@ using UnityEngine;
 using System.Collections.Generic;
 using System;
 
-class FiniteStateMachine<T> where T : IState {
+class FiniteStateMachine<T> where T : IState
+{
     T currentState;
-    public T CurrentState { get { return currentState; } } 
-    private Dictionary<State , T> states = new Dictionary<State,T>();
-    public FiniteStateMachine() {
+    public T CurrentState { get { return currentState; } }
+    private Dictionary<State, T> states = new Dictionary<State, T>();
+    public FiniteStateMachine()
+    {
     }
-    public void Initialize(T initialState = null) {
-        if (initialState == null) {
+    public void Initialize(T initialState = null)
+    {
+        if (initialState == null)
+        {
             initialState = states[State.Idle]; // Set to default state if not provided
         }
         currentState = initialState;
         currentState.OnEnter();
     }
 
-    public void ChangeState(T newState) {
+    public void ChangeState(T newState)
+    {
         currentState.OnExit();
         currentState = newState;
-        currentState.OnEnter(); 
+        currentState.OnEnter();
     }
 
-    public void Update() {
+    public void Update()
+    {
         Debug.Log("Current State: " + currentState.stateName);
         State newState = currentState.OnUpdate();
-        if (newState != currentState.state) {
-            ChangeState(states[newState]); 
-        } 
+        if (newState != currentState.state)
+        {
+            ChangeState(states[newState]);
+        }
     }
 
-    public void AddState(T state) {
-        if (states.ContainsKey(state.state)) {
+    public void AddState(T state)
+    {
+        if (states.ContainsKey(state.state))
+        {
             Debug.Log("State already exists: " + state.stateName);
-            return; 
+            return;
         }
-        states.Add(state.state, state); 
+        states.Add(state.state, state);
+    }
+    
+    public IState GetState(State state)
+    {
+        if (states.ContainsKey(state))
+        {
+            return states[state];
+        }
+        else
+        {
+            Debug.Log("State not found: " + state);
+            return null;
+        }
     }
 
 }
