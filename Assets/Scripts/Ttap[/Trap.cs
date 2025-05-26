@@ -1,21 +1,25 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
-public class TrapAttack : MonoBehaviour
+public class TrapAttack : Enemy
 {
     private Animator Ani;
 
-    public GameObject bulletPrefab; // ×Óµ¯Ô¤ÖÆÌå
-    public Transform firePoint;     // ·¢Éäµã
-    public float attackRange = 10f; // ¹¥»÷¾àÀë
-    public float attackInterval = 2f; // ¹¥»÷¼ä¸ô
+    public GameObject bulletPrefab; // å­å¼¹é¢„åˆ¶ä½“
+    public Transform firePoint;     // å‘å°„ç‚¹
+    public float attackRange = 10f; // æ”»å‡»è·ç¦»
+    public float attackInterval = 2f; // æ”»å‡»é—´éš”
     private float timer = 0f;
 
     private Transform player;
 
+
+    [SerializeField]private int currentHP;
+    private int maxHP = 5;
     void Start()
     {
         Ani = GetComponentInChildren<Animator>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
+        currentHP = maxHP;
     }
 
     void Update()
@@ -37,13 +41,32 @@ public class TrapAttack : MonoBehaviour
     void Attack()
     {
         Ani.SetTrigger("Attack");
-        // Éú³É×Óµ¯
+        // ç”Ÿæˆå­å¼¹
 
         GameObject bullet = Instantiate(bulletPrefab, firePoint.position, Quaternion.identity);
         //bullet.layer = LayerMask.NameToLayer("Default");
-        // ÈÃ×Óµ¯³¯Player·½ÏòÒÆ¶¯
+        // è®©å­å¼¹æœPlayeræ–¹å‘ç§»åŠ¨
         Vector3 dir = (player.position - firePoint.position).normalized;
         bullet.GetComponent<Bullet>().SetDirection(dir);
         
+    }
+
+    public override void OnHit(int damage = 1)
+    {
+        Debug.Log("enemyæ’");
+        currentHP -= damage;
+        if (Ani != null)
+        {
+            Ani.SetTrigger("Hit");
+        }
+        if (currentHP <= 0)
+        {
+            Die();
+        }
+    }
+
+    public new void Die()
+    {    
+        Destroy(gameObject, 1.5f);
     }
 }

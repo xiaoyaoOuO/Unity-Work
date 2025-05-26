@@ -27,7 +27,7 @@ public class Enemy : MonoBehaviour
     // �ܻ�����
     public virtual void OnHit(int damage = 1)
     {
- 
+        
     }
 
     // �������������ڶ����¼��е��ã�
