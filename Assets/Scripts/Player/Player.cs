@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public enum Facing{Left, Right}
 
-public class Player : MonoBehaviour
+public class Player : MonoBehaviour, ISaveManager
 {
     #region Player Variables
     [Header("基础移动")]
@@ -58,6 +58,9 @@ public class Player : MonoBehaviour
     public LayerMask wallLayer; // Layer mask for walls
     public LayerMask bulletLayer; // Layer mask for bullets
 
+    [Header("存档")]
+    private Vector3 CheckPointPosition; // 检查点位置
+
     #endregion
 
     public PlayerState playerState;
@@ -95,8 +98,6 @@ public class Player : MonoBehaviour
         fsm.AddState(new PlayerWallJumpState(this));
         fsm.AddState(new PlayerDeadState(this));
 
-        //玩家状态
-        playerState = new PlayerState(this, maxHealth);
 
         //获取组件
         animator = GetComponentInChildren<Animator>();
@@ -310,11 +311,36 @@ public class Player : MonoBehaviour
             DeadScreen.color = Color.Lerp(Color.clear, Color.black, t); // 逐渐显示黑色
             yield return null;
         }
-        UnityEngine.SceneManagement.SceneManager.LoadScene("Main Menu");
+        Game.instance.SaveGame();
+        // UnityEngine.SceneManagement.SceneManager.LoadScene("Main Menu");
     }
 
     public void PlayerDie()
     {
         fsm.ChangeState(fsm.GetState(State.Die));
+    }
+
+    public void SaveGameData(GameData gameData)
+    {
+        gameData.CheckPointPosition = CheckPointPosition; // 保存检查点位置
+        gameData.PlayerHealth = playerState.currentHealth; // 保存玩家生命值
+    }
+
+    public void LoadGameData(GameData gameData)
+    {
+        CheckPointPosition = gameData.CheckPointPosition; // 加载检查点位置
+        playerState = new PlayerState(this, maxHealth); // 创建新的玩家状态实例
+        playerState.currentHealth = gameData.PlayerHealth; // 加载玩家生命值
+        if (playerState.currentHealth <= 0)
+        {
+            playerState.currentHealth = playerState.maxHealth; // 如果生命值小于等于0，则重置为最大生命值
+        }
+        transform.position = CheckPointPosition + new Vector3(0, 2, 0);
+        game_UI.UpdateHealthBars();
+    }
+
+    public void SetCheckPoint(Vector3 position)
+    {
+        CheckPointPosition = position;
     }
 }
