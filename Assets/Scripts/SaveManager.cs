@@ -7,14 +7,13 @@ public class SaveManager
 {
     public List<ISaveManager> saveManagers;
 
-    string filePath;
+    public static string filePath = System.IO.Directory.GetCurrentDirectory() + "/savefile.json";
 
     public SaveManager()
     {
         saveManagers = getSaveManagers();
-        filePath = System.IO.Directory.GetCurrentDirectory() + "/savefile.json";
     }
-    
+
     public void SaveGameData()
     {
         saveManagers = getSaveManagers();
@@ -69,5 +68,15 @@ public class SaveManager
     {
         IEnumerable<ISaveManager> saveManagers = UnityEngine.Object.FindObjectsOfType<MonoBehaviour>().OfType<ISaveManager>();
         return new List<ISaveManager>(saveManagers);
+    }
+
+    public static void DeleteGame()
+    {
+        string filePath = SaveManager.filePath; // 获取保存文件路径
+        if (System.IO.File.Exists(filePath))
+        { // 如果文件存在
+            System.IO.File.Delete(filePath); // 删除文件
+            Debug.Log("Game data deleted successfully from " + filePath); // 输出日志
+        }
     }
 }

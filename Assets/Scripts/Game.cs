@@ -61,12 +61,12 @@ public class Game : MonoBehaviour
     { // 开始游戏
         currentState = GameState.Playing; // 设置当前游戏状态为 Playing
         Time.timeScale = 1; // 恢复游戏时间
-        saveManager.LoadGameData(); 
+        saveManager.LoadGameData();
     }
     public void EndGame()
     { // 结束游戏
         currentState = GameState.GameOver; // 设置当前游戏状态为 GameOver
-        saveManager.SaveGameData(); 
+        saveManager.SaveGameData();
     }
 
     public static void PauseGame()
@@ -89,11 +89,18 @@ public class Game : MonoBehaviour
 
     public void SaveGame()
     { // 保存游戏
-        saveManager.SaveGameData(); 
+        saveManager.SaveGameData();
     }
 
     public void LoadGame()
     {
-        saveManager.LoadGameData(); 
+        saveManager.LoadGameData();
+    }
+
+    [ContextMenu("Delete Game")]
+    public void DeleteGame()
+    {
+        SaveManager.DeleteGame(); // 删除游戏数据
+        Debug.Log("Game data deleted successfully."); // 输出日志
     }
 }

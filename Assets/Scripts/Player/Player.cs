@@ -46,7 +46,7 @@ public class Player : MonoBehaviour, ISaveManager
     public bool canGrab { get { return GameInput.IsGrabPressed() && HeadWallCheck(); } } // 是否可以抓墙
     public bool canAttack { get { return attackTimer <= 0 && GameInput.IsAttackPressed(); } }
     public bool canDash { get { return dashCount > 0 && GameInput.IsDashPressed(); } }
-    public bool canJump { get { return GameInput.IsJumpPressed() && IsGrounded() && !HaveWallAbove(); } }
+    public bool canJump { get { return GameInput.IsJumpPressed() &&  jumpCheck.AllowJump() && !HaveWallAbove(); } }
     public bool canIntoBulletTime { get { return GameInput.IsBulletTimePressed() && BulletTimeCooldownTimer >= BulletTimeDuration; } }
     public bool canRoll { get { return GameInput.IsRollPressed() && IsGrounded(); } }
     public Collider2D UpAttackCollider; // Reference to the UpAttack collider
@@ -76,6 +76,8 @@ public class Player : MonoBehaviour, ISaveManager
     public IEffectController effectController;
     public ICamera cameraManager;
     public ISoundEffectController soundEffectController;
+
+    public SettingUI settingUI;
 
     public JumpCheck jumpCheck;
 
@@ -116,11 +118,17 @@ public class Player : MonoBehaviour, ISaveManager
         jumpCheck = new JumpCheck(this);
 
         fsm.Initialize();
+
+        if (playerState == null)
+        {
+            playerState = new PlayerState(this, maxHealth); // Initialize player state with max health
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
+        CheckForSettingUI();
         // Update the state machine
         fsm.Update();
 
@@ -135,6 +143,22 @@ public class Player : MonoBehaviour, ISaveManager
         cameraManager.UpdateCameraPosition(this.transform.position);
 
         jumpCheck.Update();
+    }
+
+    private void CheckForSettingUI()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            settingUI.gameObject.SetActive(!settingUI.gameObject.activeSelf);
+            if (settingUI.gameObject.activeSelf)
+            {
+                Time.timeScale = 0f; // 暂停游戏
+            }
+            else
+            {
+                Time.timeScale = 1f; // 恢复游戏
+            }
+        }
     }
 
     private void UpdatePlayerController()
@@ -187,7 +211,7 @@ public class Player : MonoBehaviour, ISaveManager
 
     public bool IsGrounded()
     {
-        RaycastHit2D hit = Physics2D.BoxCast(boxCollider.bounds.center, boxCollider.bounds.size, 0f, Vector2.down, 0.1f, LayerMask.GetMask("Ground"));
+        RaycastHit2D hit = Physics2D.Raycast(boxCollider.bounds.center, Vector2.down, boxCollider.bounds.extents.y + 0.1f, wallLayer);
         if (hit.collider == null)
         { // If the player is not grounded, return false
             return false;

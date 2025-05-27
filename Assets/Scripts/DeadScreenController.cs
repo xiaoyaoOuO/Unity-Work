@@ -26,7 +26,7 @@ public class DeadScreenController : MonoBehaviour
         // Restart the game
         UnityEngine.SceneManagement.Scene scene = UnityEngine.SceneManagement.SceneManager.GetActiveScene();
         // 重新加载当前场景
-        UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(scene.name);
+        UnityEngine.SceneManagement.SceneManager.LoadScene(scene.name);
     }
 
     void OnQuitButtonClicked()
