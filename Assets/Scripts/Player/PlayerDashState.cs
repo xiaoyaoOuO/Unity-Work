@@ -6,6 +6,8 @@ public class PlayerDashState : IState
 {
     private float dashTimer; // Timer for the dash duration
     private bool dashUp;
+    private AudioSource dashAudioSource;
+    private AudioClip dashAudioClip;
     public PlayerDashState(Player player) : base(player)
     {
         stateName = "Dash";
@@ -15,6 +17,10 @@ public class PlayerDashState : IState
     {
         base.OnEnter();
         player.dashCount--;
+        dashAudioSource = player.soundEffectController.GetAudioSource();
+        dashAudioClip = player.soundEffectController.GetSoundClip(SoundType.Dashing);
+
+        PlayDashAudio();
 
         //在地面上播放冲刺特效
         if (player.IsGrounded())
@@ -44,8 +50,8 @@ public class PlayerDashState : IState
 
         player.SetAnimation("DashUp", dashUp);
 
-        if(!dashUp)
-            player.StartCoroutine(PlayDashTrail()); 
+        if (!dashUp)
+            player.StartCoroutine(PlayDashTrail());
 
         /// 获取鼠标位置或者键盘决定位置
 
@@ -86,6 +92,7 @@ public class PlayerDashState : IState
     public override void OnExit()
     {
         base.OnExit();
+        ReleaseDashAudio();
     }
 
     public IEnumerator PlayDashTrail()
@@ -99,5 +106,27 @@ public class PlayerDashState : IState
             }
             yield return new WaitForSeconds(player.trailFXInterval);
         }
+    }
+
+    private void PlayDashAudio()
+    {
+        if (dashAudioSource == null || dashAudioClip == null)
+        {
+            Debug.LogWarning("Dash audio source or clip is not set.");
+            return;
+        }
+        dashAudioSource.PlayOneShot(dashAudioClip);
+    }
+
+    private void ReleaseDashAudio()
+    {
+        if (dashAudioSource == null || dashAudioClip == null)
+        {
+            Debug.LogWarning("Dash audio source or clip is not set.");
+            return;
+        }
+
+        player.soundEffectController.ReleaseAudioSource(dashAudioSource);
+        dashAudioSource = null;
     }
 }

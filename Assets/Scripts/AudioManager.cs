@@ -28,6 +28,8 @@ public class AudioManager : MonoBehaviour
             BGMs.Add(bgm.name, bgm);
             BGMNames.Add(bgm.name);
         }
+
+        InitSoundClips();
     }
 
     public AudioClip GetAudioClip(SoundType soundType)
@@ -78,5 +80,17 @@ public class AudioManager : MonoBehaviour
         soundClips.Clear();
         BGMs.Clear();
         BGMNames.Clear();
+    }
+
+    private void InitSoundClips()
+    {
+        AudioClip dashClip = Resources.Load<AudioClip>("Audio/PlayerSoundEffect/Dash");
+        AddSoundClip(SoundType.Dashing, dashClip);
+
+        AudioClip attackClip1 = Resources.Load<AudioClip>("Audio/PlayerSoundEffect/Attack1");
+        AddSoundClip(SoundType.Attacking1, attackClip1);
+
+        AudioClip attackClip2 = Resources.Load<AudioClip>("Audio/PlayerSoundEffect/Attack2");
+        AddSoundClip(SoundType.Attacking2, attackClip2);
     }
 }

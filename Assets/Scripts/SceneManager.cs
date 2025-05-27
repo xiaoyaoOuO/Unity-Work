@@ -7,11 +7,12 @@ public enum SoundType
 {
     Running,
     WallJumping,
-    Attacking,
+    Attacking1,
+    Attacking2,
     Dashing,
     BulletTime,
     Rolling,
-    Dead
+    Dead,
 }
 
 
@@ -31,6 +32,7 @@ public class SceneManager : MonoBehaviour, IEffectController, ISoundEffectContro
 
     private void Awake()
     {
+        SoundEffectVolume = 1.0f; // Default sound effect volume
     }
     private void Start()
     {
