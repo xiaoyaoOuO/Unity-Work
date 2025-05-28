@@ -18,6 +18,7 @@ public enum SoundType
     BouncePlatform,
     GemCollect,
     Break,
+    DeathScreen
 }
 
 
@@ -71,6 +72,7 @@ public class SceneManager : MonoBehaviour, IEffectController, ISoundEffectContro
     public AudioSource GetAudioSource()
     {
         AudioSource audioSource = audioManager.GetAudioSource();
+        if (audioSource == null) return null;
         audioSource.volume = SoundEffectVolume;
         return audioSource;
     }

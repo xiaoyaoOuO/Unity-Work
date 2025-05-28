@@ -23,6 +23,7 @@ public class PlayerDeadState : IState
         if (base.triggerCalled)
         {
             player.StartCoroutine(player.Die());
+            base.triggerCalled = false;
         }
         return state;
     }

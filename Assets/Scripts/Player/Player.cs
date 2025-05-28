@@ -330,11 +330,17 @@ public class Player : MonoBehaviour, ISaveManager
     public IEnumerator Die()
     {
         DeadScreen.gameObject.SetActive(true);
-        for (float t = 0; t < 1; t += Time.deltaTime)
+        float t = 0;
+        for (t = 0; t < 1; t += Time.deltaTime)
         {
             DeadScreen.color = Color.Lerp(Color.clear, Color.black, t); // 逐渐显示黑色
             yield return null;
         }
+        AudioClip deathSound = Game.instance.sceneManager.GetSoundClip(SoundType.DeathScreen);
+        AudioSource deathAudioSource = Game.instance.sceneManager.GetAudioSource();
+        deathAudioSource.PlayOneShot(deathSound, 0.5f);
+        Game.instance.sceneManager.ReleaseAudioSource(deathAudioSource);
+        
         Game.instance.SaveGame();
         // UnityEngine.SceneManagement.SceneManager.LoadScene("Main Menu");
     }
