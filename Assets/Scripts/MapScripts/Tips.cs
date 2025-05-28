@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SignboardPrompt : MonoBehaviour
+public class Tips : MonoBehaviour
 {
     public CanvasGroup promptCanvasGroup;
     public float fadeDuration = 0.5f;

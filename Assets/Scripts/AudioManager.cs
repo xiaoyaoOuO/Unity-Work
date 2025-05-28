@@ -93,7 +93,16 @@ public class AudioManager : MonoBehaviour
         AudioClip attackClip2 = Resources.Load<AudioClip>("Audio/PlayerSoundEffect/Attack2");
         AddSoundClip(SoundType.Attacking2, attackClip2);
 
-        AudioClip attackSuccessClip = Resources.Load<AudioClip>("Audio/PlayerSoundEffect/attack_success");
-        AddSoundClip(SoundType.AttackSuccess, attackSuccessClip);
+        AudioClip bouncePadClip = Resources.Load<AudioClip>("Audio/MapSoundEffect/BouncePad");
+        AddSoundClip(SoundType.BouncePad, bouncePadClip);
+
+        AudioClip bouncePlatformClip = Resources.Load<AudioClip>("Audio/MapSoundEffect/BouncePlatform");
+        AddSoundClip(SoundType.BouncePlatform, bouncePlatformClip);
+
+        AudioClip gemCollectClip = Resources.Load<AudioClip>("Audio/MapSoundEffect/GemCollect");
+        AddSoundClip(SoundType.GemCollect, gemCollectClip);
+
+        AudioClip breakClip = Resources.Load<AudioClip>("Audio/MapSoundEffect/Break");
+        AddSoundClip(SoundType.Break, breakClip);
     }
 }

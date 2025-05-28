@@ -14,6 +14,10 @@ public enum SoundType
     BulletTime,
     Rolling,
     Dead,
+    BouncePad,
+    BouncePlatform,
+    GemCollect,
+    Break,
 }
 
 

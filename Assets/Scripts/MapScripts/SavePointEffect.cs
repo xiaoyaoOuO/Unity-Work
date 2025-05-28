@@ -3,7 +3,7 @@ using UnityEngine;
 public class SavePointEffect : MonoBehaviour
 {
     public SpriteRenderer glowE; // 蓝光E的Sprite Renderer
-    public ParticleSystem glowParticles; // 新增粒子引用
+    public ParticleSystem glowParticles; // 粒子引用
     private float fadeSpeed = 1.5f; // 淡入速度，可调整
 
     private void Start()
