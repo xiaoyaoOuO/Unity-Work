@@ -37,7 +37,7 @@ public class Golem : Enemy
     void Update()
     {
         if (isDashing) return; // ���ʱ���������ƶ�����
-        Ani.SetBool("Hit", false);
+       // Ani.SetBool("Hit", false);
         Ani.SetBool("Attack", false);
         // ����ʱ��Ѳ��
         if (!isDead && count == 0)
