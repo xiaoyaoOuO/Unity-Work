@@ -1,10 +1,13 @@
 using UnityEngine;
+using static Unity.UOS.COSXML.Model.Tag.RestoreConfigure;
+using static UnityEngine.GraphicsBuffer;
+using System.Collections;
 
 public class Bullet : MonoBehaviour
 {
-    public float speed = 10f; // ×Óµ¯ËÙ¶È
-    private Vector2 direction; // ×Óµ¯ÒÆ¶¯·½Ïò
-    private float lifeTime = 2f; // ×Óµ¯ÉúÃüÖÜÆÚ£¨Ãë£©
+    public float speed = 10f; // å­å¼¹é€Ÿåº¦
+    private Vector2 direction; // å­å¼¹ç§»åŠ¨æ–¹å‘
+    private float lifeTime = 2f; // å­å¼¹å­˜åœ¨æ—¶é—´ï¼ˆç§’ï¼‰
     private float timer = 0f;
     bool flipped=false;
     public void SetDirection(Vector2 dir)
@@ -18,17 +21,18 @@ public class Bullet : MonoBehaviour
     }
     void Update()
     {
-        // ×Óµ¯ÒÆ¶¯
+        // å­å¼¹ç§»åŠ¨
         transform.Translate(direction * speed * Time.deltaTime);
-        // ¿ÉÑ¡£º×Óµ¯×Ô×ª£¨ÈÆZÖá£©
+        // é€‰æ‹©å­å¼¹æ—‹è½¬ï¼ˆZè½´ï¼‰
         //  transform.Rotate(0, 0, 360 * Time.deltaTime);
-
+        
     }
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log("Åö×²");
-        if (this.gameObject.tag == "enemyAttack")//Èç¹û×Óµ¯±êÇ©ÊÇenemyAttack
+        
+        Debug.Log("ç¢°æ’");
+        if (this.gameObject.tag == "enemyAttack")//å¦‚æœå­å¼¹æ ‡ç­¾æ˜¯enemyAttack
         {
             if (other.CompareTag("Player"))
             {
@@ -41,11 +45,17 @@ public class Bullet : MonoBehaviour
             }
 
         }
-        else if (this.gameObject.tag == "playerAttack")//Èç¹û×Óµ¯±êÇ©ÊÇplayerAttack
+        else if (this.gameObject.tag == "playerAttack")//å¦‚æœå­å¼¹æ ‡ç­¾æ˜¯playerAttack
         {
             if (other.gameObject.layer == LayerMask.NameToLayer("Enemy"))
             {
-                //health--;
+               
+                Enemy enemy = other.GetComponent<Enemy>();
+                if (enemy != null)
+                {
+                   
+                    enemy.OnHit(1); // å‡è®¾ä¼¤å®³å€¼ä¸º1
+                }
 
                 Destroy(this.gameObject);
             }
@@ -59,16 +69,15 @@ public class Bullet : MonoBehaviour
     public void Flip()
     {
         if (flipped) return;
-        Debug.Log("·­×ª");
+        Debug.Log("ï¿½ï¿½×ª");
         flipped = true;
        
         direction = -direction;
 
-        this.gameObject.tag = "playerAttack";//¸Ä±ä±êÇ©
-
-        //GameObject.Find("FramePause").GetComponent<FramePause>().BeHitPause(12);//äÖÈ¾»­Ãæ->¶ÙÖ¡->»¹Ô­»­Ãæ
-
-        //GameObject.Find("Impulse").GetComponent<ImpulseTest>().Impulse();//Õğ¶¯ÆÁÄ»
+        this.gameObject.tag = "playerAttack";//æ”¹å˜æ ‡ç­¾
         
+        //GameObject.Find("FramePause").GetComponent<FramePause>().BeHitPause(12);//æ¸²æŸ“ç”»é¢->é¡¿å¸§->è¿˜åŸç”»é¢
+        //GameObject.Find("Impulse").GetComponent<ImpulseTest>().Impulse();//éœ‡åŠ¨å±å¹•
+        Game.instance.cameraManager.Shake(direction.normalized, 0.2f);
     }
 }
