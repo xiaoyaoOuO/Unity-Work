@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Map/Prefab.meta
 guid: 2f90dae05672d0540a07e27e78f1e759
+========
+guid: a6929c035b06e3548950fe4fcf44db47
+>>>>>>>> origin/YSJ:Assets/Animation/TrapAndBullet.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}

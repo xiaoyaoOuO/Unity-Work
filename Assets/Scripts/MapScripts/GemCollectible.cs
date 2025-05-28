@@ -19,20 +19,22 @@ public class GemCollectible : MonoBehaviour
     {
         if (other.CompareTag("Player") && !isCollected)
         {
-            // 1. UI¸üÐÂ
+            // 1. UIï¿½ï¿½ï¿½ï¿½
             GemUIManager.Instance.AddGem(1);
 
-            // 2. ²¥·ÅÊÕ¼¯¶¯»­
+            // 2. ï¿½ï¿½ï¿½ï¿½ï¿½Õ¼ï¿½ï¿½ï¿½ï¿½ï¿½
             isCollected = true;
             animator.Play("GemCollectAnim");
+            Destroy(gameObject, 1.75f); // ï¿½ï¿½ï¿½Ý¶ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+            other.GetComponent<Player>().RefillDash();
 
-            // 3. ²¥·ÅÊÕ¼¯ÒôÐ§
+            // 3. ï¿½ï¿½ï¿½ï¿½ï¿½Õ¼ï¿½ï¿½ï¿½Ð§
             PlayGemCollectSound();
 
-            // 4. Ïú»Ù¶ÔÏó
+            // 4. ï¿½ï¿½ï¿½Ù¶ï¿½ï¿½ï¿½
             Destroy(gameObject, 0.94f);
 
-            // 5. ÖØÖÃÍæ¼ÒµÄ³å´Ì´ÎÊý
+            // 5. ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÒµÄ³ï¿½Ì´ï¿½ï¿½ï¿½
             Player player = other.GetComponent<Player>();
             if (player != null)
             {
@@ -43,18 +45,18 @@ public class GemCollectible : MonoBehaviour
 
     private void PlayGemCollectSound()
     {
-        // »ñÈ¡ÒôÆµ×ÊÔ´
+        // ï¿½ï¿½È¡ï¿½ï¿½Æµï¿½ï¿½Ô´
         if (gemCollectAudioClip == null)
         {
             gemCollectAudioClip = soundEffectController.GetSoundClip(SoundType.GemCollect);
         }
 
-        // ´Ó¶ÔÏó³Ø»ñÈ¡ÒôÆµÔ´
+        // ï¿½Ó¶ï¿½ï¿½ï¿½Ø»ï¿½È¡ï¿½ï¿½ÆµÔ´
         if (soundEffectController != null && gemCollectAudioClip != null)
         {
             gemCollectAudioSource = soundEffectController.GetAudioSource();
 
-            // ÅäÖÃ²¢²¥·Å
+            // ï¿½ï¿½ï¿½Ã²ï¿½ï¿½ï¿½ï¿½ï¿½
             if (gemCollectAudioSource != null)
             {
                 gemCollectAudioSource.PlayOneShot(gemCollectAudioClip);
@@ -70,10 +72,10 @@ public class GemCollectible : MonoBehaviour
 
     private System.Collections.IEnumerator ReleaseAfterPlayback()
     {
-        // µÈ´ýÒôÆµ²¥·ÅÍê³É
+        // ï¿½È´ï¿½ï¿½ï¿½Æµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         yield return new WaitForSeconds(gemCollectAudioClip.length);
 
-        // ÊÍ·Å×ÊÔ´
+        // ï¿½Í·ï¿½ï¿½ï¿½Ô´
         if (gemCollectAudioSource!= null)
         {
             soundEffectController.ReleaseAudioSource(gemCollectAudioSource);

@@ -13,7 +13,7 @@ public class AudioManager : MonoBehaviour
         audioSourcePool = new Queue<AudioSource>();
 
         // Create a pool of AudioSources
-        for (int i = 0; i < 20; i++)
+        for (int i = 0; i < 30; i++)
         {
             AudioSource audioSource = CreateAudioSource();
             audioSourcePool.Enqueue(audioSource);
@@ -93,6 +93,9 @@ public class AudioManager : MonoBehaviour
         AudioClip attackClip2 = Resources.Load<AudioClip>("Audio/PlayerSoundEffect/Attack2");
         AddSoundClip(SoundType.Attacking2, attackClip2);
 
+        AudioClip attackClip3 = Resources.Load<AudioClip>("Audio/PlayerSoundEffect/attack_success");
+        AddSoundClip(SoundType.AttackSuccess, attackClip3);
+
         AudioClip bouncePadClip = Resources.Load<AudioClip>("Audio/MapSoundEffect/BouncePad");
         AddSoundClip(SoundType.BouncePad, bouncePadClip);
 
@@ -104,5 +107,8 @@ public class AudioManager : MonoBehaviour
 
         AudioClip breakClip = Resources.Load<AudioClip>("Audio/MapSoundEffect/Break");
         AddSoundClip(SoundType.Break, breakClip);
+
+        AudioClip death_screen = Resources.Load<AudioClip>("Audio/PlayerSoundEffect/death_screen");
+        AddSoundClip(SoundType.DeathScreen, death_screen);
     }
 }

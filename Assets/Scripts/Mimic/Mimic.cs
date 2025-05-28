@@ -22,7 +22,7 @@ public class Mimic : Enemy
     [Header("¶ÔÍæ¼ÒÊôÐÔ")]
     public Transform player; // Íæ¼ÒTransform
     public float chaseRange = 6; // ×·»÷·¶Î§
-    public float attackRange = 0.3f; // ¹¥»÷·¶Î§
+    public float attackRange = 0f; // ¹¥»÷·¶Î§
     public float revealRange = 1f; // turn range
     public float hideRange = 8f; // hide range
     // Start is called before the first frame update
@@ -54,7 +54,7 @@ public class Mimic : Enemy
         {
             if(ishiding == false&& isDead == false)
             {    
-                Hidetime--;
+                
                 Ani.SetBool("toHide", false);
                 if (Ani != null)
                 {
@@ -84,9 +84,9 @@ public class Mimic : Enemy
                 else
                 {
                     Debug.Log("Ñ²Âß");
-                    Patrol(); 
-                
+                    Patrol();
 
+                    Hidetime--;
                 }
 
                 
@@ -144,7 +144,7 @@ public class Mimic : Enemy
             }
         }
     }
-    public new void OnHit(int damage = 1)
+    public override void OnHit(int damage = 1)
     {
         currentHP -= damage;
        

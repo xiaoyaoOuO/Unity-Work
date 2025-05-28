@@ -21,6 +21,11 @@ public class SavePointEffect : MonoBehaviour
         {
             // 触发淡入动画
             StartCoroutine(FadeInGlow());
+
+            // 保存当前位置到Player
+            Player player = other.GetComponent<Player>();
+            if (player != null)
+                player.SetCheckPoint(transform.position);
         }
     }
 
