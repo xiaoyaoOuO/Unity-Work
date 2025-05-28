@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Resource/MR3_2004.meta
 guid: 809eda5d805b32e4f860359c3319cf0f
+========
+guid: b656bd7e2ae6b4a41973fb706638ac1b
+>>>>>>>> origin/YSJ:Assets/Materials.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}

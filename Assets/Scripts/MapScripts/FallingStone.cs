@@ -11,6 +11,14 @@ public class FallingStone : MonoBehaviour
     [Header("检测玩家的 Tag")]
     public string playerTag = "Player";
 
+    [Header("摇晃设置")]
+    [Tooltip("摇晃持续时间")]
+    public float shakeDuration = 0.8f;
+    [Tooltip("摇晃强度")]
+    public float shakeIntensity = 0.1f;
+    [Tooltip("摇晃频率（每秒次数）")]
+    public float shakeFrequency = 30f;
+
     private Rigidbody2D rb;
     private Vector3 originalPosition;
     private Quaternion originalRotation;
@@ -19,46 +27,63 @@ public class FallingStone : MonoBehaviour
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-        // 初始设为 Kinematic，静止不受重力影响
         rb.bodyType = RigidbodyType2D.Kinematic;
         rb.freezeRotation = true;
 
-        // 记录原始位置/旋转以便复原
         originalPosition = transform.position;
         originalRotation = transform.rotation;
     }
 
-    // 只有当玩家进入“FallTrigger”时才会调用此方法
     void OnTriggerEnter2D(Collider2D other)
     {
         if (!isTriggered && other.CompareTag(playerTag))
         {
             isTriggered = true;
-            StartCoroutine(CollapseAndRestore());
+            StartCoroutine(ShakeBeforeFall());
         }
+    }
+
+    // 新增的摇晃协程
+    private IEnumerator ShakeBeforeFall()
+    {
+        float elapsed = 0f;
+        Vector3 basePosition = transform.position;
+
+        // 摇晃阶段
+        while (elapsed < shakeDuration)
+        {
+            float offsetX = Mathf.PerlinNoise(Time.time * shakeFrequency, 0) * 2 - 1;
+            float offsetY = Mathf.PerlinNoise(0, Time.time * shakeFrequency) * 2 - 1;
+            Vector3 shakeOffset = new Vector3(offsetX, offsetY, 0) * shakeIntensity;
+
+            transform.position = basePosition + shakeOffset;
+
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+
+        // 回归原位后开始坠落流程
+        transform.position = originalPosition;
+        StartCoroutine(CollapseAndRestore());
     }
 
     private IEnumerator CollapseAndRestore()
     {
-        // 等待玩家完全走进触发区
+        // 保留原来的延迟逻辑
         yield return new WaitForSeconds(collapseDelay);
 
-        // 1️.让它掉下来
         rb.bodyType = RigidbodyType2D.Dynamic;
         rb.gravityScale = 1f;
 
-        // 2️.等待 resetDelay，然后复原
         if (resetDelay > 0f)
         {
             yield return new WaitForSeconds(resetDelay);
 
-            // 停止物理运动，复位位置
             rb.bodyType = RigidbodyType2D.Kinematic;
             rb.velocity = Vector2.zero;
             rb.angularVelocity = 0f;
             transform.SetPositionAndRotation(originalPosition, originalRotation);
 
-            // 重置标志，允许下次再次触发
             isTriggered = false;
         }
     }

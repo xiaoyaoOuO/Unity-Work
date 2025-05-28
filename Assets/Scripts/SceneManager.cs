@@ -7,58 +7,22 @@ public enum SoundType
 {
     Running,
     WallJumping,
-    Attacking,
+    Attacking1,
+    Attacking2,
     Dashing,
     BulletTime,
     Rolling,
-    Dead
+    Dead,
+    BouncePad,
+    BouncePlatform,
+    GemCollect,
+    Break,
 }
 
-public class AudioManager
-{
-    private Dictionary<SoundType, AudioClip> soundClips;
-    public Queue<AudioSource> audioSourcePool;
-    public Dictionary<String, AudioClip> BGMs;
-    public AudioManager()
-    {
-        soundClips = new Dictionary<SoundType, AudioClip>();
-        audioSourcePool = new Queue<AudioSource>(20);
-
-        //Resources.LoadAll<AudioClip>("Sounds");
-    }
-
-    public AudioClip GetAudioClip(SoundType soundType)
-    {
-        if (soundClips.ContainsKey(soundType)) return soundClips[soundType];
-        else return null;
-    }
-
-    public AudioSource GetAudioSource()
-    {
-        if (audioSourcePool.Count > 0) return audioSourcePool.Dequeue();
-        else return null;
-    }
-
-    public void ReleaseAudioSource(AudioSource audioSource)
-    {
-        audioSourcePool.Enqueue(audioSource);
-    }
-
-    public void AddSoundClip(SoundType soundType, AudioClip audioClip)
-    {
-        if (!soundClips.ContainsKey(soundType)) soundClips.Add(soundType, audioClip);
-    }
-
-    public AudioClip GetBGM(String BGMName)
-    {
-        if (BGMs.ContainsKey(BGMName)) return BGMs[BGMName];
-        else return null;
-    }
-}
 
 public class SceneManager : MonoBehaviour, IEffectController, ISoundEffectController
 {
-    private AudioManager audioManager;
+    public AudioManager audioManager;
     private AudioSource BGMAudioSource;
     public GameObject playerDashDust;
     public GameObject playerJumpFX;
@@ -67,19 +31,25 @@ public class SceneManager : MonoBehaviour, IEffectController, ISoundEffectContro
     public GameObject playerWallJumpFX;
     public GameObject playerDashTrailFX;
     private string currentBGM;
-    private float BGMVolume;
+    private float BGMVolume { set { BGMAudioSource.volume = value; } get { return BGMAudioSource.volume; } }
     private float SoundEffectVolume;
 
     private void Awake()
     {
-        audioManager = new AudioManager();
-        BGMAudioSource = new AudioSource();
-        currentBGM = "";   //TODO: 播放BGM
-        // BGMAudioSource.clip = audioManager.GetBGM(currentBGM);
-        // BGMAudioSource.Play();
+        SoundEffectVolume = 1.0f; // Default sound effect volume
     }
     private void Start()
     {
+        audioManager = GetComponentInChildren<AudioManager>();
+        BGMAudioSource = audioManager.CreateAudioSource();
+        Debug.Log("AudioManager initialized with " + audioManager.BGMNames.Count + " BGM tracks.");
+        currentBGM = audioManager.BGMNames[0];   //TODO: 播放BGM
+        // Debug.Log("Current BGM: " + currentBGM);
+        // Debug.Log(BGMAudioSource);
+        BGMAudioSource.clip = audioManager.GetBGM(currentBGM);
+        BGMAudioSource.volume = BGMVolume;
+        BGMAudioSource.loop = true;
+        BGMAudioSource.Play();
     }
 
     public void CameraShake(Vector2 direction)
@@ -148,6 +118,7 @@ public class SceneManager : MonoBehaviour, IEffectController, ISoundEffectContro
 
     public void PlayerLandFX(Vector3 position)
     {
+        // Debug.Log("Player landed at position: " + position);
         Instantiate(playerLandFX, position, Quaternion.identity);
     }
 
@@ -168,3 +139,5 @@ public class SceneManager : MonoBehaviour, IEffectController, ISoundEffectContro
         return fx;
     }
 }
+
+

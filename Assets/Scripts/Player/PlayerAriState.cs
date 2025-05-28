@@ -15,7 +15,7 @@ public class PlayerAirState : IState {
         {
             return State.Wall;
         }
-        if (player.canJump && player.jumpCheck.AllowJump())
+        if (player.canJump)
         {
             return State.Jump;
         }
@@ -23,6 +23,7 @@ public class PlayerAirState : IState {
             return State.Attack; 
         }
         if(player.IsGrounded()) {
+            player.effectController.PlayerLandFX(player.animator.transform.position);
             return State.Idle;
         }
         player.SetAnimation("yVelocity", player.getVelocity().y);

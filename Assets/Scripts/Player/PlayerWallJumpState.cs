@@ -30,6 +30,8 @@ public class PlayerWallJumpState : IState
         int direction = player.facing == Facing.Right ? 1 : -1;
         player.rb.velocity = new Vector2(wallBoostSpeed * -direction, player.wallJumpForce);
         player.OnFlip();
+
+        player.effectController.PlayerWallJumpFX(player.animator.transform.position);
     }
 
     public override void OnExit()

@@ -15,9 +15,14 @@ public class BouncePad2D : MonoBehaviour
     private Vector2 originalPosition;   // 原始位置
     private bool isActive = false;      // 是否正在运行协程
 
+    private ISoundEffectController soundEffectController;
+    private AudioSource bouncePadAudioSource;
+    private AudioClip bouncePadAudioClip;
     void Start()
     {
         originalPosition = transform.position;
+
+        soundEffectController = Game.instance.sceneManager;
     }
 
     void OnCollisionEnter2D(Collision2D collision)
@@ -31,6 +36,9 @@ public class BouncePad2D : MonoBehaviour
 
             // 启动弹板动画协程
             StartCoroutine(BounceAnimation());
+
+            // 播放音效
+            // PlayBounceSound();
         }
     }
 
@@ -56,5 +64,45 @@ public class BouncePad2D : MonoBehaviour
         // 确保精准复位
         transform.position = originalPosition;
         isActive = false;
+    }
+
+    private void PlayBounceSound()
+    {
+        // 获取音频资源
+        if (bouncePadAudioClip == null)
+        {
+            bouncePadAudioClip = soundEffectController.GetSoundClip(SoundType.BouncePad);
+        }
+
+        // 从对象池获取音频源
+        if (soundEffectController != null && bouncePadAudioClip != null)
+        {
+            bouncePadAudioSource = soundEffectController.GetAudioSource();
+
+            // 配置并播放
+            if (bouncePadAudioSource != null)
+            {
+                bouncePadAudioSource.PlayOneShot(bouncePadAudioClip);
+
+                StartCoroutine(ReleaseAfterPlayback());
+            }
+        }
+        else
+        {
+            Debug.LogWarning("Bounce sound controller or clip not available");
+        }
+    }
+
+    private System.Collections.IEnumerator ReleaseAfterPlayback()
+    {
+        // 等待音频播放完成
+        yield return new WaitForSeconds(bouncePadAudioClip.length);
+
+        // 释放资源
+        if (bouncePadAudioSource != null)
+        {
+            soundEffectController.ReleaseAudioSource(bouncePadAudioSource);
+            bouncePadAudioSource = null;
+        }
     }
 }

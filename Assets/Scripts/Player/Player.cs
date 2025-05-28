@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public enum Facing{Left, Right}
 
-public class Player : MonoBehaviour
+public class Player : MonoBehaviour, ISaveManager
 {
     #region Player Variables
     [Header("基础移动")]
@@ -24,6 +26,7 @@ public class Player : MonoBehaviour
     public Vector2 dashDirection; // 冲刺方向
     public int dashCount = 1; // 当前冲刺次数
     public int maxDashCount = 1; // 最大冲刺次数
+    public float trailFXInterval = 0.05f; // 冲刺特效间隔
     [Header("子弹时间")]
     public float BulletTimeDuration = 0.5f; // 子弹时间持续时间
     public float BulletTimeRefillSpeed = 0.5f; // 时间回复速度
@@ -43,7 +46,7 @@ public class Player : MonoBehaviour
     public bool canGrab { get { return GameInput.IsGrabPressed() && HeadWallCheck(); } } // 是否可以抓墙
     public bool canAttack { get { return attackTimer <= 0 && GameInput.IsAttackPressed(); } }
     public bool canDash { get { return dashCount > 0 && GameInput.IsDashPressed(); } }
-    public bool canJump { get { return GameInput.IsJumpPressed() && IsGrounded() && !HaveWallAbove(); } }
+    public bool canJump { get { return GameInput.IsJumpPressed() &&  jumpCheck.AllowJump() && !HaveWallAbove(); } }
     public bool canIntoBulletTime { get { return GameInput.IsBulletTimePressed() && BulletTimeCooldownTimer >= BulletTimeDuration; } }
     public bool canRoll { get { return GameInput.IsRollPressed() && IsGrounded(); } }
     public Collider2D UpAttackCollider; // Reference to the UpAttack collider
@@ -53,6 +56,10 @@ public class Player : MonoBehaviour
     public GameObject CorrectCrossWall;
     public LayerMask enemyLayer; // Layer mask for enemies
     public LayerMask wallLayer; // Layer mask for walls
+    public LayerMask bulletLayer; // Layer mask for bullets
+
+    [Header("存档")]
+    private Vector3 CheckPointPosition; // 检查点位置
 
     #endregion
 
@@ -60,14 +67,17 @@ public class Player : MonoBehaviour
     private FiniteStateMachine<IState> fsm;
 
     //Unity组件
-    private Animator animator;
+    public Animator animator;
     public Rigidbody2D rb;
     public BoxCollider2D boxCollider;  //人物的碰撞盒
     public Game_UI game_UI;
+    public Image DeadScreen;
 
     public IEffectController effectController;
     public ICamera cameraManager;
     public ISoundEffectController soundEffectController;
+
+    public SettingUI settingUI;
 
     public JumpCheck jumpCheck;
 
@@ -88,9 +98,8 @@ public class Player : MonoBehaviour
         fsm.AddState(new PlayerRollAttackState(this));
         fsm.AddState(new PlayerWallState(this));
         fsm.AddState(new PlayerWallJumpState(this));
+        fsm.AddState(new PlayerDeadState(this));
 
-        //玩家状态
-        playerState = new PlayerState(this,maxHealth);
 
         //获取组件
         animator = GetComponentInChildren<Animator>();
@@ -109,11 +118,17 @@ public class Player : MonoBehaviour
         jumpCheck = new JumpCheck(this);
 
         fsm.Initialize();
+
+        if (playerState == null)
+        {
+            playerState = new PlayerState(this, maxHealth); // Initialize player state with max health
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
+        CheckForSettingUI();
         // Update the state machine
         fsm.Update();
 
@@ -128,6 +143,22 @@ public class Player : MonoBehaviour
         cameraManager.UpdateCameraPosition(this.transform.position);
 
         jumpCheck.Update();
+    }
+
+    private void CheckForSettingUI()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            settingUI.gameObject.SetActive(!settingUI.gameObject.activeSelf);
+            if (settingUI.gameObject.activeSelf)
+            {
+                Time.timeScale = 0f; // 暂停游戏
+            }
+            else
+            {
+                Time.timeScale = 1f; // 恢复游戏
+            }
+        }
     }
 
     private void UpdatePlayerController()
@@ -180,7 +211,7 @@ public class Player : MonoBehaviour
 
     public bool IsGrounded()
     {
-        RaycastHit2D hit = Physics2D.BoxCast(boxCollider.bounds.center, boxCollider.bounds.size, 0f, Vector2.down, 0.1f, LayerMask.GetMask("Ground"));
+        RaycastHit2D hit = Physics2D.Raycast(boxCollider.bounds.center, Vector2.down, boxCollider.bounds.extents.y + 0.1f, wallLayer);
         if (hit.collider == null)
         { // If the player is not grounded, return false
             return false;
@@ -226,7 +257,7 @@ public class Player : MonoBehaviour
 
             if (InputToExitBulletTime() || BulletTimer <= 0)
             {
-                BulletTimeCooldownTimer = BulletTimer >=0 ? BulletTimer : 0;
+                BulletTimeCooldownTimer = BulletTimer >= 0 ? BulletTimer : 0;
                 BulletTimeManager.instance.Exit();
             }
         }
@@ -269,11 +300,11 @@ public class Player : MonoBehaviour
     }
 
     public RaycastHit2D RightWallCheck()
-    { 
-        int dir = facing == Facing.Right? 1 : -1;
+    {
+        int dir = facing == Facing.Right ? 1 : -1;
         Vector3 raycastPosition = boxCollider.bounds.center;
         raycastPosition.x += boxCollider.bounds.size.x / 2f * dir;
-        return Physics2D.Raycast(raycastPosition, Vector2.right * dir, 0.5f, LayerMask.GetMask("Ground"));
+        return Physics2D.Raycast(raycastPosition, Vector2.right * dir, 0.3f, LayerMask.GetMask("Ground"));
     }
 
     public bool HaveWallAbove()
@@ -284,5 +315,56 @@ public class Player : MonoBehaviour
             return false;
         }
         return true;
+    }
+
+    public void CounterBullet(Collider2D collider)
+    {
+        Bullet bullet = null;
+        if ((bullet = collider.GetComponent<Bullet>()) != null && bullet.CompareTag("enemyAttack"))
+        {
+            bullet.Flip();
+            effectController.CameraShake(Vector2.right);
+        }
+    }
+
+    public IEnumerator Die()
+    {
+        DeadScreen.gameObject.SetActive(true);
+        for (float t = 0; t < 1; t += Time.deltaTime)
+        {
+            DeadScreen.color = Color.Lerp(Color.clear, Color.black, t); // 逐渐显示黑色
+            yield return null;
+        }
+        Game.instance.SaveGame();
+        // UnityEngine.SceneManagement.SceneManager.LoadScene("Main Menu");
+    }
+
+    public void PlayerDie()
+    {
+        fsm.ChangeState(fsm.GetState(State.Die));
+    }
+
+    public void SaveGameData(GameData gameData)
+    {
+        gameData.CheckPointPosition = CheckPointPosition; // 保存检查点位置
+        gameData.PlayerHealth = playerState.currentHealth; // 保存玩家生命值
+    }
+
+    public void LoadGameData(GameData gameData)
+    {
+        CheckPointPosition = gameData.CheckPointPosition; // 加载检查点位置
+        playerState = new PlayerState(this, maxHealth); // 创建新的玩家状态实例
+        playerState.currentHealth = gameData.PlayerHealth; // 加载玩家生命值
+        if (playerState.currentHealth <= 0)
+        {
+            playerState.currentHealth = playerState.maxHealth; // 如果生命值小于等于0，则重置为最大生命值
+        }
+        transform.position = CheckPointPosition + new Vector3(0, 2, 0);
+        game_UI.UpdateHealthBars();
+    }
+
+    public void SetCheckPoint(Vector3 position)
+    {
+        CheckPointPosition = position;
     }
 }
