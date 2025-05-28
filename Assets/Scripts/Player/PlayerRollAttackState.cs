@@ -6,6 +6,10 @@ public class PlayerRollAttackState : IState
 {
     private bool rollAttackEnd;
     private float acceleration;
+
+    public AudioSource audioSource;
+    public AudioClip rollAttackSound;
+    public bool hasPlaySound = false;
     public PlayerRollAttackState(Player player) : base(player)
     {
         state = State.RollAttack;
@@ -16,6 +20,12 @@ public class PlayerRollAttackState : IState
     {
         base.OnEnter();
         rollAttackEnd = false;
+        hasPlaySound = false;
+        isAttackTriggered = false;
+        isAttackSuccess = false;
+
+        rollAttackSound = Game.instance.sceneManager.audioManager.GetAudioClip(SoundType.Attacking2);
+        audioSource = Game.instance.sceneManager.audioManager.GetAudioSource();
     }
 
     public override State OnUpdate()
@@ -27,8 +37,20 @@ public class PlayerRollAttackState : IState
         Vector2 velocity = player.rb.velocity;
         velocity.x = Mathf.MoveTowards(velocity.x, 0, acceleration * Time.deltaTime);
         player.rb.velocity = velocity;
+
+        if (isAttackTriggered && !hasPlaySound)
+        {
+            if (isAttackSuccess)
+            {
+                rollAttackSound = Game.instance.sceneManager.audioManager.GetAudioClip(SoundType.AttackSuccess);
+            }
+            audioSource.PlayOneShot(rollAttackSound);
+            hasPlaySound = true;
+            Game.instance.sceneManager.audioManager.ReleaseAudioSource(audioSource); 
+            audioSource = null;
+        }
         // Debug.Log(player.rb.velocity);
-        return state;
+            return state;
     }
 
     public override void AnimationEndTrigger()

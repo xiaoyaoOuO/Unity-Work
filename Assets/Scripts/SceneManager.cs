@@ -9,6 +9,7 @@ public enum SoundType
     WallJumping,
     Attacking1,
     Attacking2,
+    AttackSuccess,
     Dashing,
     BulletTime,
     Rolling,

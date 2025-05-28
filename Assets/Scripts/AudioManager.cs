@@ -92,5 +92,8 @@ public class AudioManager : MonoBehaviour
 
         AudioClip attackClip2 = Resources.Load<AudioClip>("Audio/PlayerSoundEffect/Attack2");
         AddSoundClip(SoundType.Attacking2, attackClip2);
+
+        AudioClip attackSuccessClip = Resources.Load<AudioClip>("Audio/PlayerSoundEffect/attack_success");
+        AddSoundClip(SoundType.AttackSuccess, attackSuccessClip);
     }
 }

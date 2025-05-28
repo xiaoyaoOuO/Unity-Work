@@ -29,6 +29,8 @@ public abstract class IState
     public String stateName { get; protected set; }
     public IState(Player player) { this.player = player; }
     public bool triggerCalled { get; protected set; }
+    public bool isAttackSuccess { get; protected set; } = false;
+    public bool isAttackTriggered { get; protected set; } = false;
 
     public virtual void OnEnter()
     {
@@ -43,6 +45,7 @@ public abstract class IState
     public virtual void AnimationEndTrigger() { triggerCalled = true; }
     public virtual void AnimationAttackTrigger(Collider2D attackBox = null)
     {
+        isAttackTriggered = true;
         if (attackBox == null)
         {
             Debug.Log("Attack box is null");
@@ -59,6 +62,7 @@ public abstract class IState
                 {
                     enemy.OnHit();
                     Debug.Log("Hit enemy: " + enemy.name);
+                    isAttackSuccess = true;
                 }
                 else
                 {
