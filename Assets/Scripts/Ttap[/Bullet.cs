@@ -53,8 +53,8 @@ public class Bullet : MonoBehaviour
                 Enemy enemy = other.GetComponent<Enemy>();
                 if (enemy != null)
                 {
-                   
-                    enemy.OnHit(1); // 假设伤害值为1
+                   //演示视频用，后续改回来
+                    enemy.OnHit(100); // 假设伤害值为100
                 }
 
                 Destroy(this.gameObject);

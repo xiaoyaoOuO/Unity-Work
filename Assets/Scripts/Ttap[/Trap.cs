@@ -39,7 +39,7 @@ public class TrapAttack : Enemy
         }
     }
 
-    void Attack()
+    new void Attack()
     {
         Ani.SetTrigger("Attack");
         // 生成子弹
