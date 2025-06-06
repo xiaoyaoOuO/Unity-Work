@@ -19,12 +19,14 @@ public class BouncePlatform : MonoBehaviour
     private Vector3 startPos;
     private Vector3 endPos;
     private bool isMoving = false;
+    private bool isReturning = false; // 标记平台是否在回程
     private Rigidbody2D rb;
     private BoxCollider2D boxCol;
 
     private ISoundEffectController soundEffectController;
     private AudioSource bouncePlatformAudioSource;
     private AudioClip bouncePlatformAudioClip;
+
     void Start()
     {
         soundEffectController = Game.instance.sceneManager;
@@ -63,8 +65,10 @@ public class BouncePlatform : MonoBehaviour
         // 停留
         yield return new WaitForSeconds(stayDuration);
 
-        // 回程
+        // 回程：开启“回程”标记，再执行移动，结束后关闭标记
+        isReturning = true;
         yield return StartCoroutine(MoveTo(startPos, returnDuration));
+        isReturning = false;
 
         isMoving = false;
     }
@@ -80,11 +84,52 @@ public class BouncePlatform : MonoBehaviour
             float t = Mathf.SmoothStep(0f, 1f, elapsed / duration);
             Vector3 newPos = Vector3.Lerp(initial, target, t);
             rb.MovePosition(newPos);
+
+            // 如果正在回程，检查平台下方是否有玩家
+            if (isReturning)
+            {
+                CheckCrush();
+            }
+
             yield return null;
         }
 
         // 最终位置
         rb.MovePosition(target);
+    }
+
+    private void CheckCrush()
+    {
+        // 检测平台下方是否有玩家：使用一个很薄的矩形框
+        float detectionHeight = 0.1f;
+        // 世界坐标中的平台宽度
+        float platformWidth = boxCol.bounds.size.x;
+        // 计算检测框中心：在平台下方，紧贴平台底边
+        Vector2 boxCenter = (Vector2)transform.position
+                            + Vector2.down * (boxCol.bounds.extents.y + detectionHeight / 2f);
+        Vector2 boxSize = new Vector2(platformWidth, detectionHeight);
+
+        // 获取所有在该区域内的 Collider2D
+        Collider2D[] hits = Physics2D.OverlapBoxAll(boxCenter, boxSize, 0f);
+        foreach (var hit in hits)
+        {
+            if (hit.CompareTag(playerTag))
+            {
+                // 玩家被压住：调用 OnHit 5 次
+                Player player = hit.GetComponent<Player>();
+                if (player != null)
+                {
+                    for (int i = 0; i < 5; i++)
+                    {
+                        player.OnHit();
+                    }
+                }
+
+                // 已经压死玩家后，结束后续检测
+                isReturning = false;
+                break;
+            }
+        }
     }
 
     private void PlayBouncePlatformSound()
