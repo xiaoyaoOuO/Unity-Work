@@ -7,73 +7,53 @@ public enum SoundType
 {
     Running,
     WallJumping,
-    Attacking,
+    Attacking1,
+    Attacking2,
+    AttackSuccess,
     Dashing,
     BulletTime,
     Rolling,
-    Dead
+    Dead,
+    BouncePad,
+    BouncePlatform,
+    GemCollect,
+    Break,
+    DeathScreen,
+    TrapAttack,
+    BulletEXP
 }
 
-public class AudioManager
-{
-    private Dictionary<SoundType, AudioClip> soundClips;
-    public Queue<AudioSource> audioSourcePool;
-    public Dictionary<String, AudioClip> BGMs;
-    public AudioManager()
-    {
-        soundClips = new Dictionary<SoundType, AudioClip>();
-        audioSourcePool = new Queue<AudioSource>(20);
-
-        //Resources.LoadAll<AudioClip>("Sounds");
-    }
-
-    public AudioClip GetAudioClip(SoundType soundType)
-    {
-        if (soundClips.ContainsKey(soundType)) return soundClips[soundType];
-        else return null;
-    }
-
-    public AudioSource GetAudioSource()
-    {
-        if (audioSourcePool.Count > 0) return audioSourcePool.Dequeue();
-        else return null;
-    }
-
-    public void ReleaseAudioSource(AudioSource audioSource)
-    {
-        audioSourcePool.Enqueue(audioSource);
-    }
-
-    public void AddSoundClip(SoundType soundType, AudioClip audioClip)
-    {
-        if (!soundClips.ContainsKey(soundType)) soundClips.Add(soundType, audioClip);
-    }
-
-    public AudioClip GetBGM(String BGMName)
-    {
-        if (BGMs.ContainsKey(BGMName)) return BGMs[BGMName];
-        else return null;
-    }
-}
 
 public class SceneManager : MonoBehaviour, IEffectController, ISoundEffectController
 {
-    private AudioManager audioManager;
+    public AudioManager audioManager;
     private AudioSource BGMAudioSource;
+    public GameObject playerDashDust;
+    public GameObject playerJumpFX;
+    public GameObject playerLandFX;
+    public GameObject playerWallSlideFX;
+    public GameObject playerWallJumpFX;
+    public GameObject playerDashTrailFX;
     private string currentBGM;
-    private float BGMVolume;
+    private float BGMVolume { set { BGMAudioSource.volume = value; } get { return BGMAudioSource.volume; } }
     private float SoundEffectVolume;
 
     private void Awake()
     {
-        audioManager = new AudioManager();
-        BGMAudioSource = new AudioSource();
-        currentBGM = "";   //TODO: 播放BGM
-        BGMAudioSource.clip = audioManager.GetBGM(currentBGM);
-        BGMAudioSource.Play();
+        SoundEffectVolume = 1.0f; // Default sound effect volume
     }
     private void Start()
     {
+        audioManager = GetComponentInChildren<AudioManager>();
+        BGMAudioSource = audioManager.CreateAudioSource();
+        Debug.Log("AudioManager initialized with " + audioManager.BGMNames.Count + " BGM tracks.");
+        currentBGM = audioManager.BGMNames[0];   //TODO: 播放BGM
+        // Debug.Log("Current BGM: " + currentBGM);
+        // Debug.Log(BGMAudioSource);
+        BGMAudioSource.clip = audioManager.GetBGM(currentBGM);
+        BGMAudioSource.volume = BGMVolume;
+        BGMAudioSource.loop = true;
+        BGMAudioSource.Play();
     }
 
     public void CameraShake(Vector2 direction)
@@ -94,6 +74,7 @@ public class SceneManager : MonoBehaviour, IEffectController, ISoundEffectContro
     public AudioSource GetAudioSource()
     {
         AudioSource audioSource = audioManager.GetAudioSource();
+        if (audioSource == null) return null;
         audioSource.volume = SoundEffectVolume;
         return audioSource;
     }
@@ -127,6 +108,40 @@ public class SceneManager : MonoBehaviour, IEffectController, ISoundEffectContro
     public void StopBgm()
     {
         BGMAudioSource.Stop();
+    }
+
+    public GameObject PlayerDashFX(Vector3 position)
+    {
+        GameObject fx = Instantiate(playerDashDust, position, Quaternion.identity);
+        return fx;
+    }
+
+    public void PlayerJumpFX(Vector3 position)
+    {
+        Instantiate(playerJumpFX, position, Quaternion.identity);
+    }
+
+    public void PlayerLandFX(Vector3 position)
+    {
+        // Debug.Log("Player landed at position: " + position);
+        Instantiate(playerLandFX, position, Quaternion.identity);
+    }
+
+    public GameObject PlayerWallSlideFX(Vector3 position)
+    {
+        GameObject fx = Instantiate(playerWallSlideFX, position, Quaternion.identity);
+        return fx;
+    }
+
+    public void PlayerWallJumpFX(Vector3 position)
+    {
+        Instantiate(playerWallJumpFX, position, Quaternion.identity);
+    }
+
+    public GameObject PlayerDashTrailFX(Vector3 position)
+    {
+        GameObject fx = Instantiate(playerDashTrailFX, position, Quaternion.identity);
+        return fx;
     }
 }
 

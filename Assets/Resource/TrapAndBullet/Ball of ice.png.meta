@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: b3ad646307261ae4a9316b80005ee34c
+guid: f7da50614d5016447aed366fe899f581
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -63,16 +63,16 @@ TextureImporter:
   compressionQualitySet: 0
   textureFormatSet: 0
   ignorePngGamma: 0
-  applyGammaDecoding: 0
+  applyGammaDecoding: 1
   swizzle: 50462976
-  cookieLightType: 0
+  cookieLightType: 2
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -85,7 +85,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -111,8 +111,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1b4af02848258994d90aa81d9ef8be10
-      internalID: -1341299535
+      spriteID: b59522bec9a1e29418bb4b01622b2431
+      internalID: -44508344
       vertices: []
       indices: 
       edges: []
@@ -132,8 +132,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c9c880cb86507be4788aa2e9345286f9
-      internalID: -18997676
+      spriteID: 0506923514148ba40ab58468482929d7
+      internalID: 1317778717
       vertices: []
       indices: 
       edges: []
@@ -153,8 +153,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0def8ec63be917b44b6d52e65ab49671
-      internalID: 13695346
+      spriteID: 24ae3dd9973644b448f738b909da3d4f
+      internalID: -124473865
       vertices: []
       indices: 
       edges: []
@@ -174,8 +174,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7527846d925a97344bb189b4e9bfa410
-      internalID: 2013266696
+      spriteID: eca8a555e508d4d47a452d599d9692e8
+      internalID: 1309313978
       vertices: []
       indices: 
       edges: []
@@ -183,7 +183,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 67fa39d85c012e546972c8147e87eca6
+    spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []
     indices: 
@@ -191,10 +191,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Ball of ice_0: -1341299535
-      Ball of ice_1: -18997676
-      Ball of ice_2: 13695346
-      Ball of ice_3: 2013266696
+      Ball of ice_0: -44508344
+      Ball of ice_1: 1317778717
+      Ball of ice_2: -124473865
+      Ball of ice_3: 1309313978
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

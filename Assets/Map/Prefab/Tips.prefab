@@ -326,10 +326,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "A:\u5411\u5DE6\u79FB\u52A8\nD:\u5411\u53F3\u79FB\u52A8\n\u7A7A\u683C:\u8DF3\u8DC3"
+  m_text: "A:\nD:\u5411\u53F3\u79FB\u52A8\n\u7A7A\u683C:\u8DF3\u8DC3"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 1c015fa7797c87e4dbcca27491f592e0, type: 2}
-  m_sharedMaterial: {fileID: -6711129285748570244, guid: 1c015fa7797c87e4dbcca27491f592e0, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 5405c47b20c4af5449aebeeea7cd30e4, type: 2}
+  m_sharedMaterial: {fileID: 6423213317940349454, guid: 5405c47b20c4af5449aebeeea7cd30e4, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

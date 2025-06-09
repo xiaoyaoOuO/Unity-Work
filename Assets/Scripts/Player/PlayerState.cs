@@ -12,6 +12,7 @@ public class PlayerState
     {
         this.player = player;
         this.maxHealth = maxHealth;
+        currentHealth = maxHealth;
     }
     public void OnHit()
     {
@@ -20,6 +21,7 @@ public class PlayerState
         if (currentHealth <= 0)
         {
             Debug.Log("Player is dead");        //TODO : 死亡界面
+            player.PlayerDie();
         }
         
     }

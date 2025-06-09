@@ -3,7 +3,12 @@ using UnityEngine;
 public class PlayerDashAttackState : IState {
     private bool attackEnd;
     private bool AttackUp;
-    public PlayerDashAttackState(Player player) : base(player) {
+
+    public AudioSource audioSource;
+    public AudioClip dashAttackSound;
+    public bool hasPlaySound = false;
+    public PlayerDashAttackState(Player player) : base(player)
+    {
         stateName = "DashAttack";
         state = State.DashAttack;
     }
@@ -13,11 +18,32 @@ public class PlayerDashAttackState : IState {
             attackEnd = false;
             return State.Idle;
         }
+
+        if (isAttackTriggered && !hasPlaySound)
+        {
+            if (isAttackSuccess)
+            {
+                dashAttackSound = Game.instance.sceneManager.audioManager.GetAudioClip(SoundType.AttackSuccess);
+            }
+            audioSource.PlayOneShot(dashAttackSound);
+            hasPlaySound = true;
+            Game.instance.sceneManager.audioManager.ReleaseAudioSource(audioSource);
+            audioSource = null;
+        }
+
         return state;
     }
 
     public override void OnEnter() {
         base.OnEnter();
+
+        hasPlaySound = false;
+        isAttackTriggered = false;
+        isAttackSuccess = false;
+
+        dashAttackSound = Game.instance.sceneManager.audioManager.GetAudioClip(SoundType.Attacking2);
+        audioSource = Game.instance.sceneManager.audioManager.GetAudioSource();
+
         player.attackTimer = player.attackCooldown; // Reset the attack timer
         this.AttackUp = player.dashDirection.y >  0 && player.dashDirection.x == 0;
         player.SetAnimation("DashAttackUp",this.AttackUp); 

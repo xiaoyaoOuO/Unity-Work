@@ -12,6 +12,7 @@ public class PlayerJumpState : IState
     {
         base.OnEnter();
         player.rb.velocity = new Vector2(player.rb.velocity.x, player.jumpForce); // Set the player's velocity to the jump force in the y direction
+        player.effectController.PlayerJumpFX(player.animator.transform.position);
     }
 
     public override State OnUpdate()
@@ -27,10 +28,13 @@ public class PlayerJumpState : IState
         { // If the player presses the attack button, change to the attack state
             return State.Attack;
         }
-        if(player.IsGrounded()) // If the player is grounded, change to the idle state
+        if (player.IsGrounded())
+        {
+            player.effectController.PlayerLandFX(player.animator.transform.position);
             return State.Idle;
-        if(player.rb.velocity.y <0)
-            return State.Air;
+        }
+        if (player.rb.velocity.y < 0)
+                return State.Air;
         player.SetAnimation("yVelocity", player.rb.velocity.y);
         return state;
     }

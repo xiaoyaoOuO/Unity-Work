@@ -1,13 +1,19 @@
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
 
 public class PlayerWallIdleState : IState
 {
+    private GameObject dust;
     public PlayerWallIdleState(Player player) : base(player)
     {
         this.stateName = "WallIdle";
         this.state = State.WallIdle;
+    }
+
+    public override void OnEnter()
+    {
+        base.OnEnter();
+        dust = player.effectController.PlayerWallSlideFX(player.animator.transform.position);
     }
 
     public override State OnUpdate()
@@ -22,5 +28,11 @@ public class PlayerWallIdleState : IState
         }
         player.ZeroVelocity();
         return state;
+    }
+
+    public override void OnExit()
+    {
+        base.OnExit();
+        GameObject.Destroy(dust); 
     }
 }

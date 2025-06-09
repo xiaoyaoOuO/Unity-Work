@@ -7,6 +7,10 @@ public class PlayerRollState : IState
 {
     private bool RollAttack;
     private bool CanChangeToAttack;
+    private Vector2 colliderDefaultScale;
+    private Vector2 colliderDefaultOffset;
+    private float colliderYOffset = -0.4f;          //写死的数据
+    private float colliderYSize = 0.7f;
     public PlayerRollState(Player player) : base(player)
     {
         state = State.Roll;
@@ -16,12 +20,26 @@ public class PlayerRollState : IState
     public override void OnEnter()
     {
         base.OnEnter();
+        //翻滚尘土
+        GameObject dust = player.effectController.PlayerDashFX(player.animator.transform.position); //和dash共用一个特效
+        if (dust != null) {
+           if(player.facing == Facing.Left) {
+                dust.transform.Rotate(0, 180,0);
+           }
+        }
+
+
         int direction = player.facing == Facing.Right ? 1 : -1;
         Vector2 newSpeed = new Vector2(Math.Max(player.rb.velocity.x, player.rollSpeed), 0);
         player.rb.velocity = newSpeed * direction;
         triggerCalled = false; // Reset the trigger called flag
         RollAttack = false;
         CanChangeToAttack = false;
+
+        colliderDefaultScale = player.boxCollider.size; 
+        colliderDefaultOffset = player.boxCollider.offset;
+        player.boxCollider.size = new Vector2(colliderDefaultScale.x, colliderYSize); 
+        player.boxCollider.offset = new Vector2(player.boxCollider.offset.x, colliderYOffset); 
     }
 
     public override State OnUpdate()
@@ -30,8 +48,9 @@ public class PlayerRollState : IState
         {
             RollAttack = true;
         }
-        if(RollAttack) {
-            return State.RollAttack; 
+        if (RollAttack)
+        {
+            return State.RollAttack;
         }
         if (triggerCalled)
         {
@@ -48,5 +67,12 @@ public class PlayerRollState : IState
     public override void FirstAnimationTrigger()
     {
         CanChangeToAttack = true;
+    }
+
+    public override void OnExit()
+    {
+        base.OnExit();
+        player.boxCollider.size = colliderDefaultScale;
+        player.boxCollider.offset = colliderDefaultOffset;
     }
 }
