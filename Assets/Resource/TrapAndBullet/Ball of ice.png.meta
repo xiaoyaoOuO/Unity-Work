@@ -111,8 +111,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 44cda2183d71c8b44befd3a5bdb047e5
-      internalID: -280461480
+      spriteID: b59522bec9a1e29418bb4b01622b2431
+      internalID: -44508344
       vertices: []
       indices: 
       edges: []
@@ -132,8 +132,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: dcbee173681738143b32b78316b0789f
-      internalID: 658400817
+      spriteID: 0506923514148ba40ab58468482929d7
+      internalID: 1317778717
       vertices: []
       indices: 
       edges: []
@@ -153,8 +153,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 015b813a5fb7f9d4e92cc9750a7852ff
-      internalID: -159572013
+      spriteID: 24ae3dd9973644b448f738b909da3d4f
+      internalID: -124473865
       vertices: []
       indices: 
       edges: []
@@ -174,8 +174,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 61b9cad71dc47ab4d8065de28b0a0002
-      internalID: 802307726
+      spriteID: eca8a555e508d4d47a452d599d9692e8
+      internalID: 1309313978
       vertices: []
       indices: 
       edges: []
@@ -191,10 +191,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Ball of ice_0: -280461480
-      Ball of ice_1: 658400817
-      Ball of ice_2: -159572013
-      Ball of ice_3: 802307726
+      Ball of ice_0: -44508344
+      Ball of ice_1: 1317778717
+      Ball of ice_2: -124473865
+      Ball of ice_3: 1309313978
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

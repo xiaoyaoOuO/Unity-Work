@@ -10,6 +10,12 @@ public class Bullet : MonoBehaviour
     private float lifeTime = 2f; // 子弹存在时间（秒）
     private float timer = 0f;
     bool flipped=false;
+    private Animator Ani;
+
+    private AudioSource BulletEXPAudioSource;
+    private AudioClip BulletEXPAudioClip;
+
+    public Player player;
     public void SetDirection(Vector2 dir)
     {
         direction = dir;
@@ -18,6 +24,8 @@ public class Bullet : MonoBehaviour
     {
         flipped = false;
         tag = "enemyAttack";
+        Ani = GetComponentInChildren<Animator>();
+        player = GetComponent<Player>();
     }
     void Update()
     {
@@ -37,11 +45,12 @@ public class Bullet : MonoBehaviour
             if (other.CompareTag("Player"))
             {
                 other.GetComponent<Player>().OnHit();
-
-                Destroy(this.gameObject);
+                Explo();
+                Destroy(this.gameObject,0.5f);
             }
             else if (other.gameObject.layer == LayerMask.NameToLayer("Ground")) {
-                Destroy(this.gameObject);
+                Explo();
+                Destroy(this.gameObject, 0.5f);
             }
 
         }
@@ -56,12 +65,13 @@ public class Bullet : MonoBehaviour
                    //演示视频用，后续改回来
                     enemy.OnHit(100); // 假设伤害值为100
                 }
-
-                Destroy(this.gameObject);
+                Explo();
+                Destroy(this.gameObject, 0.5f);
             }
             else if (other.gameObject.layer == LayerMask.NameToLayer("Ground"))
             {
-                Destroy(this.gameObject);
+                Explo();
+                Destroy(this.gameObject, 0.5f);
             }
         }
     }
@@ -79,5 +89,20 @@ public class Bullet : MonoBehaviour
         //GameObject.Find("FramePause").GetComponent<FramePause>().BeHitPause(12);//渲染画面->顿帧->还原画面
         //GameObject.Find("Impulse").GetComponent<ImpulseTest>().Impulse();//震动屏幕
         Game.instance.cameraManager.Shake(direction.normalized, 0.2f);
+    }
+
+    void Explo() {
+        speed = 0;
+        Ani.SetTrigger("EXP");
+        //PlayExploAudio();
+    }
+
+    private void PlayExploAudio()
+    {
+        BulletEXPAudioSource = player.soundEffectController.GetAudioSource();
+        BulletEXPAudioClip = player.soundEffectController.GetSoundClip(SoundType.BulletEXP);
+        BulletEXPAudioSource.PlayOneShot(BulletEXPAudioClip);
+        player.soundEffectController.ReleaseAudioSource(BulletEXPAudioSource);
+        BulletEXPAudioSource = null;
     }
 }

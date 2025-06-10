@@ -283,8 +283,8 @@ public class Player : MonoBehaviour, ISaveManager
 
     public void OnHit()
     {
-        playerState.OnHit();
-        game_UI.UpdateHealthBars();
+        //playerState.OnHit();
+        //game_UI.UpdateHealthBars();
     }
 
     public bool HeadWallCheck()

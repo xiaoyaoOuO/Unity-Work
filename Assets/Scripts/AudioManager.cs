@@ -110,5 +110,11 @@ public class AudioManager : MonoBehaviour
 
         AudioClip death_screen = Resources.Load<AudioClip>("Audio/PlayerSoundEffect/death_screen");
         AddSoundClip(SoundType.DeathScreen, death_screen);
+
+        AudioClip TrapAttackClip = Resources.Load<AudioClip>("Audio/Enemy/TrapAttackClip");
+        AddSoundClip(SoundType.TrapAttack, TrapAttackClip);
+
+        AudioClip BulletEXPClip = Resources.Load<AudioClip>("Audio/Enemy/BulletEXPClip");
+        AddSoundClip(SoundType.BulletEXP, BulletEXPClip);
     }
 }
