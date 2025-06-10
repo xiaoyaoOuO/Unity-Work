@@ -120,7 +120,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 100}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 118
+  controlID: 133
   draggingID: 0
 --- !u!114 &6
 MonoBehaviour:
@@ -146,7 +146,7 @@ MonoBehaviour:
   m_MinSize: {x: 100, y: 100}
   m_MaxSize: {x: 8096, y: 16192}
   vertical: 1
-  controlID: 21
+  controlID: 29
   draggingID: 0
 --- !u!114 &7
 MonoBehaviour:
@@ -226,7 +226,7 @@ MonoBehaviour:
   m_MinSize: {x: 100, y: 100}
   m_MaxSize: {x: 8096, y: 16192}
   vertical: 1
-  controlID: 319
+  controlID: 87
   draggingID: 0
 --- !u!114 &10
 MonoBehaviour:
@@ -763,7 +763,7 @@ MonoBehaviour:
   m_Position:
     m_Target: {x: 38.009914, y: 15.964506, z: -0.6584469}
     speed: 2
-    m_Value: {x: 40.928226, y: 15.618462, z: -0.7112769}
+    m_Value: {x: 38.009914, y: 15.964506, z: -0.6584469}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -815,7 +815,7 @@ MonoBehaviour:
   m_Size:
     m_Target: 112.115974
     speed: 2
-    m_Value: 117.398926
+    m_Value: 112.115974
   m_Ortho:
     m_Target: 1
     speed: 2
@@ -1266,9 +1266,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 32500100
+      m_SelectedIDs: da160000
       m_LastClickedID: 0
-      m_ExpandedIDs: f6c9ffff76caffffc4caffff2ecbffffaecbffff4ecdfffff4cdffff7aceffff32d1ffff3ed4ffff8cd5ffff1cfbffff
+      m_ExpandedIDs: 1cfbffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -1337,7 +1337,7 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Scenes
+    - Assets/Scripts/Component
     m_Globs: []
     m_OriginalText: 
     m_ImportLogFlags: 0
@@ -1345,15 +1345,15 @@ MonoBehaviour:
   m_ViewMode: 1
   m_StartGridSize: 50
   m_LastFolders:
-  - Assets/Scenes
+  - Assets/Scripts/Component
   m_LastFoldersGridSize: 50
   m_LastProjectPath: "F:\\Unity\\\u65B0\u8F6F\u4EF6\u5DE5\u7A0B\u9879\u76EE\\Unity-Work"
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 334.2}
-    m_SelectedIDs: 04500100
-    m_LastClickedID: 86020
+    scrollPos: {x: 0, y: 240}
+    m_SelectedIDs: 38830000
+    m_LastClickedID: 33592
     m_ExpandedIDs: 00000000f2820000f4820000f6820000f8820000fa820000fc820000fe820000008300000283000004830000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
