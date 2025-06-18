@@ -1,7 +1,4 @@
 using UnityEngine;
-using static Unity.UOS.COSXML.Model.Tag.RestoreConfigure;
-using static UnityEngine.GraphicsBuffer;
-using System.Collections;
 
 public class Bullet : MonoBehaviour
 {
