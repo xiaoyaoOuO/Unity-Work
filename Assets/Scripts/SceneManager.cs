@@ -18,7 +18,9 @@ public enum SoundType
     BouncePlatform,
     GemCollect,
     Break,
-    DeathScreen
+    DeathScreen,
+    TrapAttack,
+    BulletEXP
 }
 
 

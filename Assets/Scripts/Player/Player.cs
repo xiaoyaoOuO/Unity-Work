@@ -46,7 +46,7 @@ public class Player : MonoBehaviour, ISaveManager
     public bool canGrab { get { return GameInput.IsGrabPressed() && HeadWallCheck(); } } // 是否可以抓墙
     public bool canAttack { get { return attackTimer <= 0 && GameInput.IsAttackPressed(); } }
     public bool canDash { get { return dashCount > 0 && GameInput.IsDashPressed(); } }
-    public bool canJump { get { return GameInput.IsJumpPressed() &&  jumpCheck.AllowJump() && !HaveWallAbove(); } }
+    public bool canJump { get { return GameInput.IsJumpPressed() && jumpCheck.AllowJump() && !HaveWallAbove(); } }
     public bool canIntoBulletTime { get { return GameInput.IsBulletTimePressed() && BulletTimeCooldownTimer >= BulletTimeDuration; } }
     public bool canRoll { get { return GameInput.IsRollPressed() && IsGrounded(); } }
     public Collider2D UpAttackCollider; // Reference to the UpAttack collider
@@ -80,6 +80,10 @@ public class Player : MonoBehaviour, ISaveManager
     public SettingUI settingUI;
 
     public JumpCheck jumpCheck;
+    void Awake()
+    {
+        Init();
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -340,7 +344,7 @@ public class Player : MonoBehaviour, ISaveManager
         AudioSource deathAudioSource = Game.instance.sceneManager.GetAudioSource();
         deathAudioSource.PlayOneShot(deathSound, 0.5f);
         Game.instance.sceneManager.ReleaseAudioSource(deathAudioSource);
-        
+
         Game.instance.SaveGame();
         // UnityEngine.SceneManagement.SceneManager.LoadScene("Main Menu");
     }
@@ -372,5 +376,28 @@ public class Player : MonoBehaviour, ISaveManager
     public void SetCheckPoint(Vector3 position)
     {
         CheckPointPosition = position;
+    }
+
+    private void Init()
+    {
+        this.speed = ConStantSetting.PlayerSpeed;
+        this.jumpForce = ConStantSetting.PlayerJumpForce;
+        this.acceleration = ConStantSetting.PlayerAcceleration;
+        this.gravity = ConStantSetting.PlayerGravity;
+        this.jumpGraceTime = ConStantSetting.PlayerJumpGraceTime;
+        this.attackCooldown = ConStantSetting.PlayerAttackCooldown;
+        this.dashSpeed = ConStantSetting.PlayerDashSpeed;
+        this.upDashSpeed = ConStantSetting.PlayerDashUpSpeed;
+        this.dashDuration = ConStantSetting.PlayerDashDuration;
+        this.maxDashCount = (int)ConStantSetting.PlayerMaxDashCount;
+        this.trailFXInterval = ConStantSetting.trailFXInterval;
+        this.BulletTimeDuration = ConStantSetting.PlayerBulletTimeDuration;
+        this.BulletTimeRefillSpeed = ConStantSetting.PlayerBulletTimeRefillSpeed;
+        this.rollSpeed = ConStantSetting.PlayerRollSpeed;
+        this.rollCooldown = ConStantSetting.PlayerRollCooldown;
+        this.wallSlideSpeed = ConStantSetting.PlayerWallClimbSpeed;
+        this.wallJumpForce = ConStantSetting.PlayerWallBoostForceY;
+        this.wallJumpBoostSpeed = ConStantSetting.PlayerWallBoostForceX;
+        this.wallJumpDuration = ConStantSetting.PlayerWallJumpDuration;
     }
 }

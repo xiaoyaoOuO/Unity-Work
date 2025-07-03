@@ -1,7 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
 using System.Linq;
-using UnityEditor.SearchService;
 
 public class DeadScreenController : MonoBehaviour
 {

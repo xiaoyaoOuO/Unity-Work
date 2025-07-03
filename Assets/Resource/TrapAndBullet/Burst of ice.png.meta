@@ -95,18 +95,178 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: Burst of ice_0
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 816
+        width: 34
+        height: 30
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b66b825b0acda454da30c1a66395a73b
+      internalID: 1107280992
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Burst of ice_1
+      rect:
+        serializedVersion: 2
+        x: 44
+        y: 682
+        width: 40
+        height: 42
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 09df49b85d2b89b4eb75fa4b0f6b3fa3
+      internalID: 780750979
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Burst of ice_2
+      rect:
+        serializedVersion: 2
+        x: 36
+        y: 546
+        width: 56
+        height: 56
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4cdae34f9005d354da0da2298bd93799
+      internalID: -1404819492
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Burst of ice_5
+      rect:
+        serializedVersion: 2
+        x: 31
+        y: 412
+        width: 68
+        height: 68
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 490aa339ac668fd4ca1735c8ba0865d8
+      internalID: 999637305
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Burst of ice_11
+      rect:
+        serializedVersion: 2
+        x: 26
+        y: 278
+        width: 76
+        height: 78
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2e47738a6a011af428b88444bfe3765c
+      internalID: 1350258477
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Burst of ice_28
+      rect:
+        serializedVersion: 2
+        x: 23
+        y: 147
+        width: 86
+        height: 84
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0908f4eaa6597c74ab2d07da362f277f
+      internalID: -777431349
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 92244b1f619eb2d4a93e34c628043fcb
     internalID: 0
     vertices: []
     indices: 
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Burst of ice_0: 1107280992
+      Burst of ice_1: 780750979
+      Burst of ice_10: 126313060
+      Burst of ice_11: 1350258477
+      Burst of ice_12: 756806761
+      Burst of ice_13: -803262387
+      Burst of ice_14: 85325318
+      Burst of ice_15: -1996449909
+      Burst of ice_16: -1340775876
+      Burst of ice_17: -361562853
+      Burst of ice_18: 301793431
+      Burst of ice_19: 1812590541
+      Burst of ice_2: -1404819492
+      Burst of ice_20: -670154925
+      Burst of ice_21: 983829309
+      Burst of ice_22: -1676331420
+      Burst of ice_23: -1612055011
+      Burst of ice_24: 44551760
+      Burst of ice_25: 513032102
+      Burst of ice_26: -128325212
+      Burst of ice_27: 490134559
+      Burst of ice_28: -777431349
+      Burst of ice_29: 730781752
+      Burst of ice_3: -1357523330
+      Burst of ice_30: -2117999864
+      Burst of ice_31: -1968276029
+      Burst of ice_32: -350754939
+      Burst of ice_33: 1364411243
+      Burst of ice_4: 1404620740
+      Burst of ice_5: 999637305
+      Burst of ice_6: -2127825911
+      Burst of ice_7: -2144048555
+      Burst of ice_8: 2070525963
+      Burst of ice_9: -714089145
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

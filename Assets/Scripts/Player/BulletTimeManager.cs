@@ -40,13 +40,13 @@ public class BulletTimeManager :MonoBehaviour
     public void Update() {
         if (isBulletTime) { // 如果是子弹时间，显示屏幕图像
             Color color = ScreenImage.color; // 获取屏幕图像的颜色
-            color.a = Mathf.MoveTowards(color.a, 0.3f, Time.deltaTime); // 逐渐增加透明度
+            color.a = Mathf.MoveTowards(color.a, 0.3f, 2*Time.deltaTime); // 逐渐增加透明度
             ScreenImage.color = color; 
 
             Time.timeScale = Mathf.MoveTowards(Time.timeScale, BulletTimeScale, Time.unscaledDeltaTime); // 逐渐增加时间缩放比例
         }else{
             Color color = ScreenImage.color; // 获取屏幕图像的颜色
-            color.a = Mathf.MoveTowards(color.a, 0f, Time.deltaTime); // 逐渐减少透明度
+            color.a = Mathf.MoveTowards(color.a, 0f, 2*Time.deltaTime); // 逐渐减少透明度
             ScreenImage.color = color; 
         }
     }
