@@ -4,22 +4,22 @@ using System.Collections;
 [RequireComponent(typeof(Rigidbody2D), typeof(BoxCollider2D))]
 public class BouncePlatform : MonoBehaviour
 {
-    [Header("·����")]
+    [Header("目标位置")]
     public Vector3 offset = new Vector3(0, 5, 0);
 
-    [Header("��������")]
+    [Header("移动参数")]
     public float delayBeforeMove = 1f;
     public float moveDuration = 0.5f;
     public float stayDuration = 1f;
     public float returnDuration = 0.8f;
 
-    [Header("��� Tag")]
+    [Header("玩家Tag")]
     public string playerTag = "Player";
 
     private Vector3 startPos;
     private Vector3 endPos;
     private bool isMoving = false;
-    private bool isReturning = false; // ���ƽ̨�Ƿ��ڻس�
+    private bool isReturning = false;
     private Rigidbody2D rb;
     private BoxCollider2D boxCol;
 
@@ -41,7 +41,6 @@ public class BouncePlatform : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D col)
     {
-        // ֻ����Ҳ���ƽ̨ʱ����һ���ƶ�����
         if (!isMoving && col.collider.CompareTag(playerTag))
         {
             StartCoroutine(MoveSequence());
@@ -52,19 +51,19 @@ public class BouncePlatform : MonoBehaviour
     {
         isMoving = true;
 
-        // �ӳ�
+        // 延时后触发
         yield return new WaitForSeconds(delayBeforeMove);
 
-        // ������Ч
+        // 播放音效
         PlayBouncePlatformSound();
 
-        // ȥ��
+        // 开始移动
         yield return StartCoroutine(MoveTo(endPos, moveDuration));
 
-        // ͣ��
+        // 停留一段时间
         yield return new WaitForSeconds(stayDuration);
 
-        // �س̣��������س̡���ǣ���ִ���ƶ���������رձ��
+        // 返回起始位置
         isReturning = true;
         yield return StartCoroutine(MoveTo(startPos, returnDuration));
         isReturning = false;
@@ -84,9 +83,10 @@ public class BouncePlatform : MonoBehaviour
             Vector3 newPos = Vector3.Lerp(initial, target, t);
             rb.MovePosition(newPos);
 
-            // ������ڻس̣����ƽ̨�·��Ƿ������
             if (isReturning)
             {
+                // 检查是否有玩家被压在平台下方
+                CheckCrush();
             }
 
             yield return null;
@@ -96,22 +96,19 @@ public class BouncePlatform : MonoBehaviour
 
     private void CheckCrush()
     {
-        // ���ƽ̨�·��Ƿ�����ң�ʹ��һ���ܱ��ľ��ο�
         float detectionHeight = 0.1f;
-        // ���������е�ƽ̨����
         float platformWidth = boxCol.bounds.size.x;
-        // ����������ģ���ƽ̨�·�������ƽ̨�ױ�
+        
         Vector2 boxCenter = (Vector2)transform.position
                             + Vector2.down * (boxCol.bounds.extents.y + detectionHeight / 2f);
         Vector2 boxSize = new Vector2(platformWidth, detectionHeight);
 
-        // ��ȡ�����ڸ������ڵ� Collider2D
         Collider2D[] hits = Physics2D.OverlapBoxAll(boxCenter, boxSize, 0f);
         foreach (var hit in hits)
         {
             if (hit.CompareTag(playerTag))
             {
-                // ��ұ�ѹס������ OnHit 5 ��
+                // 找到玩家并触发击中效果
                 Player player = hit.GetComponent<Player>();
                 if (player != null)
                 {
@@ -121,7 +118,7 @@ public class BouncePlatform : MonoBehaviour
                     }
                 }
 
-                // �Ѿ�ѹ����Һ󣬽����������
+                // 停止返回
                 isReturning = false;
                 break;
             }
@@ -130,16 +127,15 @@ public class BouncePlatform : MonoBehaviour
 
     private void PlayBouncePlatformSound()
     {
-        // ��ȡ��Ƶ��Դ
         if (bouncePlatformAudioClip == null)
         {
             bouncePlatformAudioClip = soundEffectController.GetSoundClip(SoundType.BouncePlatform);
         }
-        // �Ӷ���ػ�ȡ��ƵԴ
+
         if (soundEffectController != null && bouncePlatformAudioClip != null)
         {
             bouncePlatformAudioSource = soundEffectController.GetAudioSource();
-            // ���ò�����
+
             if (bouncePlatformAudioSource != null)
             {
                 bouncePlatformAudioSource.PlayOneShot(bouncePlatformAudioClip);
@@ -150,9 +146,9 @@ public class BouncePlatform : MonoBehaviour
 
     private IEnumerator ReleaseAfterPlayback()
     {
-        // �ȴ���Ƶ�������
+
         yield return new WaitForSeconds(bouncePlatformAudioClip.length);
-        // �ͷ���ƵԴ
+
         if (bouncePlatformAudioSource != null)
         {
             soundEffectController.ReleaseAudioSource(bouncePlatformAudioSource);

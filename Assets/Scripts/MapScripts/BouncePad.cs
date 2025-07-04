@@ -38,7 +38,7 @@ public class BouncePad2D : MonoBehaviour
             StartCoroutine(BounceAnimation());
 
             // 播放音效
-            // PlayBounceSound();
+            PlayBounceSound();
         }
     }
 
@@ -61,7 +61,7 @@ public class BouncePad2D : MonoBehaviour
             yield return null;
         }
 
-        // 确保精准复位
+        // 确保复位
         transform.position = originalPosition;
         isActive = false;
     }

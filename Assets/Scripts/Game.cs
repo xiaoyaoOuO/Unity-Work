@@ -7,6 +7,7 @@ public class GameData
 {
     public Vector3 CheckPointPosition; // 检查点位置
     public int PlayerHealth; // 玩家生命值
+    public int GemCount; // 宝石数量
 }
 
 

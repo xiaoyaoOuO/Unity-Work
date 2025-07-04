@@ -19,22 +19,22 @@ public class GemCollectible : MonoBehaviour
     {
         if (other.CompareTag("Player") && !isCollected)
         {
-            // 1. UI����
+            // 1. 增加数量
             GemUIManager.Instance.AddGem(1);
 
-            // 2. �����ռ�����
+            // 2. 播放动画
             isCollected = true;
             animator.Play("GemCollectAnim");
-            Destroy(gameObject, 1.75f); // ���ݶ���ʱ������
+            Destroy(gameObject, 1.75f); 
             other.GetComponent<Player>().RefillDash();
 
-            // 3. �����ռ���Ч
+            // 3. 播放音效
             PlayGemCollectSound();
 
-            // 4. ���ٶ���
+            // 4. 销毁物体
             Destroy(gameObject, 0.94f);
 
-            // 5. ������ҵĳ�̴���
+            // 5. 更新冲刺次数
             Player player = other.GetComponent<Player>();
             if (player != null)
             {
@@ -45,18 +45,15 @@ public class GemCollectible : MonoBehaviour
 
     private void PlayGemCollectSound()
     {
-        // ��ȡ��Ƶ��Դ
         if (gemCollectAudioClip == null)
         {
             gemCollectAudioClip = soundEffectController.GetSoundClip(SoundType.GemCollect);
         }
 
-        // �Ӷ���ػ�ȡ��ƵԴ
         if (soundEffectController != null && gemCollectAudioClip != null)
         {
             gemCollectAudioSource = soundEffectController.GetAudioSource();
 
-            // ���ò�����
             if (gemCollectAudioSource != null)
             {
                 gemCollectAudioSource.PlayOneShot(gemCollectAudioClip);
@@ -72,10 +69,8 @@ public class GemCollectible : MonoBehaviour
 
     private System.Collections.IEnumerator ReleaseAfterPlayback()
     {
-        // �ȴ���Ƶ�������
         yield return new WaitForSeconds(gemCollectAudioClip.length);
 
-        // �ͷ���Դ
         if (gemCollectAudioSource!= null)
         {
             soundEffectController.ReleaseAudioSource(gemCollectAudioSource);

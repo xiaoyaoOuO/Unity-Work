@@ -333,6 +333,7 @@ public class Player : MonoBehaviour, ISaveManager
 
     public IEnumerator Die()
     {
+        Game.instance.SaveGame();
         DeadScreen.gameObject.SetActive(true);
         float t = 0;
         for (t = 0; t < 1; t += Time.deltaTime)
@@ -345,7 +346,6 @@ public class Player : MonoBehaviour, ISaveManager
         deathAudioSource.PlayOneShot(deathSound, 0.5f);
         Game.instance.sceneManager.ReleaseAudioSource(deathAudioSource);
 
-        Game.instance.SaveGame();
         // UnityEngine.SceneManagement.SceneManager.LoadScene("Main Menu");
     }
 
@@ -358,6 +358,7 @@ public class Player : MonoBehaviour, ISaveManager
     {
         gameData.CheckPointPosition = CheckPointPosition; // 保存检查点位置
         gameData.PlayerHealth = playerState.currentHealth; // 保存玩家生命值
+        gameData.GemCount = GemUIManager.Instance.currentGemCount; // 保存宝石数量
     }
 
     public void LoadGameData(GameData gameData)
@@ -369,6 +370,14 @@ public class Player : MonoBehaviour, ISaveManager
         {
             playerState.currentHealth = playerState.maxHealth; // 如果生命值小于等于0，则重置为最大生命值
         }
+
+        // 加载宝石数量
+        if (GemUIManager.Instance != null)
+        {
+            GemUIManager.Instance.currentGemCount = gameData.GemCount;
+            GemUIManager.Instance.gemCountText.text = "x " + gameData.GemCount;
+        }
+
         transform.position = CheckPointPosition + new Vector3(0, 2, 0);
         game_UI.UpdateHealthBars();
     }

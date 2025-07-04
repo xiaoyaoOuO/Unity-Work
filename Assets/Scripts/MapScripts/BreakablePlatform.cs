@@ -5,7 +5,7 @@ using System.Collections;
 public class BreakablePlatform : MonoBehaviour
 {
     [Header("平台重现时间")]
-    public float respawnTime = 3f;     // 重生时间
+    public float respawnTime = 3f;  // 重生时间
 
     // 组件引用
     private Animator anim;

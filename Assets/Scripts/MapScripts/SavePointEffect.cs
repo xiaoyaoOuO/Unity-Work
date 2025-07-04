@@ -4,7 +4,7 @@ public class SavePointEffect : MonoBehaviour
 {
     public SpriteRenderer glowE; // 蓝光E的Sprite Renderer
     public ParticleSystem glowParticles; // 粒子引用
-    private float fadeSpeed = 1.5f; // 淡入速度，可调整
+    private float fadeSpeed = 1.5f; // 淡入速度
 
     private void Start()
     {

@@ -16,7 +16,7 @@ public class HiddenZone : MonoBehaviour
     private List<SpriteRenderer> spriteRenderers = new List<SpriteRenderer>();
     private List<Tilemap> tilemaps = new List<Tilemap>();
     private List<Collider2D> colliders = new List<Collider2D>();
-    private List<ParticleSystem> particleSystems = new List<ParticleSystem>(); // 新增粒子系统列表
+    private List<ParticleSystem> particleSystems = new List<ParticleSystem>();
 
     private bool isInitialized = false;
 
@@ -53,7 +53,7 @@ public class HiddenZone : MonoBehaviour
             colliders.Add(col);
         }
 
-        // 4. 新增：收集并关闭所有粒子系统
+        // 4. 收集并关闭所有粒子系统
         foreach (var ps in hiddenRegion.GetComponentsInChildren<ParticleSystem>(true))
         {
             particleSystems.Add(ps);
@@ -73,7 +73,7 @@ public class HiddenZone : MonoBehaviour
         foreach (var col in colliders)
             col.enabled = true;
 
-        // 新增：启用所有粒子系统
+        // 启用所有粒子系统
         foreach (var ps in particleSystems)
         {
             ps.gameObject.SetActive(true);

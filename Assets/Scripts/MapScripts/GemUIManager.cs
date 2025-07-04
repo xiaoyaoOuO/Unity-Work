@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class GemUIManager : MonoBehaviour
+public class GemUIManager : MonoBehaviour, ISaveManager
 {
     public static GemUIManager Instance { get; private set; }
 
@@ -11,7 +11,8 @@ public class GemUIManager : MonoBehaviour
     public Image gemIcon;
     public TextMeshProUGUI gemCountText;
 
-    private int currentGemCount = 0;
+    public int currentGemCount = 0;
+    public int CurrentGemCount => currentGemCount;
 
     private void Awake()
     {
@@ -37,5 +38,16 @@ public class GemUIManager : MonoBehaviour
         if (gemCountText != null)
             gemCountText.text = "x " + currentGemCount;
 
+    }
+    public void SaveGameData(GameData gameData)
+    {
+        gameData.GemCount = currentGemCount;
+    }
+
+    public void LoadGameData(GameData gameData)
+    {
+        currentGemCount = gameData.GemCount;
+        if (gemCountText != null)
+            gemCountText.text = "x " + currentGemCount;
     }
 }

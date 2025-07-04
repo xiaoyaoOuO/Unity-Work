@@ -42,8 +42,6 @@ public class FallingStone : MonoBehaviour
             StartCoroutine(ShakeBeforeFall());
         }
     }
-
-    // 新增的摇晃协程
     private IEnumerator ShakeBeforeFall()
     {
         float elapsed = 0f;
@@ -69,7 +67,6 @@ public class FallingStone : MonoBehaviour
 
     private IEnumerator CollapseAndRestore()
     {
-        // 保留原来的延迟逻辑
         yield return new WaitForSeconds(collapseDelay);
 
         rb.bodyType = RigidbodyType2D.Dynamic;

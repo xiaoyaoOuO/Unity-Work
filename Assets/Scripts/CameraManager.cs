@@ -25,6 +25,9 @@ public class CameraManager : MonoBehaviour, ICamera
         new Keyframe(1, 0, 0, 0)
     });
 
+    [Header("位置修正")]
+    [SerializeField] private float TeleportThreshold = 5f;
+
     private Coroutine roomTransitionCoroutine;
 
     public void Shake(Vector2 dir, float duration)
@@ -45,23 +48,77 @@ public class CameraManager : MonoBehaviour, ICamera
         offset = Vector2.zero;
     }
 
+    private void SnapToPosition(Vector2 targetPosition)
+    {
+        // 计算边界限制
+        float halfW = mainCamera.orthographicSize * mainCamera.aspect;
+        float halfH = mainCamera.orthographicSize;
+
+        // 应用边界限制
+        float clampedX = Mathf.Clamp(
+            targetPosition.x,
+            bounds.min.x + halfW,
+            bounds.max.x - halfW
+        );
+        float clampedY = Mathf.Clamp(
+            targetPosition.y,
+            bounds.min.y + halfH,
+            bounds.max.y - halfH
+        );
+
+        // 直接设置摄像机位置
+        Vector3 newPosition = new Vector3(
+            clampedX,
+            clampedY,
+            mainCamera.transform.position.z
+        );
+        mainCamera.transform.position = newPosition;
+    }
+
     public void SetCameraPosition(Vector2 pos)
     {
-        mainCamera.transform.position = new Vector3(pos.x + offset.x, pos.y + offset.y, mainCamera.transform.position.z);
+        mainCamera.transform.position = new Vector3(
+            pos.x + offset.x,
+            pos.y + offset.y,
+            mainCamera.transform.position.z
+        );
     }
 
     public void UpdateCameraPosition(Vector3 targetPosition)
     {
-        var from = mainCamera.transform.position;
-        var target = new Vector3(targetPosition.x, targetPosition.y, mainCamera.transform.position.z);
-        var multiplier = 1f;
+        Vector3 from = mainCamera.transform.position;
+        Vector3 target = new Vector3(
+            targetPosition.x,
+            targetPosition.y,
+            mainCamera.transform.position.z
+        );
 
+        // 边界限制计算
         float halfW = mainCamera.orthographicSize * mainCamera.aspect;
         float halfH = mainCamera.orthographicSize;
-        target.x = Mathf.Clamp(target.x, bounds.min.x + halfW, bounds.max.x - halfW);
-        target.y = Mathf.Clamp(target.y, bounds.min.y + halfH, bounds.max.y - halfH);
+        target.x = Mathf.Clamp(
+            target.x,
+            bounds.min.x + halfW,
+            bounds.max.x - halfW
+        );
+        target.y = Mathf.Clamp(
+            target.y,
+            bounds.min.y + halfH,
+            bounds.max.y - halfH
+        );
 
-        Vector2 cameraPosition = from + (target - from) * (1f - Mathf.Pow(0.01f / multiplier, Time.deltaTime));
+        // 新增：距离检查（瞬时跳转条件）
+        if (Vector3.Distance(from, target) > TeleportThreshold)
+        {
+            SnapToPosition(target);
+            return;
+        }
+
+        // 原有平滑移动逻辑
+        float multiplier = 1f;
+        Vector2 cameraPosition = from + (target - from) *
+            (1f - Mathf.Pow(0.01f / multiplier, Time.deltaTime));
+
         SetCameraPosition(cameraPosition);
     }
 
@@ -69,13 +126,22 @@ public class CameraManager : MonoBehaviour, ICamera
     {
         if (roomTransitionCoroutine != null)
             StopCoroutine(roomTransitionCoroutine);
+
         roomTransitionCoroutine = StartCoroutine(RoomTransitionCoroutine(newBounds));
     }
 
     private IEnumerator RoomTransitionCoroutine(Bounds newBounds)
     {
+        // 获取玩家当前坐标（这里需要根据实际项目获取玩家位置）
+        Vector3 playerPosition = GameObject.FindGameObjectWithTag("Player").transform.position;
+
+        // 立即将摄像机定位到玩家位置
+        SnapToPosition(playerPosition);
+
+        // 更新边界并结束协程
         bounds = newBounds;
         roomTransitionCoroutine = null;
-        yield break;   
+
+        yield break;
     }
 }
