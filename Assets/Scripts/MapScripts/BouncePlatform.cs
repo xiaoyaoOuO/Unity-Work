@@ -4,21 +4,22 @@ using System.Collections;
 [RequireComponent(typeof(Rigidbody2D), typeof(BoxCollider2D))]
 public class BouncePlatform : MonoBehaviour
 {
-    [Header("Â·¾¶µã")]
+    [Header("Â·ï¿½ï¿½ï¿½ï¿½")]
     public Vector3 offset = new Vector3(0, 5, 0);
 
-    [Header("²ÎÊýÉèÖÃ")]
+    [Header("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½")]
     public float delayBeforeMove = 1f;
     public float moveDuration = 0.5f;
     public float stayDuration = 1f;
     public float returnDuration = 0.8f;
 
-    [Header("Íæ¼Ò Tag")]
+    [Header("ï¿½ï¿½ï¿½ Tag")]
     public string playerTag = "Player";
 
     private Vector3 startPos;
     private Vector3 endPos;
     private bool isMoving = false;
+    private bool isReturning = false; // ï¿½ï¿½ï¿½Æ½Ì¨ï¿½Ç·ï¿½ï¿½Ú»Ø³ï¿½
     private Rigidbody2D rb;
     private BoxCollider2D boxCol;
 
@@ -40,7 +41,7 @@ public class BouncePlatform : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D col)
     {
-        // Ö»ÔÚÍæ¼Ò²ÈÉÏÆ½Ì¨Ê±´¥·¢Ò»´ÎÒÆ¶¯ÐòÁÐ
+        // Ö»ï¿½ï¿½ï¿½ï¿½Ò²ï¿½ï¿½ï¿½Æ½Ì¨Ê±ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½Æ¶ï¿½ï¿½ï¿½ï¿½ï¿½
         if (!isMoving && col.collider.CompareTag(playerTag))
         {
             StartCoroutine(MoveSequence());
@@ -51,20 +52,22 @@ public class BouncePlatform : MonoBehaviour
     {
         isMoving = true;
 
-        // ÑÓ³Ù
+        // ï¿½Ó³ï¿½
         yield return new WaitForSeconds(delayBeforeMove);
 
-        // ²¥·ÅÒôÐ§
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð§
         PlayBouncePlatformSound();
 
-        // È¥³Ì
+        // È¥ï¿½ï¿½
         yield return StartCoroutine(MoveTo(endPos, moveDuration));
 
-        // Í£Áô
+        // Í£ï¿½ï¿½
         yield return new WaitForSeconds(stayDuration);
 
-        // »Ø³Ì
+        // ï¿½Ø³Ì£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ø³Ì¡ï¿½ï¿½ï¿½Ç£ï¿½ï¿½ï¿½Ö´ï¿½ï¿½ï¿½Æ¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ø±Õ±ï¿½ï¿½
+        isReturning = true;
         yield return StartCoroutine(MoveTo(startPos, returnDuration));
+        isReturning = false;
 
         isMoving = false;
     }
@@ -80,25 +83,63 @@ public class BouncePlatform : MonoBehaviour
             float t = Mathf.SmoothStep(0f, 1f, elapsed / duration);
             Vector3 newPos = Vector3.Lerp(initial, target, t);
             rb.MovePosition(newPos);
+
+            // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ú»Ø³Ì£ï¿½ï¿½ï¿½ï¿½Æ½Ì¨ï¿½Â·ï¿½ï¿½Ç·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+            if (isReturning)
+            {
+            }
+
             yield return null;
         }
 
-        // ×îÖÕÎ»ÖÃ
-        rb.MovePosition(target);
+    }
+
+    private void CheckCrush()
+    {
+        // ï¿½ï¿½ï¿½Æ½Ì¨ï¿½Â·ï¿½ï¿½Ç·ï¿½ï¿½ï¿½ï¿½ï¿½Ò£ï¿½Ê¹ï¿½ï¿½Ò»ï¿½ï¿½ï¿½Ü±ï¿½ï¿½Ä¾ï¿½ï¿½Î¿ï¿½
+        float detectionHeight = 0.1f;
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ðµï¿½Æ½Ì¨ï¿½ï¿½ï¿½ï¿½
+        float platformWidth = boxCol.bounds.size.x;
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä£ï¿½ï¿½ï¿½Æ½Ì¨ï¿½Â·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ½Ì¨ï¿½×±ï¿½
+        Vector2 boxCenter = (Vector2)transform.position
+                            + Vector2.down * (boxCol.bounds.extents.y + detectionHeight / 2f);
+        Vector2 boxSize = new Vector2(platformWidth, detectionHeight);
+
+        // ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½Ú¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Úµï¿½ Collider2D
+        Collider2D[] hits = Physics2D.OverlapBoxAll(boxCenter, boxSize, 0f);
+        foreach (var hit in hits)
+        {
+            if (hit.CompareTag(playerTag))
+            {
+                // ï¿½ï¿½Ò±ï¿½Ñ¹×¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ OnHit 5 ï¿½ï¿½
+                Player player = hit.GetComponent<Player>();
+                if (player != null)
+                {
+                    for (int i = 0; i < 5; i++)
+                    {
+                        player.OnHit();
+                    }
+                }
+
+                // ï¿½Ñ¾ï¿½Ñ¹ï¿½ï¿½ï¿½ï¿½Òºó£¬½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+                isReturning = false;
+                break;
+            }
+        }
     }
 
     private void PlayBouncePlatformSound()
     {
-        // »ñÈ¡ÒôÆµ×ÊÔ´
+        // ï¿½ï¿½È¡ï¿½ï¿½Æµï¿½ï¿½Ô´
         if (bouncePlatformAudioClip == null)
         {
             bouncePlatformAudioClip = soundEffectController.GetSoundClip(SoundType.BouncePlatform);
         }
-        // ´Ó¶ÔÏó³Ø»ñÈ¡ÒôÆµÔ´
+        // ï¿½Ó¶ï¿½ï¿½ï¿½Ø»ï¿½È¡ï¿½ï¿½ÆµÔ´
         if (soundEffectController != null && bouncePlatformAudioClip != null)
         {
             bouncePlatformAudioSource = soundEffectController.GetAudioSource();
-            // ÅäÖÃ²¢²¥·Å
+            // ï¿½ï¿½ï¿½Ã²ï¿½ï¿½ï¿½ï¿½ï¿½
             if (bouncePlatformAudioSource != null)
             {
                 bouncePlatformAudioSource.PlayOneShot(bouncePlatformAudioClip);
@@ -109,9 +150,9 @@ public class BouncePlatform : MonoBehaviour
 
     private IEnumerator ReleaseAfterPlayback()
     {
-        // µÈ´ýÒôÆµ²¥·ÅÍê³É
+        // ï¿½È´ï¿½ï¿½ï¿½Æµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         yield return new WaitForSeconds(bouncePlatformAudioClip.length);
-        // ÊÍ·ÅÒôÆµÔ´
+        // ï¿½Í·ï¿½ï¿½ï¿½ÆµÔ´
         if (bouncePlatformAudioSource != null)
         {
             soundEffectController.ReleaseAudioSource(bouncePlatformAudioSource);

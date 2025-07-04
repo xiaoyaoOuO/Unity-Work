@@ -43,7 +43,7 @@ public class TrapAttack : Enemy
         }
     }
 
-    void Attack()
+    new void Attack()
     {
         PlayAttackAudio();
         Ani.SetTrigger("Attack");
@@ -58,11 +58,11 @@ public class TrapAttack : Enemy
     }
     private void PlayAttackAudio()
     {
-        attackAudioSource = player.soundEffectController.GetAudioSource();
-        attackAudioClip = player.soundEffectController.GetSoundClip(SoundType.TrapAttack);
-        attackAudioSource.PlayOneShot(attackAudioClip);
-        player.soundEffectController.ReleaseAudioSource(attackAudioSource);
-        attackAudioSource = null;
+        //attackAudioSource = player.soundEffectController.GetAudioSource();
+        //attackAudioClip = player.soundEffectController.GetSoundClip(SoundType.TrapAttack);
+        //attackAudioSource.PlayOneShot(attackAudioClip);
+        //player.soundEffectController.ReleaseAudioSource(attackAudioSource);
+        //attackAudioSource = null;
     }
 
     public override void OnHit(int damage = 1)

@@ -38,6 +38,8 @@ public class PlayerWallState : IState
 
     public override void OnExit()
     {
+        if (fsm.CurrentState != null)
+            fsm.CurrentState.OnExit();
         base.OnExit();
     }
 
