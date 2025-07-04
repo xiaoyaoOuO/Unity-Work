@@ -44,6 +44,7 @@ public class SaveManager
 
     public void LoadGameData()
     {
+        Debug.Log("Loading game data from " + filePath);
         if (!System.IO.File.Exists(filePath))
         {
             Debug.LogWarning("Save file not found at " + filePath);

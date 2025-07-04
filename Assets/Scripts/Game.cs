@@ -39,6 +39,11 @@ public class Game : MonoBehaviour
         }
     }
 
+    void OnEnable()
+    {
+        LoadGame();
+    }
+
     public void Start()
     { // 在游戏开始时调用
         defaultFixedDeltaTime = Time.fixedDeltaTime; // 保存默认的固定时间步长
