@@ -285,7 +285,7 @@ public class Player : MonoBehaviour, ISaveManager
         return false;
     }
 
-    public void OnHit()
+    public void OnHit() 
     {
         playerState.OnHit();
         game_UI.UpdateHealthBars();
